@@ -82,12 +82,21 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AaU-y0-idu">
+                                                <rect key="frame" x="8" y="10" width="356" height="34"/>
+                                                <color key="backgroundColor" systemColor="systemGray5Color"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                                            </textField>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemGray5Color"/>
                                         <constraints>
                                             <constraint firstItem="k8a-Qj-ZSO" firstAttribute="trailing" secondItem="iJP-5w-pTX" secondAttribute="trailingMargin" id="1B3-a3-ug0"/>
                                             <constraint firstAttribute="bottom" secondItem="k8a-Qj-ZSO" secondAttribute="bottom" id="8lj-cQ-zjj"/>
+                                            <constraint firstItem="AaU-y0-idu" firstAttribute="leading" secondItem="k8a-Qj-ZSO" secondAttribute="leading" id="Ahd-f4-cPH"/>
                                             <constraint firstItem="k8a-Qj-ZSO" firstAttribute="top" secondItem="iJP-5w-pTX" secondAttribute="top" id="MmJ-2f-xMV"/>
+                                            <constraint firstItem="AaU-y0-idu" firstAttribute="centerY" secondItem="k8a-Qj-ZSO" secondAttribute="centerY" id="b4g-dX-d3g"/>
+                                            <constraint firstAttribute="trailing" secondItem="AaU-y0-idu" secondAttribute="trailing" id="nzy-x1-aJg"/>
                                             <constraint firstItem="k8a-Qj-ZSO" firstAttribute="leading" secondItem="iJP-5w-pTX" secondAttribute="leadingMargin" id="ojP-na-oJ6"/>
                                         </constraints>
                                     </view>
@@ -100,13 +109,22 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tg7-3N-cWt">
+                                                <rect key="frame" x="8" y="10" width="356" height="34"/>
+                                                <color key="backgroundColor" systemColor="systemGray5Color"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <textInputTraits key="textInputTraits" textContentType="password"/>
+                                            </textField>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemGray5Color"/>
                                         <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="Tg7-3N-cWt" secondAttribute="trailing" id="0x9-4F-vgy"/>
                                             <constraint firstAttribute="bottom" secondItem="CnK-4B-imJ" secondAttribute="bottom" id="8hU-8g-cr0"/>
                                             <constraint firstItem="CnK-4B-imJ" firstAttribute="trailing" secondItem="Je1-sH-wsk" secondAttribute="trailingMargin" id="JQG-Or-gGw"/>
                                             <constraint firstItem="CnK-4B-imJ" firstAttribute="leading" secondItem="Je1-sH-wsk" secondAttribute="leadingMargin" id="O7D-JP-NzC"/>
+                                            <constraint firstItem="Tg7-3N-cWt" firstAttribute="centerY" secondItem="CnK-4B-imJ" secondAttribute="centerY" id="QWX-Ze-f9t"/>
                                             <constraint firstItem="CnK-4B-imJ" firstAttribute="top" secondItem="Je1-sH-wsk" secondAttribute="top" id="SRy-fS-qVU"/>
+                                            <constraint firstItem="Tg7-3N-cWt" firstAttribute="leading" secondItem="CnK-4B-imJ" secondAttribute="leading" id="umr-t3-yLI"/>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="   회원가입                                                             &gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Qq-Hp-dP1">
@@ -170,8 +188,10 @@
                     <connections>
                         <outlet property="forgotLabel" destination="Wky-OL-jBc" id="mAQ-aL-xl7"/>
                         <outlet property="idLabel" destination="k8a-Qj-ZSO" id="qYm-gy-qFq"/>
+                        <outlet property="idText" destination="AaU-y0-idu" id="MeI-rk-cPt"/>
                         <outlet property="loginButtonLabel" destination="brZ-2r-E2Q" id="UPH-Ia-fE4"/>
                         <outlet property="passwordLabel" destination="CnK-4B-imJ" id="fcb-Ub-2A9"/>
+                        <outlet property="passwordText" destination="Tg7-3N-cWt" id="zeG-Sr-IlN"/>
                         <outlet property="signUpButtonLabel" destination="2Qq-Hp-dP1" id="eU3-gu-wmz"/>
                         <segue destination="ohm-Hv-V3C" kind="show" id="xVE-I8-Maw"/>
                     </connections>
