@@ -20,7 +20,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     @IBAction func signUpTapView(_ sender: UITapGestureRecognizer) {
-        
+        let singUpVC = self.storyboard?.instantiateViewController(withIdentifier: "SignUpStoryBoard")
+        self.navigationController?.pushViewController(singUpVC!, animated: true)
     }
     
     override func viewDidLoad() {
@@ -36,6 +37,11 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             UITapGestureRecognizer(target: self, action: #selector(self.signUpTapView(_:)))
         self.signUpButtonLabel.isUserInteractionEnabled = true
         self.signUpButtonLabel.addGestureRecognizer(signUpTapGesture)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.isNavigationBarHidden = true
     }
 
 

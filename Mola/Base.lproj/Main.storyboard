@@ -173,22 +173,24 @@
                         <outlet property="loginButtonLabel" destination="brZ-2r-E2Q" id="UPH-Ia-fE4"/>
                         <outlet property="passwordLabel" destination="CnK-4B-imJ" id="fcb-Ub-2A9"/>
                         <outlet property="signUpButtonLabel" destination="2Qq-Hp-dP1" id="eU3-gu-wmz"/>
+                        <segue destination="ohm-Hv-V3C" kind="show" id="xVE-I8-Maw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2533.3333333333335" y="118.52678571428571"/>
         </scene>
-        <!--View Controller-->
+        <!--Sign Up View Controller-->
         <scene sceneID="JiH-Sc-sgJ">
             <objects>
-                <viewController storyboardIdentifier="SignUpStoryBoard" id="ohm-Hv-V3C" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="kii-OV-hx1">
+                <viewController storyboardIdentifier="SignUpStoryBoard" id="ohm-Hv-V3C" customClass="SignUpViewController" customModule="Mola" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="kii-OV-hx1" customClass="Signup">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="Gal-ug-5oi"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" id="MDo-u3-Utt"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JYq-Rf-Lio" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -200,6 +202,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="9Fy-DD-GmJ" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" hidden="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="l1h-Pe-53h">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
