@@ -6,99 +6,93 @@
 //
 
 import UIKit
+import SnapKit
+import Then
 
-class ViewController: UIViewController, UIGestureRecognizerDelegate, UITextFieldDelegate {
+class ViewController: UIViewController {
     
-    @IBOutlet weak var loginButtonLabel: UILabel!
-    @IBOutlet weak var signUpButtonLabel: UILabel!
-    @IBOutlet weak var idLabel: UILabel!
-    @IBOutlet weak var passwordLabel: UILabel!
-    @IBOutlet weak var forgotLabel: UILabel!
-    @IBOutlet weak var idText: UITextField!
-    @IBOutlet weak var passwordText: UITextField!
-    
-    var tapIdTextField: Bool = false
-    var tapPasswordTextField: Bool = false
-    
-    @IBAction func loginTapView(_ sender: UITapGestureRecognizer) {
-        print("login")
+    private var titleimage = UIImageView().then {
+        $0.image = UIImage(named: "PriceLabelpng")
+        $0.contentMode = .scaleAspectFit
     }
-    
-    @IBAction func signUpTapView(_ sender: UITapGestureRecognizer) {
-        let singUpVC = self.storyboard?.instantiateViewController(withIdentifier: "SignUpStoryBoard")
-        self.navigationController?.pushViewController(singUpVC!, animated: true)
+    private var idField = SloyTextField().then {
+        $0.placeholder = "이메일"
+        $0.tintColor = .systemTeal
     }
-    
-    
-    @IBAction func idTapView(_ sender: UITapGestureRecognizer) {
-        self.idLabel.isHidden = true
-        self.idText.isHidden = false
-        self.tapIdTextField = true
-        self.idText.text = self.idLabel.text
+    private var pwField = SloyTextField().then {
+        $0.placeholder = "비밀번호"
+        $0.tintColor = .systemTeal
     }
-    
-    @IBAction func passwordTapView(_ sender: UITapGestureRecognizer) {
-        self.passwordLabel.isHidden = true
-        self.passwordText.isHidden = false
-        self.tapPasswordTextField = true
-        self.passwordText.text = self.passwordLabel.text
+    private var loginButton = UIButton().then {
+        $0.setTitle("로그인", for: .normal)
+        $0.setTitleColor(.white, for: .normal)
+        $0.backgroundColor = .systemTeal
+        $0.layer.cornerRadius = 10
     }
-    
-    func textFieldShouldReturn(_ Text: UITextField) -> Bool {
-        if tapIdTextField == true {
-            Text.resignFirstResponder()
-            self.idText.isHidden = true
-            self.idLabel.isHidden = false
-            tapIdTextField = false
-            self.idLabel.text = self.idText.text
-        } else if tapPasswordTextField == true {
-            Text.resignFirstResponder()
-            self.passwordText.isHidden = true
-            self.passwordLabel.isHidden = false
-            tapPasswordTextField = false
-            self.passwordLabel.text = self.passwordText.text
-        }
-        return true
-    }
-    
-    func initGesture() {
-        let loginTapGesture: UITapGestureRecognizer =
-            UITapGestureRecognizer(target: self, action: #selector(self.loginTapView(_:)))
-        self.loginButtonLabel.isUserInteractionEnabled = true
-        self.loginButtonLabel.addGestureRecognizer(loginTapGesture)
-        
-        let signUpTapGesture: UITapGestureRecognizer =
-            UITapGestureRecognizer(target: self, action: #selector(self.signUpTapView(_:)))
-        self.signUpButtonLabel.isUserInteractionEnabled = true
-        self.signUpButtonLabel.addGestureRecognizer(signUpTapGesture)
-
-        self.idText.delegate = self
-        self.idText.isHidden = true
-        let idTapGesture = UITapGestureRecognizer(target: self, action: #selector(self.idTapView(_:)))
-        self.idLabel.isUserInteractionEnabled = true
-        idTapGesture.numberOfTapsRequired = 1
-        self.idLabel.addGestureRecognizer(idTapGesture)
-        
-        self.passwordText.delegate = self
-        self.passwordText.isHidden = true
-        let passwordTapGesture = UITapGestureRecognizer(target: self, action: #selector(self.passwordTapView(_:)))
-        self.passwordLabel.isUserInteractionEnabled = true
-        passwordTapGesture.numberOfTapsRequired = 1
-        self.passwordLabel.addGestureRecognizer(passwordTapGesture)
+    private var signUpLabel = UILabel().then {
+        $0.font = .systemFont(ofSize: 14)
+        $0.textColor = .systemBlue
+        $0.text = "회원이 아니신가요?"
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-
-        initGesture()
+        view.backgroundColor = .white
+        self.setupLabelTap()
+        self.setupMainLayoutWithSnapKit()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.isNavigationBarHidden = true
+    @objc func labelTapped(_ sender: UITapGestureRecognizer) {
+        print("labelTapped")
     }
+    
+    private func setupLabelTap() {
+        let SignUpLabelTap = UITapGestureRecognizer(target: self, action: #selector(self.labelTapped(_:)))
+        self.signUpLabel.isUserInteractionEnabled = true
+        self.signUpLabel.addGestureRecognizer(SignUpLabelTap)
+    }
+    
+    private func setupMainLayoutWithSnapKit() {
+        view.addSubview(titleimage)
+        view.addSubview(idField)
+        view.addSubview(pwField)
+        view.addSubview(loginButton)
+        view.addSubview(signUpLabel)
+        
+        titleimage.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(100)
+            make.centerX.equalToSuperview()
+            make.leading.equalToSuperview().offset(3)
+            make.trailing.equalToSuperview().offset(-3)
+            make.height.equalTo(150)
+        }
+        
+        idField.snp.makeConstraints { make in
+            make.top.equalTo(titleimage.snp.bottom).offset(90)
+            make.leading.equalTo(titleimage.snp.leading).offset(35)
+            make.trailing.equalTo(titleimage.snp.trailing).offset(-35)
+            make.height.equalTo(55)
+        }
+        pwField.snp.makeConstraints { make in
+            make.top.equalTo(idField.snp.bottom).offset(16)
+            make.leading.equalTo(idField.snp.leading)
+            make.trailing.equalTo(idField.snp.trailing)
+            make.height.equalTo(55)
+        }
 
-
+        loginButton.snp.makeConstraints { make in
+            make.top.equalTo(pwField.snp.bottom).offset(16)
+            make.leading.equalTo(pwField.snp.leading).offset(-5)
+            make.trailing.equalTo(pwField.snp.trailing).offset(5)
+            make.height.equalTo(44)
+        }
+        
+        signUpLabel.snp.makeConstraints { make in
+            make.top.equalTo(loginButton.snp.bottom).offset(3)
+            make.leading.equalTo(loginButton.snp.leading).offset(230)
+            make.trailing.equalTo(loginButton.snp.trailing).offset(0)
+            make.height.equalTo(44)
+        }
+    }
 }
-

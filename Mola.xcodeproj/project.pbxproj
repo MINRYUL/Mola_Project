@@ -3,29 +3,33 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		915724D15D8EBBD96C64B303 /* Pods_Mola.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2EF5095118F121AAE29E91 /* Pods_Mola.framework */; };
 		DA8D099C262C1B7700CF83F1 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8D099B262C1B7700CF83F1 /* SignUpViewController.swift */; };
 		DABFBBEF262ABAD70057EBDC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABFBBEE262ABAD70057EBDC /* AppDelegate.swift */; };
 		DABFBBF1262ABAD70057EBDC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABFBBF0262ABAD70057EBDC /* SceneDelegate.swift */; };
 		DABFBBF3262ABAD70057EBDC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABFBBF2262ABAD70057EBDC /* ViewController.swift */; };
-		DABFBBF6262ABAD70057EBDC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DABFBBF4262ABAD70057EBDC /* Main.storyboard */; };
 		DABFBBF8262ABAD80057EBDC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DABFBBF7262ABAD80057EBDC /* Assets.xcassets */; };
 		DABFBBFB262ABAD80057EBDC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DABFBBF9262ABAD80057EBDC /* LaunchScreen.storyboard */; };
+		DADBD9A626381202004C522B /* SloyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADBD9A526381202004C522B /* SloyTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0F2EF5095118F121AAE29E91 /* Pods_Mola.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mola.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B8605BC1D007FC807FCA9BB /* Pods-Mola.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mola.debug.xcconfig"; path = "Target Support Files/Pods-Mola/Pods-Mola.debug.xcconfig"; sourceTree = "<group>"; };
+		D810955494EFB69E61777DC0 /* Pods-Mola.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mola.release.xcconfig"; path = "Target Support Files/Pods-Mola/Pods-Mola.release.xcconfig"; sourceTree = "<group>"; };
 		DA8D099B262C1B7700CF83F1 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		DABFBBEB262ABAD70057EBDC /* Mola.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mola.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DABFBBEE262ABAD70057EBDC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DABFBBF0262ABAD70057EBDC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		DABFBBF2262ABAD70057EBDC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		DABFBBF5262ABAD70057EBDC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DABFBBF7262ABAD80057EBDC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DABFBBFA262ABAD80057EBDC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DABFBBFC262ABAD80057EBDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DADBD9A526381202004C522B /* SloyTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SloyTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,17 +37,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				915724D15D8EBBD96C64B303 /* Pods_Mola.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1F56DC835673ED54D21745CD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0F2EF5095118F121AAE29E91 /* Pods_Mola.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		DABFBBE2262ABAD70057EBDC = {
 			isa = PBXGroup;
 			children = (
 				DABFBBED262ABAD70057EBDC /* Mola */,
 				DABFBBEC262ABAD70057EBDC /* Products */,
+				DCCA126E99D59AA2A7D1B94D /* Pods */,
+				1F56DC835673ED54D21745CD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,10 +73,10 @@
 		DABFBBED262ABAD70057EBDC /* Mola */ = {
 			isa = PBXGroup;
 			children = (
+				DADBD9A4263811ED004C522B /* Extension */,
 				DABFBC03262AC7E90057EBDC /* Controller */,
 				DABFBBEE262ABAD70057EBDC /* AppDelegate.swift */,
 				DABFBBF0262ABAD70057EBDC /* SceneDelegate.swift */,
-				DABFBBF4262ABAD70057EBDC /* Main.storyboard */,
 				DABFBBF7262ABAD80057EBDC /* Assets.xcassets */,
 				DABFBBF9262ABAD80057EBDC /* LaunchScreen.storyboard */,
 				DABFBBFC262ABAD80057EBDC /* Info.plist */,
@@ -78,6 +93,23 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		DADBD9A4263811ED004C522B /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				DADBD9A526381202004C522B /* SloyTextField.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		DCCA126E99D59AA2A7D1B94D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8B8605BC1D007FC807FCA9BB /* Pods-Mola.debug.xcconfig */,
+				D810955494EFB69E61777DC0 /* Pods-Mola.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -85,9 +117,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DABFBBFF262ABAD80057EBDC /* Build configuration list for PBXNativeTarget "Mola" */;
 			buildPhases = (
+				977B9C261FA6E1E2E0762C7E /* [CP] Check Pods Manifest.lock */,
 				DABFBBE7262ABAD70057EBDC /* Sources */,
 				DABFBBE8262ABAD70057EBDC /* Frameworks */,
 				DABFBBE9262ABAD70057EBDC /* Resources */,
+				42D96A8D9A0DD696B651CED8 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -137,11 +171,52 @@
 			files = (
 				DABFBBFB262ABAD80057EBDC /* LaunchScreen.storyboard in Resources */,
 				DABFBBF8262ABAD80057EBDC /* Assets.xcassets in Resources */,
-				DABFBBF6262ABAD70057EBDC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		42D96A8D9A0DD696B651CED8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Mola/Pods-Mola-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Mola/Pods-Mola-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Mola/Pods-Mola-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		977B9C261FA6E1E2E0762C7E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Mola-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		DABFBBE7262ABAD70057EBDC /* Sources */ = {
@@ -152,20 +227,13 @@
 				DABFBBEF262ABAD70057EBDC /* AppDelegate.swift in Sources */,
 				DA8D099C262C1B7700CF83F1 /* SignUpViewController.swift in Sources */,
 				DABFBBF1262ABAD70057EBDC /* SceneDelegate.swift in Sources */,
+				DADBD9A626381202004C522B /* SloyTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		DABFBBF4262ABAD70057EBDC /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DABFBBF5262ABAD70057EBDC /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		DABFBBF9262ABAD80057EBDC /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -295,6 +363,7 @@
 		};
 		DABFBC00262ABAD80057EBDC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8B8605BC1D007FC807FCA9BB /* Pods-Mola.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -313,6 +382,7 @@
 		};
 		DABFBC01262ABAD80057EBDC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D810955494EFB69E61777DC0 /* Pods-Mola.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
