@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Then
 
-class ViewController: UIViewController {
+class LoginVC: UIViewController {
     
     private var titleimage = UIImageView().then {
         $0.image = UIImage(named: "PriceLabelpng")
@@ -41,6 +41,11 @@ class ViewController: UIViewController {
         view.backgroundColor = .white
         self.setupLabelTap()
         self.setupMainLayoutWithSnapKit()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        navigationController?.isNavigationBarHidden = true
+        navigationController?.isToolbarHidden = true
     }
     
     @objc func labelTapped(_ sender: UITapGestureRecognizer) {
@@ -94,5 +99,20 @@ class ViewController: UIViewController {
             make.trailing.equalTo(loginButton.snp.trailing).offset(0)
             make.height.equalTo(44)
         }
+    }
+}
+
+extension String {
+    var isValidEmail: Bool {
+        let emailFormat = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailFormat)
+        return emailPredicate.evaluate(with: self)
+    }
+    
+    
+    var isValidPassword: Bool {
+        let passwordFormat = "(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,}"
+        let passwordPredicate = NSPredicate(format: "SELF MATCHES %@", passwordFormat)
+        return passwordPredicate.evaluate(with: self)
     }
 }

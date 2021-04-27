@@ -10,8 +10,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
-
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
@@ -19,8 +18,51 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.windowScene = windowScene
-        window?.rootViewController = ViewController()
-        window?.makeKeyAndVisible()
+//        window?.rootViewController = LoginVC()
+//        window?.makeKeyAndVisible()
+        
+//        let loginView = LoginVC()
+        let splashView = SplashVC()
+        
+        let nav = UINavigationController(rootViewController: splashView)
+        let tab = UITabBarController()
+        tab.viewControllers = [nav]
+        tab.selectedIndex = 0
+        
+        self.window?.rootViewController = tab
+        self.window?.makeKeyAndVisible()
+        
+//        guard let scene = (scene as? UIWindowScene) else { return }
+//        self.window = UIWindow(frame: UIScreen.main.bounds)
+//        self.window?.windowScene = scene
+//        self.window?.rootViewController = ViewController()
+//        self.window?.makeKeyAndVisible()
+//
+//        let vc1 = ViewController()
+//
+//        let nav1 = UINavigationController(rootViewController: vc1)
+//        let tab = UITabBarController()
+//        tab.viewControllers = [nav1]
+//        tab.selectedIndex = 0
+        
+//        nav1.tabBarItem.title = "SnapKit"
+//        nav1.tabBarItem.image = UIImage(systemName: "house.fill")
+        
+//        let vc2 = SnpViewController()
+//        let vc3 = ThenViewController()
+//        let nav2 = UINavigationController(rootViewController: vc2)
+//        let nav3 = UINavigationController(rootViewController: vc3)
+//        let tab = UITabBarController()
+//        tab.viewControllers = [nav1, nav2, nav3]
+//        tab.selectedIndex = 0
+//        nav2.tabBarItem.title = "SnapKit"
+//        nav2.tabBarItem.image = UIImage(systemName: "house")
+//
+//        nav3.tabBarItem.title = "Then"
+//        nav3.tabBarItem.image = UIImage(systemName: "star")
+        
+//        self.window?.rootViewController = tab
+//        self.window?.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

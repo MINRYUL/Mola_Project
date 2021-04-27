@@ -11,10 +11,12 @@
 		DA8D099C262C1B7700CF83F1 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8D099B262C1B7700CF83F1 /* SignUpViewController.swift */; };
 		DABFBBEF262ABAD70057EBDC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABFBBEE262ABAD70057EBDC /* AppDelegate.swift */; };
 		DABFBBF1262ABAD70057EBDC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABFBBF0262ABAD70057EBDC /* SceneDelegate.swift */; };
-		DABFBBF3262ABAD70057EBDC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABFBBF2262ABAD70057EBDC /* ViewController.swift */; };
+		DABFBBF3262ABAD70057EBDC /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABFBBF2262ABAD70057EBDC /* LoginVC.swift */; };
 		DABFBBF8262ABAD80057EBDC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DABFBBF7262ABAD80057EBDC /* Assets.xcassets */; };
 		DABFBBFB262ABAD80057EBDC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DABFBBF9262ABAD80057EBDC /* LaunchScreen.storyboard */; };
 		DADBD9A626381202004C522B /* SloyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADBD9A526381202004C522B /* SloyTextField.swift */; };
+		DADBD9B2263813D6004C522B /* SplashVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADBD9B1263813D6004C522B /* SplashVC.swift */; };
+		DADBD9B526381AFD004C522B /* DeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADBD9B426381AFD004C522B /* DeviceManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,11 +27,13 @@
 		DABFBBEB262ABAD70057EBDC /* Mola.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mola.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DABFBBEE262ABAD70057EBDC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DABFBBF0262ABAD70057EBDC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		DABFBBF2262ABAD70057EBDC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		DABFBBF2262ABAD70057EBDC /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		DABFBBF7262ABAD80057EBDC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DABFBBFA262ABAD80057EBDC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DABFBBFC262ABAD80057EBDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DADBD9A526381202004C522B /* SloyTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SloyTextField.swift; sourceTree = "<group>"; };
+		DADBD9B1263813D6004C522B /* SplashVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashVC.swift; sourceTree = "<group>"; };
+		DADBD9B426381AFD004C522B /* DeviceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +77,7 @@
 		DABFBBED262ABAD70057EBDC /* Mola */ = {
 			isa = PBXGroup;
 			children = (
+				DADBD9BD263823EF004C522B /* Manager */,
 				DADBD9A4263811ED004C522B /* Extension */,
 				DABFBC03262AC7E90057EBDC /* Controller */,
 				DABFBBEE262ABAD70057EBDC /* AppDelegate.swift */,
@@ -87,7 +92,8 @@
 		DABFBC03262AC7E90057EBDC /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				DABFBBF2262ABAD70057EBDC /* ViewController.swift */,
+				DABFBBF2262ABAD70057EBDC /* LoginVC.swift */,
+				DADBD9B1263813D6004C522B /* SplashVC.swift */,
 				DA8D099B262C1B7700CF83F1 /* SignUpViewController.swift */,
 			);
 			path = Controller;
@@ -99,6 +105,14 @@
 				DADBD9A526381202004C522B /* SloyTextField.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		DADBD9BD263823EF004C522B /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				DADBD9B426381AFD004C522B /* DeviceManager.swift */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 		DCCA126E99D59AA2A7D1B94D /* Pods */ = {
@@ -223,11 +237,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DABFBBF3262ABAD70057EBDC /* ViewController.swift in Sources */,
+				DABFBBF3262ABAD70057EBDC /* LoginVC.swift in Sources */,
 				DABFBBEF262ABAD70057EBDC /* AppDelegate.swift in Sources */,
 				DA8D099C262C1B7700CF83F1 /* SignUpViewController.swift in Sources */,
 				DABFBBF1262ABAD70057EBDC /* SceneDelegate.swift in Sources */,
 				DADBD9A626381202004C522B /* SloyTextField.swift in Sources */,
+				DADBD9B526381AFD004C522B /* DeviceManager.swift in Sources */,
+				DADBD9B2263813D6004C522B /* SplashVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
