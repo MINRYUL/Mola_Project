@@ -46,6 +46,8 @@ class LoginVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         navigationController?.isNavigationBarHidden = true
         navigationController?.isToolbarHidden = true
+        self.tabBarController?.tabBar.isHidden = true
+        self.extendedLayoutIncludesOpaqueBars = true
     }
     
     @objc func labelTapped(_ sender: UITapGestureRecognizer) {

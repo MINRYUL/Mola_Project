@@ -20,6 +20,8 @@ class SplashVC: UIViewController {
         self.setupMainLayoutWithSnapKit()
         navigationController?.isNavigationBarHidden = true
         navigationController?.isToolbarHidden = true
+        self.tabBarController?.tabBar.isHidden = true
+        self.extendedLayoutIncludesOpaqueBars = true
         // Do any additional setup after loading the view.
     }
     
@@ -32,8 +34,6 @@ class SplashVC: UIViewController {
             sleep(1)
             let loginVC = LoginVC()
             self.navigationController?.pushViewController(loginVC, animated: true)
-//            let singUpVC = self.storyboard?.instantiateViewController(withIdentifier: "SignUpStoryBoard")
-//            self.navigationController?.pushViewController(singUpVC!, animated: true)
             
         } else {
             let alert: UIAlertController = UIAlertController(title: "네트워크 상태 확인", message: "네트워크가 불안정 합니다.", preferredStyle: .alert)
