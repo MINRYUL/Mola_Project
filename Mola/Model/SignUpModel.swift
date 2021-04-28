@@ -9,5 +9,11 @@ import Foundation
 
 struct SignUpCategory {
     let name: String
-    let textField: [String]
+    let textField: [TextField]
+}
+
+struct TextField {
+    let label: String
+    let placeHolder: String
+    let helpText: String
 }

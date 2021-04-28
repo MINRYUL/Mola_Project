@@ -8,5 +8,9 @@ target 'Mola' do
   # Pods for Mola
   pod 'SnapKit', '~> 5.0.0'
   pod 'Then'
+  pod 'MaterialComponents/TextControls+FilledTextAreas'
+  pod 'MaterialComponents/TextControls+FilledTextFields'
+  pod 'MaterialComponents/TextControls+OutlinedTextAreas'
+  pod 'MaterialComponents/TextControls+OutlinedTextFields'
 
 end

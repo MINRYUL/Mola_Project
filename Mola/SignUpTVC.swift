@@ -8,6 +8,10 @@
 import UIKit
 import SnapKit
 import Then
+import MaterialComponents.MaterialTextControls_FilledTextAreas
+import MaterialComponents.MaterialTextControls_FilledTextFields
+import MaterialComponents.MaterialTextControls_OutlinedTextAreas
+import MaterialComponents.MaterialTextControls_OutlinedTextFields
 
 class SignUpTVC: UITableViewCell {
    
@@ -16,10 +20,12 @@ class SignUpTVC: UITableViewCell {
 //    let boardTitleLabel = UILabel().then {
 //        $0.font = .systemFont(ofSize: 17)
 //    }
-//
-    let boardTextField = SloyTextField().then {
-        $0.font = .systemFont(ofSize: 14)
-        $0.tintColor = .systemTeal
+    
+    let boardTextField = MDCOutlinedTextField().then {
+        $0.font = .systemFont(ofSize: 15)
+//        $0.leadingAssistiveLabel.text = "This is helper text"
+        $0.sizeToFit()
+        $0.tintColor = .systemGray
     }
     
     lazy var stackView =  UIStackView(arrangedSubviews: [boardTextField]).then {
@@ -44,7 +50,7 @@ class SignUpTVC: UITableViewCell {
             make.topMargin.equalToSuperview().offset(0)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
-            make.bottomMargin.equalToSuperview().offset(9)
+            make.bottomMargin.equalToSuperview().offset(-9)
         }
     }
     

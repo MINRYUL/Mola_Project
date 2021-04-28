@@ -16,11 +16,14 @@ class SignUpVC: UIViewController {
     
     let signUpCategory: [SignUpCategory] = [
         SignUpCategory(name: "가입 정보", textField: [
-            "이메일", "비밀번호", "비밀번호 확인"
+            TextField(label: "이메일", placeHolder: "example@gmail.com", helpText: "이메일 형식에 맞게 작성해 주세요."),
+            TextField(label: "비밀번호", placeHolder: "********", helpText: "대소문자 포함 8글자 이상 작성해 주세요."),
+            TextField(label: "비밀번호 확인", placeHolder: "********", helpText: "비밀번호를 다시 한번 입력해 주세요.")
         ]),
         SignUpCategory(name: "회원 정보", textField: [
-            "직업"
-        ]),
+            TextField(label: "닉네임", placeHolder: "", helpText: "자신이 사용할 닉네임을 작성해 주세요."),
+            TextField(label: "직업", placeHolder: "학생", helpText: "자신의 현재 직업을 작성해 주세요.")
+        ])
     ]
     
     private let tableView = UITableView(frame: CGRect.zero, style: .grouped).then {
@@ -61,15 +64,15 @@ class SignUpVC: UIViewController {
         tableView.snp.makeConstraints { maker in
 //            maker.edges.equalTo(view)
             maker.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(0)
-            maker.leading.equalToSuperview().offset(3)
-            maker.trailing.equalToSuperview().offset(-3)
-            maker.height.equalTo(405)
+            maker.leading.equalToSuperview()
+            maker.trailing.equalToSuperview()
+            maker.height.equalTo(588)
         }
         
         signUpButton.snp.makeConstraints { make in
             make.top.equalTo(tableView.snp.bottom).offset(5)
-            make.leading.equalTo(tableView.snp.leading).offset(0)
-            make.trailing.equalTo(tableView.snp.trailing).offset(0)
+            make.leading.equalTo(tableView.snp.leading).offset(20)
+            make.trailing.equalTo(tableView.snp.trailing).offset(-20)
             make.height.equalTo(44)
         }
     }
@@ -98,7 +101,9 @@ extension SignUpVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SignUpTVC.identifier, for: indexPath) as! SignUpTVC
         
-        cell.boardTextField.placeholder = signUpCategory[indexPath.section].textField[indexPath.row]
+        cell.boardTextField.label.text = signUpCategory[indexPath.section].textField[indexPath.row].label
+        cell.boardTextField.placeholder = signUpCategory[indexPath.section].textField[indexPath.row].placeHolder
+        cell.boardTextField.leadingAssistiveLabel.text = signUpCategory[indexPath.section].textField[indexPath.row].helpText
         
         return cell
     }
@@ -106,9 +111,10 @@ extension SignUpVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: 60))
         headerView.backgroundColor = .systemBackground
-        let label = UILabel()
-        label.font = .boldSystemFont(ofSize: 24)
-        label.text = signUpCategory[section].name
+        let label = UILabel().then {
+            $0.font = .boldSystemFont(ofSize: 24)
+            $0.text = signUpCategory[section].name
+        }
         headerView.addSubview(label)
         
         label.snp.makeConstraints { make in
@@ -129,7 +135,7 @@ extension SignUpVC: UITableViewDataSource, UITableViewDelegate {
         lineView.backgroundColor = .systemGray
         
         lineView.snp.makeConstraints { make in
-            make.left.right.equalTo(footerView).inset(UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5))
+            make.left.right.equalTo(footerView).inset(UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20))
             make.height.equalTo(1)
             make.centerY.equalTo(footerView)
         }
