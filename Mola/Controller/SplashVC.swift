@@ -52,7 +52,7 @@ class SplashVC: UIViewController {
         titleimage.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.centerX.equalToSuperview()
-            make.height.equalTo(130)
+            make.height.equalTo(150)
         }
     }
     

@@ -46,12 +46,12 @@ class LoginVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         navigationController?.isNavigationBarHidden = true
         navigationController?.isToolbarHidden = true
-        self.tabBarController?.tabBar.isHidden = true
-        self.extendedLayoutIncludesOpaqueBars = true
     }
     
     @objc func labelTapped(_ sender: UITapGestureRecognizer) {
         print("labelTapped")
+        let signUpVC = SignUpVC()
+        self.navigationController?.pushViewController(signUpVC, animated: true)
     }
     
     private func setupLabelTap() {
@@ -69,7 +69,6 @@ class LoginVC: UIViewController {
         
         titleimage.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(100)
-            make.centerX.equalToSuperview()
             make.leading.equalToSuperview().offset(3)
             make.trailing.equalToSuperview().offset(-3)
             make.height.equalTo(150)
