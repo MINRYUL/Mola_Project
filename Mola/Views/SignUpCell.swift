@@ -13,7 +13,7 @@ import MaterialComponents.MaterialTextControls_FilledTextFields
 import MaterialComponents.MaterialTextControls_OutlinedTextAreas
 import MaterialComponents.MaterialTextControls_OutlinedTextFields
 
-class SignUpCell: UITableViewCell {
+public class SignUpCell: UITableViewCell {
    
     static let identifier = "SignUpTableViewCell"
     
@@ -53,17 +53,4 @@ class SignUpCell: UITableViewCell {
             make.bottomMargin.equalToSuperview().offset(-9)
         }
     }
-    
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }

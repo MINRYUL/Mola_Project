@@ -20,8 +20,8 @@ class SplashVC: UIViewController {
         self.setupMainLayoutWithSnapKit()
         navigationController?.isNavigationBarHidden = true
         navigationController?.isToolbarHidden = true
-        self.tabBarController?.tabBar.isHidden = true
-        self.extendedLayoutIncludesOpaqueBars = true
+//        self.tabBarController?.tabBar.isHidden = true
+//        self.extendedLayoutIncludesOpaqueBars = true
         // Do any additional setup after loading the view.
     }
     
