@@ -28,7 +28,7 @@ class SignUpVC: UIViewController {
     
     private let tableView = UITableView(frame: CGRect.zero, style: .grouped).then {
         $0.backgroundColor = .systemBackground
-        $0.register(SignUpTVC.self, forCellReuseIdentifier: SignUpTVC.identifier)
+        $0.register(SignUpCell.self, forCellReuseIdentifier: SignUpCell.identifier)
         $0.separatorStyle = .none
         $0.rowHeight = UITableView.automaticDimension
         $0.estimatedRowHeight = 60
@@ -54,6 +54,11 @@ class SignUpVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = false
+    }
+    
+    override func viewWillDisappear(_ animated: Bool){
+        super.viewWillDisappear(animated)
+        self.navigationController?.isNavigationBarHidden = true
     }
     
     private func createUI() {
@@ -99,7 +104,7 @@ extension SignUpVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: SignUpTVC.identifier, for: indexPath) as! SignUpTVC
+        let cell = tableView.dequeueReusableCell(withIdentifier: SignUpCell.identifier, for: indexPath) as! SignUpCell
         
         cell.boardTextField.label.text = signUpCategory[indexPath.section].textField[indexPath.row].label
         cell.boardTextField.placeholder = signUpCategory[indexPath.section].textField[indexPath.row].placeHolder

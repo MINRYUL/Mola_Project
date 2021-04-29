@@ -13,7 +13,7 @@ import MaterialComponents.MaterialTextControls_FilledTextFields
 import MaterialComponents.MaterialTextControls_OutlinedTextAreas
 import MaterialComponents.MaterialTextControls_OutlinedTextFields
 
-class SignUpTVC: UITableViewCell {
+class SignUpCell: UITableViewCell {
    
     static let identifier = "SignUpTableViewCell"
     

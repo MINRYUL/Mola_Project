@@ -16,20 +16,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
+        NotificationCenter.default.addObserver(self, selector:#selector(showMainViewController(notification:)),name:LoginVC.NotificationDone,object: nil)
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.windowScene = windowScene
+        
 //        window?.rootViewController = LoginVC()
 //        window?.makeKeyAndVisible()
         
 //        let loginView = LoginVC()
         let splashView = SplashVC()
-        
         let nav = UINavigationController(rootViewController: splashView)
-        let tab = UITabBarController()
-        tab.viewControllers = [nav]
-        tab.selectedIndex = 0
         
-        self.window?.rootViewController = tab
+        window?.rootViewController = nav
         self.window?.makeKeyAndVisible()
         
 //        guard let scene = (scene as? UIWindowScene) else { return }
@@ -63,6 +61,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
 //        self.window?.rootViewController = tab
 //        self.window?.makeKeyAndVisible()
+    }
+    
+    @objc func showMainViewController(notification: Notification){
+        let mainView = MainVC()
+        let homeNav = UINavigationController(rootViewController: mainView)
+        
+        let tab = UITabBarController()
+        
+        tab.viewControllers = [homeNav]
+        tab.selectedIndex = 0
+        
+        homeNav.tabBarItem.image = UIImage(systemName: "house.fill")
+        
+        self.window?.rootViewController = tab
+        self.window?.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

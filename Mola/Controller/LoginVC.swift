@@ -10,6 +10,7 @@ import SnapKit
 import Then
 
 class LoginVC: UIViewController {
+    static let NotificationDone = NSNotification.Name(rawValue: "Main")
     
     private var titleimage = UIImageView().then {
         $0.image = UIImage(named: "PriceLabelpng")
@@ -44,18 +45,23 @@ class LoginVC: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        navigationController?.isNavigationBarHidden = true
-        navigationController?.isToolbarHidden = true
     }
     
-    @objc func labelTapped(_ sender: UITapGestureRecognizer) {
+    @objc func loginButtonAction(sender: UIButton!) {
+//        showMainViewController()
+        print("touch login button")
+        NotificationCenter.default.post(name: LoginVC.NotificationDone, object: nil)
+        
+    }
+    
+    @objc func signUpLabelTapped(_ sender: UITapGestureRecognizer) {
         print("labelTapped")
         let signUpVC = SignUpVC()
         self.navigationController?.pushViewController(signUpVC, animated: true)
     }
     
     private func setupLabelTap() {
-        let SignUpLabelTap = UITapGestureRecognizer(target: self, action: #selector(self.labelTapped(_:)))
+        let SignUpLabelTap = UITapGestureRecognizer(target: self, action: #selector(self.signUpLabelTapped(_:)))
         self.signUpLabel.isUserInteractionEnabled = true
         self.signUpLabel.addGestureRecognizer(SignUpLabelTap)
     }
@@ -92,6 +98,7 @@ class LoginVC: UIViewController {
             make.leading.equalTo(pwField.snp.leading).offset(-5)
             make.trailing.equalTo(pwField.snp.trailing).offset(5)
             make.height.equalTo(44)
+            loginButton.addTarget(self, action: #selector(loginButtonAction), for: .touchUpInside)
         }
         
         signUpLabel.snp.makeConstraints { make in

@@ -8,9 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		915724D15D8EBBD96C64B303 /* Pods_Mola.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2EF5095118F121AAE29E91 /* Pods_Mola.framework */; };
+		DA6C3022263A9F8E006574FB /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6C3021263A9F8E006574FB /* MainVC.swift */; };
 		DA8D099C262C1B7700CF83F1 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8D099B262C1B7700CF83F1 /* SignUpVC.swift */; };
 		DA9382BC2639368300A04F25 /* SignUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9382BB2639368300A04F25 /* SignUpModel.swift */; };
-		DA9382C0263937FC00A04F25 /* SignUpTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9382BF263937FC00A04F25 /* SignUpTVC.swift */; };
+		DA9382C0263937FC00A04F25 /* SignUpCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9382BF263937FC00A04F25 /* SignUpCell.swift */; };
 		DABFBBEF262ABAD70057EBDC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABFBBEE262ABAD70057EBDC /* AppDelegate.swift */; };
 		DABFBBF1262ABAD70057EBDC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABFBBF0262ABAD70057EBDC /* SceneDelegate.swift */; };
 		DABFBBF3262ABAD70057EBDC /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABFBBF2262ABAD70057EBDC /* LoginVC.swift */; };
@@ -25,9 +26,10 @@
 		0F2EF5095118F121AAE29E91 /* Pods_Mola.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mola.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B8605BC1D007FC807FCA9BB /* Pods-Mola.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mola.debug.xcconfig"; path = "Target Support Files/Pods-Mola/Pods-Mola.debug.xcconfig"; sourceTree = "<group>"; };
 		D810955494EFB69E61777DC0 /* Pods-Mola.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mola.release.xcconfig"; path = "Target Support Files/Pods-Mola/Pods-Mola.release.xcconfig"; sourceTree = "<group>"; };
+		DA6C3021263A9F8E006574FB /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		DA8D099B262C1B7700CF83F1 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		DA9382BB2639368300A04F25 /* SignUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpModel.swift; sourceTree = "<group>"; };
-		DA9382BF263937FC00A04F25 /* SignUpTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SignUpTVC.swift; path = Mola/SignUpTVC.swift; sourceTree = SOURCE_ROOT; };
+		DA9382BF263937FC00A04F25 /* SignUpCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SignUpCell.swift; path = Mola/SignUpCell.swift; sourceTree = SOURCE_ROOT; };
 		DABFBBEB262ABAD70057EBDC /* Mola.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mola.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DABFBBEE262ABAD70057EBDC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DABFBBF0262ABAD70057EBDC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -94,7 +96,7 @@
 				DADBD9A4263811ED004C522B /* Extension */,
 				DABFBC03262AC7E90057EBDC /* Controller */,
 				DABFBBEE262ABAD70057EBDC /* AppDelegate.swift */,
-				DA9382BF263937FC00A04F25 /* SignUpTVC.swift */,
+				DA9382BF263937FC00A04F25 /* SignUpCell.swift */,
 				DABFBBF0262ABAD70057EBDC /* SceneDelegate.swift */,
 				DABFBBF7262ABAD80057EBDC /* Assets.xcassets */,
 				DABFBBF9262ABAD80057EBDC /* LaunchScreen.storyboard */,
@@ -106,6 +108,7 @@
 		DABFBC03262AC7E90057EBDC /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				DA6C3021263A9F8E006574FB /* MainVC.swift */,
 				DABFBBF2262ABAD70057EBDC /* LoginVC.swift */,
 				DADBD9B1263813D6004C522B /* SplashVC.swift */,
 				DA8D099B262C1B7700CF83F1 /* SignUpVC.swift */,
@@ -256,8 +259,9 @@
 				DA8D099C262C1B7700CF83F1 /* SignUpVC.swift in Sources */,
 				DA9382BC2639368300A04F25 /* SignUpModel.swift in Sources */,
 				DABFBBF1262ABAD70057EBDC /* SceneDelegate.swift in Sources */,
-				DA9382C0263937FC00A04F25 /* SignUpTVC.swift in Sources */,
+				DA9382C0263937FC00A04F25 /* SignUpCell.swift in Sources */,
 				DADBD9A626381202004C522B /* SloyTextField.swift in Sources */,
+				DA6C3022263A9F8E006574FB /* MainVC.swift in Sources */,
 				DADBD9B526381AFD004C522B /* DeviceManager.swift in Sources */,
 				DADBD9B2263813D6004C522B /* SplashVC.swift in Sources */,
 			);
