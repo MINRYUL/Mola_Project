@@ -12,5 +12,7 @@ target 'Mola' do
   pod 'MaterialComponents/TextControls+FilledTextFields'
   pod 'MaterialComponents/TextControls+OutlinedTextAreas'
   pod 'MaterialComponents/TextControls+OutlinedTextFields'
+  pod 'MaterialComponents/schemes/Color'
+  pod 'MaterialComponents/NavigationDrawer'
 
 end

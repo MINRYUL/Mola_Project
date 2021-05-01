@@ -20,32 +20,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.windowScene = windowScene
         
-//        window?.rootViewController = LoginVC()
-//        window?.makeKeyAndVisible()
-        
-//        let loginView = LoginVC()
         let splashView = SplashVC()
         let nav = UINavigationController(rootViewController: splashView)
         
         window?.rootViewController = nav
         self.window?.makeKeyAndVisible()
         
-//        guard let scene = (scene as? UIWindowScene) else { return }
-//        self.window = UIWindow(frame: UIScreen.main.bounds)
-//        self.window?.windowScene = scene
-//        self.window?.rootViewController = ViewController()
-//        self.window?.makeKeyAndVisible()
-//
-//        let vc1 = ViewController()
-//
-//        let nav1 = UINavigationController(rootViewController: vc1)
-//        let tab = UITabBarController()
-//        tab.viewControllers = [nav1]
-//        tab.selectedIndex = 0
-        
 //        nav1.tabBarItem.title = "SnapKit"
 //        nav1.tabBarItem.image = UIImage(systemName: "house.fill")
-        
 //        let vc2 = SnpViewController()
 //        let vc3 = ThenViewController()
 //        let nav2 = UINavigationController(rootViewController: vc2)
@@ -58,9 +40,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //
 //        nav3.tabBarItem.title = "Then"
 //        nav3.tabBarItem.image = UIImage(systemName: "star")
-        
-//        self.window?.rootViewController = tab
-//        self.window?.makeKeyAndVisible()
     }
     
     @objc func showMainViewController(notification: Notification){

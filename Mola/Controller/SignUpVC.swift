@@ -10,12 +10,6 @@ import SnapKit
 import Then
 
 class SignUpVC: UIViewController {
-    
-//    struct Category {
-//        let name: String
-//        let textField: String
-//    }
-    
     let signUpCategory: [SignUpCategory] = [
         SignUpCategory(name: "가입 정보", textField: [
             TextField(label: "이메일", placeHolder: "example@gmail.com", helpText: "이메일 형식에 맞게 작성해 주세요."),
@@ -107,7 +101,7 @@ extension SignUpVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SignUpCell.identifier, for: indexPath) as! SignUpCell
-        
+        cell.selectionStyle = .none
         cell.boardTextField.label.text = signUpCategory[indexPath.section].textField[indexPath.row].label
         cell.boardTextField.placeholder = signUpCategory[indexPath.section].textField[indexPath.row].placeHolder
         cell.boardTextField.leadingAssistiveLabel.text = signUpCategory[indexPath.section].textField[indexPath.row].helpText

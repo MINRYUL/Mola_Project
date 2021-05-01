@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		915724D15D8EBBD96C64B303 /* Pods_Mola.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2EF5095118F121AAE29E91 /* Pods_Mola.framework */; };
+		DA1F0544263D443200BE9E27 /* NavigationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1F0543263D443200BE9E27 /* NavigationVC.swift */; };
+		DA1F0547263D495E00BE9E27 /* BottomDrawerSupplemental.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1F0546263D495E00BE9E27 /* BottomDrawerSupplemental.swift */; };
 		DA6C3022263A9F8E006574FB /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6C3021263A9F8E006574FB /* MainVC.swift */; };
 		DA6C302E263AB6B4006574FB /* String+Extansion.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6C302D263AB6B4006574FB /* String+Extansion.swift */; };
 		DA8D099C262C1B7700CF83F1 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8D099B262C1B7700CF83F1 /* SignUpVC.swift */; };
@@ -27,6 +29,8 @@
 		0F2EF5095118F121AAE29E91 /* Pods_Mola.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mola.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B8605BC1D007FC807FCA9BB /* Pods-Mola.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mola.debug.xcconfig"; path = "Target Support Files/Pods-Mola/Pods-Mola.debug.xcconfig"; sourceTree = "<group>"; };
 		D810955494EFB69E61777DC0 /* Pods-Mola.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mola.release.xcconfig"; path = "Target Support Files/Pods-Mola/Pods-Mola.release.xcconfig"; sourceTree = "<group>"; };
+		DA1F0543263D443200BE9E27 /* NavigationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationVC.swift; sourceTree = "<group>"; };
+		DA1F0546263D495E00BE9E27 /* BottomDrawerSupplemental.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BottomDrawerSupplemental.swift; path = Mola/BottomDrawerSupplemental.swift; sourceTree = SOURCE_ROOT; };
 		DA6C3021263A9F8E006574FB /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		DA6C302D263AB6B4006574FB /* String+Extansion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extansion.swift"; sourceTree = "<group>"; };
 		DA8D099B262C1B7700CF83F1 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
@@ -107,6 +111,7 @@
 				DADBD9A4263811ED004C522B /* Extension */,
 				DABFBC03262AC7E90057EBDC /* Controller */,
 				DABFBBEE262ABAD70057EBDC /* AppDelegate.swift */,
+				DA1F0546263D495E00BE9E27 /* BottomDrawerSupplemental.swift */,
 				DABFBBF0262ABAD70057EBDC /* SceneDelegate.swift */,
 				DABFBBF7262ABAD80057EBDC /* Assets.xcassets */,
 				DABFBBF9262ABAD80057EBDC /* LaunchScreen.storyboard */,
@@ -119,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				DA6C3021263A9F8E006574FB /* MainVC.swift */,
+				DA1F0543263D443200BE9E27 /* NavigationVC.swift */,
 				DABFBBF2262ABAD70057EBDC /* LoginVC.swift */,
 				DADBD9B1263813D6004C522B /* SplashVC.swift */,
 				DA8D099B262C1B7700CF83F1 /* SignUpVC.swift */,
@@ -270,7 +276,9 @@
 				DA8D099C262C1B7700CF83F1 /* SignUpVC.swift in Sources */,
 				DA9382BC2639368300A04F25 /* SignUpModel.swift in Sources */,
 				DABFBBF1262ABAD70057EBDC /* SceneDelegate.swift in Sources */,
+				DA1F0547263D495E00BE9E27 /* BottomDrawerSupplemental.swift in Sources */,
 				DA9382C0263937FC00A04F25 /* SignUpCell.swift in Sources */,
+				DA1F0544263D443200BE9E27 /* NavigationVC.swift in Sources */,
 				DA6C302E263AB6B4006574FB /* String+Extansion.swift in Sources */,
 				DADBD9A626381202004C522B /* SloyTextField.swift in Sources */,
 				DA6C3022263A9F8E006574FB /* MainVC.swift in Sources */,
