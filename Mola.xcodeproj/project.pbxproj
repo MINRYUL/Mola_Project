@@ -30,7 +30,7 @@
 		8B8605BC1D007FC807FCA9BB /* Pods-Mola.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mola.debug.xcconfig"; path = "Target Support Files/Pods-Mola/Pods-Mola.debug.xcconfig"; sourceTree = "<group>"; };
 		D810955494EFB69E61777DC0 /* Pods-Mola.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mola.release.xcconfig"; path = "Target Support Files/Pods-Mola/Pods-Mola.release.xcconfig"; sourceTree = "<group>"; };
 		DA1F0543263D443200BE9E27 /* NavigationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationVC.swift; sourceTree = "<group>"; };
-		DA1F0546263D495E00BE9E27 /* BottomDrawerSupplemental.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BottomDrawerSupplemental.swift; path = Mola/BottomDrawerSupplemental.swift; sourceTree = SOURCE_ROOT; };
+		DA1F0546263D495E00BE9E27 /* BottomDrawerSupplemental.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BottomDrawerSupplemental.swift; path = Mola/Views/BottomDrawerSupplemental.swift; sourceTree = SOURCE_ROOT; };
 		DA6C3021263A9F8E006574FB /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		DA6C302D263AB6B4006574FB /* String+Extansion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extansion.swift"; sourceTree = "<group>"; };
 		DA8D099B262C1B7700CF83F1 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
@@ -71,6 +71,7 @@
 		DA6C302B263AB43D006574FB /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				DA1F0546263D495E00BE9E27 /* BottomDrawerSupplemental.swift */,
 				DA9382BF263937FC00A04F25 /* SignUpCell.swift */,
 			);
 			path = Views;
@@ -111,7 +112,6 @@
 				DADBD9A4263811ED004C522B /* Extension */,
 				DABFBC03262AC7E90057EBDC /* Controller */,
 				DABFBBEE262ABAD70057EBDC /* AppDelegate.swift */,
-				DA1F0546263D495E00BE9E27 /* BottomDrawerSupplemental.swift */,
 				DABFBBF0262ABAD70057EBDC /* SceneDelegate.swift */,
 				DABFBBF7262ABAD80057EBDC /* Assets.xcassets */,
 				DABFBBF9262ABAD80057EBDC /* LaunchScreen.storyboard */,

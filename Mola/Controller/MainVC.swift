@@ -19,7 +19,30 @@ class MainVC: UIViewController, MDCBottomDrawerViewControllerDelegate {
         $0.image = UIImage(systemName: "text.justify")
         $0.action = #selector(navigationButton)
     }
-
+    
+    private var topSubView = UIView().then {
+        $0.backgroundColor = UIColor(red: 51/225, green: 153/255, blue: 255/255, alpha:1.0)
+//        $0.backgroundColor = .systemTeal
+    }
+    
+    private var userNameLabel = UILabel().then {
+        $0.font = .systemFont(ofSize: 14)
+        $0.textColor = .white
+        $0.text = "김민창님의 포인트"
+    }
+    
+    private var userPointLabel = UILabel().then {
+        $0.font = .systemFont(ofSize: 32)
+        $0.textColor = .white
+        $0.text = "330,312"
+    }
+    
+    private var pointButtonImage = UIImageView().then(){
+        $0.image = UIImage(systemName: "chevron.forward")
+        $0.contentMode = .scaleAspectFit
+        $0.tintColor = .white
+    }
+    
     @objc func navigationButton(sender: UIBarButtonItem!) {
         print("touch navigationButton button")
         let bottomDrawerViewController = MDCBottomDrawerViewController()
@@ -46,11 +69,6 @@ class MainVC: UIViewController, MDCBottomDrawerViewControllerDelegate {
 
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-
-      }
-    
     private func setupNavigation() {
         self.navigationItem.title = "모두의 라벨링"
         
@@ -60,13 +78,42 @@ class MainVC: UIViewController, MDCBottomDrawerViewControllerDelegate {
         self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         self.navigationController?.navigationBar.tintColor = .white
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 51/225, green: 153/255, blue: 255/255, alpha:1.0)
+//        self.navigationController?.navigationBar.barTintColor = .systemTeal
         self.navigationItem.setLeftBarButtonItems([leftMenuItem], animated: true)
         
         leftMenuItem.target = self
     }
     
     private func setupMainLayoutWithSnapKit() {
+        view.addSubview(topSubView)
+        topSubView.addSubview(userNameLabel)
+        topSubView.addSubview(userPointLabel)
+        topSubView.addSubview(pointButtonImage)
         
+        topSubView.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.height.equalTo(180)
+        }
+        
+        userNameLabel.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(58)
+            make.leading.equalToSuperview().offset(70)
+            make.trailing.equalToSuperview().offset(-100)
+        }
+        
+        userPointLabel.snp.makeConstraints { make in
+            make.top.equalTo(userNameLabel).offset(20)
+            make.leading.equalTo(userNameLabel)
+            make.trailing.equalTo(userNameLabel)
+        }
+        
+        pointButtonImage.snp.makeConstraints { make in
+            make.top.equalTo(userPointLabel).offset(9)
+            make.leading.equalTo(userPointLabel).offset(20)
+            make.trailing.equalTo(userPointLabel).offset(-5)
+        }
     }
     
     func bottomDrawerControllerDidChangeTopInset(_ controller: MDCBottomDrawerViewController,
@@ -90,7 +137,6 @@ class MainVC: UIViewController, MDCBottomDrawerViewControllerDelegate {
 }
 
 extension MainVC {
-
   @objc class func catalogMetadata() -> [String: Any] {
     return [
       "breadcrumbs": ["Navigation Drawer", "Bottom Drawer"],
