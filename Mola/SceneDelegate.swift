@@ -25,34 +25,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window?.rootViewController = nav
         self.window?.makeKeyAndVisible()
-        
-//        nav1.tabBarItem.title = "SnapKit"
-//        nav1.tabBarItem.image = UIImage(systemName: "house.fill")
-//        let vc2 = SnpViewController()
-//        let vc3 = ThenViewController()
-//        let nav2 = UINavigationController(rootViewController: vc2)
-//        let nav3 = UINavigationController(rootViewController: vc3)
-//        let tab = UITabBarController()
-//        tab.viewControllers = [nav1, nav2, nav3]
-//        tab.selectedIndex = 0
-//        nav2.tabBarItem.title = "SnapKit"
-//        nav2.tabBarItem.image = UIImage(systemName: "house")
-//
-//        nav3.tabBarItem.title = "Then"
-//        nav3.tabBarItem.image = UIImage(systemName: "star")
     }
     
     @objc func showMainViewController(notification: Notification){
         let mainView = MainVC()
+        let orderView = OrderVC()
         let homeNav = UINavigationController(rootViewController: mainView)
+        let orderNav = UINavigationController(rootViewController: orderView)
         
         let tab = UITabBarController()
         
-        tab.viewControllers = [homeNav]
+        tab.viewControllers = [homeNav, orderNav]
         tab.selectedIndex = 0
         
         homeNav.tabBarItem.image = UIImage(systemName: "house.fill")
-        
+        orderNav.tabBarItem.image = UIImage(systemName: "highlighter")
         self.window?.rootViewController = tab
         self.window?.makeKeyAndVisible()
     }

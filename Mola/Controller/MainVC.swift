@@ -100,15 +100,16 @@ class MainVC: UIViewController, MDCBottomDrawerViewControllerDelegate {
     
     private func setupNavigation() {
         self.navigationItem.title = "모두의 라벨링"
-        
-        UINavigationBar.appearance().isTranslucent = false
-        
+                
+        self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         self.navigationController?.navigationBar.tintColor = .white
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 51/225, green: 153/255, blue: 255/255, alpha:1.0)
-//        self.navigationController?.navigationBar.barTintColor = .systemTeal
         self.navigationItem.setLeftBarButtonItems([leftMenuItem], animated: true)
+        
+        tabBarController?.tabBar.barTintColor = UIColor(red: 51/225, green: 153/255, blue: 255/255, alpha:1.0)
+        tabBarController?.tabBar.tintColor = UIColor.white
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -149,7 +150,7 @@ class MainVC: UIViewController, MDCBottomDrawerViewControllerDelegate {
         }
         
         orderButton.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(255)
+            make.top.equalToSuperview().offset(163)
             make.leading.equalToSuperview().offset(50)
             make.trailing.equalToSuperview().offset(-50)
         }
@@ -202,6 +203,9 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MainCell.identifier, for: indexPath) as! MainCell
         cell.selectionStyle = .none
+        if indexPath.section == 0 {
+            cell.pinButton.setImage(UIImage(systemName: "pin.fill"), for: .normal)
+        }
         
         cell.nameText.text = orderList[indexPath.section].order[indexPath.row].name
         cell.detailText.text = orderList[indexPath.section].order[indexPath.row].detail
