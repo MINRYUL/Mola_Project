@@ -14,5 +14,6 @@ target 'Mola' do
   pod 'MaterialComponents/TextControls+OutlinedTextFields'
   pod 'MaterialComponents/schemes/Color'
   pod 'MaterialComponents/NavigationDrawer'
+  pod 'Mantis', '~> 1.5.2'
 
 end

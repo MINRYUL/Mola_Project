@@ -33,17 +33,15 @@ class SignUpVC: UIViewController {
     private var signUpButton = UIButton().then {
         $0.setTitle("회원가입", for: .normal)
         $0.setTitleColor(.white, for: .normal)
-        $0.backgroundColor = .systemTeal
+        $0.backgroundColor = UIColor(red: 51/225, green: 153/255, blue: 255/255, alpha:1.0)
         $0.layer.cornerRadius = 10
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        self.navigationController?.navigationBar.topItem?.title = "로그인"
-        view.backgroundColor = .white
-        tableView.dataSource = self
-        tableView.delegate = self
+        self.view.backgroundColor = .white
+        setUpNavigation()
         createUI()
     }
     
@@ -57,8 +55,22 @@ class SignUpVC: UIViewController {
         self.navigationController?.isNavigationBarHidden = true
     }
     
-    private func createUI() {
+    private func setUpNavigation() {
         self.navigationItem.title = "회원가입"
+        self.navigationController?.navigationBar.topItem?.title = "로그인"
+        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        self.navigationController?.navigationBar.tintColor = .white
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: 51/225, green: 153/255, blue: 255/255, alpha:1.0)
+        
+        tabBarController?.tabBar.barTintColor = UIColor(red: 51/225, green: 153/255, blue: 255/255, alpha:1.0)
+        tabBarController?.tabBar.tintColor = UIColor.white
+    }
+    
+    private func createUI() {
+        tableView.dataSource = self
+        tableView.delegate = self
         view.addSubview(tableView)
         view.addSubview(signUpButton)
         
