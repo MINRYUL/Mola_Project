@@ -14,10 +14,16 @@ import Mantis
 
 class OrderVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate, CropViewControllerDelegate {
 
+    private let rightCompleteItem = UIBarButtonItem(title: "완료하기", style: .plain, target: self, action: #selector(buttonPressed))
+
     private let scrollView = UIScrollView().then() {
         $0.backgroundColor = .systemBackground
         $0.isScrollEnabled = true
         $0.sizeToFit()
+    }
+    
+    private let contentView = UIView().then() {
+        $0.backgroundColor = .systemBackground
     }
     
     private var labelingText = MDCFilledTextField().then() {
@@ -104,6 +110,10 @@ class OrderVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCo
     @objc private func touchUpSelectImageButton(_ sender: UITapGestureRecognizer) {
         self.present(self.imagePicker, animated: true, completion: nil)
     }
+    
+    @objc func buttonPressed(sender: UIBarButtonItem!) {
+        print("touch navigationButton button")
+    }
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -119,27 +129,40 @@ class OrderVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCo
         self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         self.navigationController?.navigationBar.tintColor = .white
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 51/225, green: 153/255, blue: 255/255, alpha:1.0)
-        
+        self.navigationItem.setRightBarButtonItems([rightCompleteItem], animated: true)
+    
         tabBarController?.tabBar.barTintColor = UIColor(red: 51/225, green: 153/255, blue: 255/255, alpha:1.0)
         tabBarController?.tabBar.tintColor = UIColor.white
     }
     
     private func createUI() {
         self.view.backgroundColor = .white
-        scrollView.delegate = self
+        self.scrollView.delegate = self
         
         view.addSubview(scrollView)
-        scrollView.addSubview(labelingText)
-        scrollView.addSubview(uploadLabel)
-        scrollView.addSubview(uploadButton)
-        scrollView.addSubview(creditText)
-        scrollView.addSubview(imageExampleText)
-        scrollView.addSubview(exampleImage)
-        scrollView.addSubview(requirementsLabel)
-        scrollView.addSubview(requirementsText)
+        scrollView.addSubview(contentView)
+        contentView.addSubview(labelingText)
+        contentView.addSubview(uploadLabel)
+        contentView.addSubview(uploadButton)
+        contentView.addSubview(creditText)
+        contentView.addSubview(imageExampleText)
+        contentView.addSubview(exampleImage)
+        contentView.addSubview(requirementsLabel)
+        contentView.addSubview(requirementsText)
         
-        scrollView.snp.makeConstraints{ maker in
-            maker.edges.equalTo(view)
+        scrollView.snp.makeConstraints{ make in
+            make.top.equalTo(topLayoutGuide.snp.bottom)
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.bottom.equalToSuperview()
+            make.width.equalToSuperview()
+            make.edges.equalTo(view)
+        }
+        
+        contentView.snp.makeConstraints { make in
+            make.height.equalToSuperview()
+            make.top.bottom.equalTo(scrollView)
+            make.left.right.equalTo(view)
         }
         
         labelingText.snp.makeConstraints{ make in
