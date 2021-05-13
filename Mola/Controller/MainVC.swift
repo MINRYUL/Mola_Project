@@ -7,10 +7,12 @@
 
 import UIKit
 import MaterialComponents.MaterialNavigationDrawer
+import SideMenu
 
 class MainVC: UIViewController, MDCBottomDrawerViewControllerDelegate {
     
     @objc var colorScheme = MDCSemanticColorScheme(defaults: .material201804)
+    private var sideMenuControllr: SideMenuNavigationController?
     
     let headerViewController = DrawerHeaderViewController()
     let contentViewController = DrawerContentViewController()
@@ -45,7 +47,6 @@ class MainVC: UIViewController, MDCBottomDrawerViewControllerDelegate {
     
     private var topSubView = UIView().then {
         $0.backgroundColor = UIColor(red: 51/225, green: 153/255, blue: 255/255, alpha:1.0)
-//        $0.backgroundColor = .systemTeal
     }
     
     private var userNameLabel = UILabel().then {
@@ -75,18 +76,28 @@ class MainVC: UIViewController, MDCBottomDrawerViewControllerDelegate {
     
     @objc func navigationButton(sender: UIBarButtonItem!) {
         print("touch navigationButton button")
-        let bottomDrawerViewController = MDCBottomDrawerViewController()
-        bottomDrawerViewController.setTopCornersRadius(24, for: .collapsed)
-        bottomDrawerViewController.setTopCornersRadius(8, for: .expanded)
-        bottomDrawerViewController.isTopHandleHidden = false
-        bottomDrawerViewController.topHandleColor = UIColor.lightGray
-        bottomDrawerViewController.contentViewController = contentViewController
-        bottomDrawerViewController.headerViewController = headerViewController
-        bottomDrawerViewController.delegate = self
-        bottomDrawerViewController.headerViewController?.view.backgroundColor = colorScheme.surfaceColor;
-        bottomDrawerViewController.contentViewController?.view.backgroundColor = colorScheme.surfaceColor;
-        bottomDrawerViewController.scrimColor = colorScheme.onSurfaceColor.withAlphaComponent(0.32)
-        present(bottomDrawerViewController, animated: true, completion: nil)
+//        let bottomDrawerViewController = MDCBottomDrawerViewController()
+//        bottomDrawerViewController.setTopCornersRadius(24, for: .collapsed)
+//        bottomDrawerViewController.setTopCornersRadius(8, for: .expanded)
+//        bottomDrawerViewController.isTopHandleHidden = false
+//        bottomDrawerViewController.topHandleColor = UIColor.lightGray
+//        bottomDrawerViewController.contentViewController = contentViewController
+//        bottomDrawerViewController.headerViewController = headerViewController
+//        bottomDrawerViewController.delegate = self
+//        bottomDrawerViewController.headerViewController?.view.backgroundColor = colorScheme.surfaceColor;
+//        bottomDrawerViewController.contentViewController?.view.backgroundColor = colorScheme.surfaceColor;
+//        bottomDrawerViewController.scrimColor = colorScheme.onSurfaceColor.withAlphaComponent(0.32)
+//        present(bottomDrawerViewController, animated: true, completion: nil)
+        let sidemenu = CustomSideMenuNavigation.getInstance()
+        sidemenu.hostViewController = self
+        self.sideMenuControllr = SideMenuNavigationController(rootViewController: sidemenu)
+        self.sideMenuControllr!.leftSide = true
+        self.sideMenuControllr!.isNavigationBarHidden = true
+        self.sideMenuControllr!.settings.presentationStyle = .menuSlideIn
+        self.sideMenuControllr!.settings.presentationStyle.presentingEndAlpha = 0.6
+        self.sideMenuControllr!.settings.statusBarEndAlpha = 0
+        CustomSideMenuNavigation.getInstance().createUI()
+        present(self.sideMenuControllr!, animated: true, completion: nil)
     }
 
     override func viewDidLoad() {
@@ -109,7 +120,8 @@ class MainVC: UIViewController, MDCBottomDrawerViewControllerDelegate {
         self.navigationItem.setLeftBarButtonItems([leftMenuItem], animated: true)
         
         tabBarController?.tabBar.barTintColor = UIColor(red: 51/225, green: 153/255, blue: 255/255, alpha:1.0)
-        tabBarController?.tabBar.tintColor = UIColor.white
+        tabBarController?.tabBar.tintColor = .white
+        tabBarController?.tabBar.unselectedItemTintColor = .lightText
         
         tableView.dataSource = self
         tableView.delegate = self

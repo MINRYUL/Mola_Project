@@ -79,6 +79,7 @@ PODS:
     - "MaterialComponents/private/TextControlsPrivate+OutlinedStyle"
     - "MaterialComponents/TextControls+BaseTextFields"
   - MDFInternationalization (2.0.0)
+  - SideMenu (6.5.0)
   - SnapKit (5.0.1)
   - Then (2.7.0)
 
@@ -90,6 +91,7 @@ DEPENDENCIES:
   - "MaterialComponents/TextControls+FilledTextFields"
   - "MaterialComponents/TextControls+OutlinedTextAreas"
   - "MaterialComponents/TextControls+OutlinedTextFields"
+  - SideMenu
   - SnapKit (~> 5.0.0)
   - Then
 
@@ -98,6 +100,7 @@ SPEC REPOS:
     - Mantis
     - MaterialComponents
     - MDFInternationalization
+    - SideMenu
     - SnapKit
     - Then
 
@@ -105,9 +108,10 @@ SPEC CHECKSUMS:
   Mantis: 2d820f8d7a2f576ad028d5418faab8f5656c2997
   MaterialComponents: 1a9b2d9d45b1601ae544de85089adc4c464306d4
   MDFInternationalization: 010097556d6b09d2c4ea38e0820ea6d37be6a314
+  SideMenu: f583187d21c5b1dd04c72002be544b555a2627a2
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   Then: acfe0be7e98221c6204e12f8161459606d5d822d
 
-PODFILE CHECKSUM: 295132afdf2ef1fa614193c7318301a629a438cd
+PODFILE CHECKSUM: d1e7b580d66ba90a86ad8a3a3c9407fd6fcd7863
 
 COCOAPODS: 1.10.1

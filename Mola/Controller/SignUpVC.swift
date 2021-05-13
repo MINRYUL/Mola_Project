@@ -22,6 +22,8 @@ class SignUpVC: UIViewController {
         ])
     ]
     
+    private let rightCompleteItem = UIBarButtonItem(title: "가입하기", style: .plain, target: self, action: #selector(buttonPressed))
+    
     private let tableView = UITableView(frame: CGRect.zero, style: .grouped).then {
         $0.backgroundColor = .systemBackground
         $0.register(SignUpCell.self, forCellReuseIdentifier: SignUpCell.identifier)
@@ -30,11 +32,8 @@ class SignUpVC: UIViewController {
         $0.estimatedRowHeight = 60
     }
     
-    private var signUpButton = UIButton().then {
-        $0.setTitle("회원가입", for: .normal)
-        $0.setTitleColor(.white, for: .normal)
-        $0.backgroundColor = UIColor(red: 51/225, green: 153/255, blue: 255/255, alpha:1.0)
-        $0.layer.cornerRadius = 10
+    @objc func buttonPressed(sender: UIBarButtonItem!) {
+        print("touch navigationButton button")
     }
 
     override func viewDidLoad() {
@@ -66,13 +65,14 @@ class SignUpVC: UIViewController {
         
         tabBarController?.tabBar.barTintColor = UIColor(red: 51/225, green: 153/255, blue: 255/255, alpha:1.0)
         tabBarController?.tabBar.tintColor = UIColor.white
+        
+        self.navigationItem.setRightBarButtonItems([rightCompleteItem], animated: true)
     }
     
     private func createUI() {
         tableView.dataSource = self
         tableView.delegate = self
         view.addSubview(tableView)
-        view.addSubview(signUpButton)
         
         tableView.snp.makeConstraints { maker in
 //            maker.edges.equalTo(view)
@@ -80,13 +80,6 @@ class SignUpVC: UIViewController {
             maker.leading.equalToSuperview()
             maker.trailing.equalToSuperview()
             maker.height.equalTo(588)
-        }
-        
-        signUpButton.snp.makeConstraints { make in
-            make.top.equalTo(tableView.snp.bottom).offset(5)
-            make.leading.equalTo(tableView.snp.leading).offset(20)
-            make.trailing.equalTo(tableView.snp.trailing).offset(-20)
-            make.height.equalTo(44)
         }
     }
     

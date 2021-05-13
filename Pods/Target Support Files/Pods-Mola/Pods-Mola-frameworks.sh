@@ -178,6 +178,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/MDFInternationalization/MDFInternationalization.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Mantis/Mantis.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MaterialComponents/MaterialComponents.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/SideMenu/SideMenu.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Then/Then.framework"
 fi
@@ -185,6 +186,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/MDFInternationalization/MDFInternationalization.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Mantis/Mantis.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MaterialComponents/MaterialComponents.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/SideMenu/SideMenu.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Then/Then.framework"
 fi
