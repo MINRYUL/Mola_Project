@@ -12,7 +12,7 @@ import MaterialComponents.MaterialTextControls_OutlinedTextAreas
 import MaterialComponents.MaterialTextControls_OutlinedTextFields
 import Mantis
 
-class OrderVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate, CropViewControllerDelegate {
+class OrderVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate {
 
     private let rightCompleteItem = UIBarButtonItem(title: "완료하기", style: .plain, target: self, action: #selector(buttonPressed))
 
@@ -84,16 +84,6 @@ class OrderVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCo
         return picker
     }()
         
-    
-    func cropViewControllerDidCrop(_ cropViewController: CropViewController, cropped: UIImage, transformation: Transformation) {
-        self.exampleImage.image = cropped
-        self.exampleImage.backgroundColor = .white
-        dismiss(animated: true, completion: nil)
-    }
-    
-    func cropViewControllerDidCancel(_ cropViewController: CropViewController, original: UIImage) {
-        dismiss(animated: true, completion: nil)
-    }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         self.dismiss(animated: true, completion: nil)
@@ -233,4 +223,18 @@ class OrderVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCo
     }
     */
 
+}
+
+extension OrderVC: CropViewControllerDelegate {
+    
+    func cropViewControllerDidCrop(_ cropViewController: CropViewController, cropped: UIImage, transformation: Transformation) {
+        self.exampleImage.image = cropped
+        self.exampleImage.backgroundColor = .white
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func cropViewControllerDidCancel(_ cropViewController: CropViewController, original: UIImage) {
+        dismiss(animated: true, completion: nil)
+    }
+    
 }

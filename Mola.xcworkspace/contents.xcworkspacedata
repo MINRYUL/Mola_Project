@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/minryul/Documents/Mola/Mola/CustomSideMenuNavigation.swift">
-   </FileRef>
-   <FileRef
       location = "group:Mola.xcodeproj">
    </FileRef>
    <FileRef

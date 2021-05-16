@@ -19,7 +19,7 @@
 		DAA18FBE26426BE5006E37DA /* MainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA18FBD26426BE5006E37DA /* MainCell.swift */; };
 		DAA18FC126427915006E37DA /* OrderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA18FC026427915006E37DA /* OrderVC.swift */; };
 		DAABCE0A264A732F0067DD98 /* MyPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAABCE09264A732F0067DD98 /* MyPageVC.swift */; };
-		DAABCE1E264D3CB30067DD98 /* CustomSideMenuNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAABCE1D264D3CB30067DD98 /* CustomSideMenuNavigation.swift */; };
+		DAABCE1E264D3CB30067DD98 /* CustomSideMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAABCE1D264D3CB30067DD98 /* CustomSideMenuVC.swift */; };
 		DABFBBEF262ABAD70057EBDC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABFBBEE262ABAD70057EBDC /* AppDelegate.swift */; };
 		DABFBBF1262ABAD70057EBDC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABFBBF0262ABAD70057EBDC /* SceneDelegate.swift */; };
 		DABFBBF3262ABAD70057EBDC /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABFBBF2262ABAD70057EBDC /* LoginVC.swift */; };
@@ -45,7 +45,7 @@
 		DAA18FBD26426BE5006E37DA /* MainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCell.swift; sourceTree = "<group>"; };
 		DAA18FC026427915006E37DA /* OrderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderVC.swift; sourceTree = "<group>"; };
 		DAABCE09264A732F0067DD98 /* MyPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageVC.swift; sourceTree = "<group>"; };
-		DAABCE1D264D3CB30067DD98 /* CustomSideMenuNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomSideMenuNavigation.swift; path = /Users/minryul/Documents/Mola/Mola/CustomSideMenuNavigation.swift; sourceTree = "<absolute>"; };
+		DAABCE1D264D3CB30067DD98 /* CustomSideMenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomSideMenuVC.swift; path = /Users/minryul/Documents/Mola/Mola/CustomSideMenuVC.swift; sourceTree = "<absolute>"; };
 		DABFBBEB262ABAD70057EBDC /* Mola.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mola.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DABFBBEE262ABAD70057EBDC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DABFBBF0262ABAD70057EBDC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -81,7 +81,6 @@
 		DA6C302B263AB43D006574FB /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				DAABCE1D264D3CB30067DD98 /* CustomSideMenuNavigation.swift */,
 				DA1F0546263D495E00BE9E27 /* BottomDrawerSupplemental.swift */,
 				DA9382BF263937FC00A04F25 /* SignUpCell.swift */,
 				DAA18FBD26426BE5006E37DA /* MainCell.swift */,
@@ -136,6 +135,7 @@
 		DABFBC03262AC7E90057EBDC /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				DAABCE1D264D3CB30067DD98 /* CustomSideMenuVC.swift */,
 				DAABCE09264A732F0067DD98 /* MyPageVC.swift */,
 				DAA18FC026427915006E37DA /* OrderVC.swift */,
 				DA6C3021263A9F8E006574FB /* MainVC.swift */,
@@ -294,7 +294,7 @@
 				DA1F0547263D495E00BE9E27 /* BottomDrawerSupplemental.swift in Sources */,
 				DA9382C0263937FC00A04F25 /* SignUpCell.swift in Sources */,
 				DA1F0544263D443200BE9E27 /* NavigationVC.swift in Sources */,
-				DAABCE1E264D3CB30067DD98 /* CustomSideMenuNavigation.swift in Sources */,
+				DAABCE1E264D3CB30067DD98 /* CustomSideMenuVC.swift in Sources */,
 				DA6C302E263AB6B4006574FB /* String+Extansion.swift in Sources */,
 				DADBD9A626381202004C522B /* SloyTextField.swift in Sources */,
 				DAA18FBB26426BCB006E37DA /* OrderModel.swift in Sources */,
