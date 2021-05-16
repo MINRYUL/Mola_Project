@@ -12,8 +12,15 @@ import MaterialComponents.MaterialTextControls_OutlinedTextAreas
 import MaterialComponents.MaterialTextControls_OutlinedTextFields
 import Mantis
 
-class OrderVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate {
-
+class OrderVC: UIViewController, UINavigationControllerDelegate, UIScrollViewDelegate {
+    
+    lazy var imagePicker: UIImagePickerController = {
+        let picker: UIImagePickerController = UIImagePickerController()
+        picker.sourceType = .photoLibrary
+        picker.delegate = self
+        return picker
+    }()
+    
     private let rightCompleteItem = UIBarButtonItem(title: "완료하기", style: .plain, target: self, action: #selector(buttonPressed))
 
     private let scrollView = UIScrollView().then() {
@@ -75,30 +82,6 @@ class OrderVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCo
     private var requirementsText = MDCFilledTextArea().then() {
         $0.tintColor = .systemGray
         $0.sizeToFit()
-    }
-    
-    lazy var imagePicker: UIImagePickerController = {
-        let picker: UIImagePickerController = UIImagePickerController()
-        picker.sourceType = .photoLibrary
-        picker.delegate = self
-        return picker
-    }()
-        
-    
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        self.dismiss(animated: true, completion: nil)
-    }
-
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
-        self.dismiss(animated: true, completion: nil)
-        let cropViewController = Mantis.cropViewController(image: originalImage!)
-        cropViewController.delegate = self
-        self.present(cropViewController, animated: true)
-    }
-    
-    @objc private func touchUpSelectImageButton(_ sender: UITapGestureRecognizer) {
-        self.present(self.imagePicker, animated: true, completion: nil)
     }
     
     @objc func buttonPressed(sender: UIBarButtonItem!) {
@@ -211,7 +194,7 @@ class OrderVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCo
         self.exampleImage.addGestureRecognizer(imageTapGestureRecognizer)
         exampleImage.isUserInteractionEnabled = true
     }
-    
+
 
     /*
     // MARK: - Navigation
@@ -237,4 +220,23 @@ extension OrderVC: CropViewControllerDelegate {
         dismiss(animated: true, completion: nil)
     }
     
+}
+
+extension OrderVC: UIImagePickerControllerDelegate {
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        self.dismiss(animated: true, completion: nil)
+    }
+
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+        self.dismiss(animated: true, completion: nil)
+        let cropViewController = Mantis.cropViewController(image: originalImage!)
+        cropViewController.delegate = self
+        self.present(cropViewController, animated: true)
+    }
+    
+    @objc private func touchUpSelectImageButton(_ sender: UITapGestureRecognizer) {
+        self.present(self.imagePicker, animated: true, completion: nil)
+    }
 }

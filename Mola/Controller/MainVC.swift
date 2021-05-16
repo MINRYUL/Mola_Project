@@ -6,17 +6,13 @@
 //
 
 import UIKit
-import MaterialComponents.MaterialNavigationDrawer
 import SideMenu
 
-class MainVC: UIViewController, MDCBottomDrawerViewControllerDelegate, UIScrollViewDelegate {
-    
-    @objc var colorScheme = MDCSemanticColorScheme(defaults: .material201804)
-    private var sideMenuControllr: SideMenuNavigationController?
-    
-    let headerViewController = DrawerHeaderViewController()
-    let contentViewController = DrawerContentViewController()
+class MainVC: UIViewController {
 
+    private var sideMenuControllr: SideMenuNavigationController?
+
+    //MAKR: - Main UI
     private var leftMenuItem = UIBarButtonItem().then {
         $0.image = UIImage(systemName: "text.justify")
         $0.action = #selector(navigationButton)
@@ -44,20 +40,80 @@ class MainVC: UIViewController, MDCBottomDrawerViewControllerDelegate, UIScrollV
         $0.tintColor = .white
     }
     
+    //MAKR: - Scroll UI
     private var mainScrollView = UIScrollView().then() {
-        $0.backgroundColor = .systemBackground
+        $0.backgroundColor = .systemGray6
         $0.showsHorizontalScrollIndicator = false
         $0.isPagingEnabled = true
         $0.bounces = true
-        
+        $0.alwaysBounceVertical = false
     }
     
-    private var mainContentView = UIView().then() {
-        $0.backgroundColor = .systemBackground
+    private var pageControl = UIPageControl().then() {
+        $0.hidesForSinglePage = true
+        $0.numberOfPages = 3
+        $0.pageIndicatorTintColor = .darkGray
     }
     
-    let requestView = UIView()
-    let ordersView = UIView()
+    private var requestView = UIView().then() {
+        $0.backgroundColor = .systemGray6
+    }
+    
+    private var ordersView = UIView().then() {
+        $0.backgroundColor = .systemGray6
+    }
+    
+    private var profileView = UIView().then() {
+        $0.backgroundColor = .systemGray6
+    }
+
+    //MAKR: - Request UI
+    private var requestInView = UIView().then() {
+        $0.backgroundColor = .white
+        $0.layer.cornerRadius = 135
+    }
+    
+    private var requestLabel = UILabel().then() {
+        $0.font = .systemFont(ofSize: 31)
+        $0.text = "모든 라벨링 의뢰 \n시작하시겠습니까?"
+        $0.textColor = .darkGray
+        $0.numberOfLines = 2
+    }
+    
+    private var requestButton = UIButton().then() {
+        $0.layer.cornerRadius = 14
+        $0.setTitle("외주시작", for: .normal)
+        $0.backgroundColor = .systemTeal
+    }
+    
+    private var requestImage = UIImageView().then() {
+        $0.image = UIImage(named: "main_request")
+        $0.contentMode = .scaleAspectFit
+    }
+    
+    //MAKR: - Order UI
+    private var orderInView = UIView().then() {
+        $0.backgroundColor = .white
+        $0.layer.cornerRadius = 135
+    }
+    
+    private var orderLabel = UILabel().then() {
+        $0.font = .systemFont(ofSize: 31)
+        $0.text = "유저가 함께하는 의뢰 \n시작하시겠습니까?"
+        $0.textColor = .darkGray
+        $0.numberOfLines = 2
+    }
+    
+    private var orderButton = UIButton().then() {
+        $0.layer.cornerRadius = 14
+        $0.setTitle("외주신청", for: .normal)
+        $0.backgroundColor = .systemTeal
+    }
+    
+    private var orderImage = UIImageView().then() {
+        $0.image = UIImage(named: "main_order")
+        $0.contentMode = .scaleAspectFit
+    }
     
     @objc func navigationButton(sender: UIBarButtonItem!) {
         print("touch navigationButton button")
@@ -72,7 +128,7 @@ class MainVC: UIViewController, MDCBottomDrawerViewControllerDelegate, UIScrollV
         CustomSideMenuVC.getInstance().createUI()
         present(self.sideMenuControllr!, animated: true, completion: nil)
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -98,27 +154,33 @@ class MainVC: UIViewController, MDCBottomDrawerViewControllerDelegate, UIScrollV
     }
     
     private func createUI() {
-        view.backgroundColor = colorScheme.backgroundColor
+        view.backgroundColor = .white
         self.mainScrollView.delegate = self
         
         let xOffset = view.frame.size.width
-        let yOffset = view.frame.size.height - 300
+        let yOffset = view.frame.size.height - 350
         
-        mainScrollView.contentSize = CGSize(width: Int(xOffset) * 2, height: Int(yOffset))
+        mainScrollView.contentSize = CGSize(width: Int(xOffset) * 3, height: Int(yOffset))
         
         view.addSubview(topSubView)
         view.addSubview(mainScrollView)
+        view.addSubview(pageControl)
         topSubView.addSubview(userNameLabel)
         topSubView.addSubview(userPointLabel)
         topSubView.addSubview(pointButtonImage)
-//        mainScrollView.addSubview(mainContentView)
         
+        _ = [requestView, ordersView, profileView].map { self.mainScrollView.addSubview($0) }
         
         topSubView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
             make.height.equalTo(180)
+        }
+        
+        pageControl.snp.makeConstraints{ make in
+            make.top.equalTo(topSubView.safeAreaLayoutGuide.snp.bottom).offset(30)
+            make.leading.equalToSuperview().offset(30)
         }
         
         userNameLabel.snp.makeConstraints { make in
@@ -144,32 +206,21 @@ class MainVC: UIViewController, MDCBottomDrawerViewControllerDelegate, UIScrollV
             make.bottom.leading.trailing.equalToSuperview()
         }
         
-        _ = [requestView, ordersView].map { self.mainScrollView.addSubview($0) }
-        
-        requestView.backgroundColor = .systemTeal
-        ordersView.backgroundColor = .systemBlue
-        
-        requestView.snp.makeConstraints { (make) in
+        requestView.snp.makeConstraints { make in
             make.width.equalToSuperview()
             make.height.equalTo(yOffset)
             make.left.equalToSuperview()
         }
 
-        ordersView.snp.makeConstraints { (make) in
+        ordersView.snp.makeConstraints { make in
             make.width.equalToSuperview()
             make.height.equalTo(yOffset)
             make.left.equalToSuperview().offset(xOffset)
         }
+        
+        setUpRequestUI()
+        setUpOrderUI()
     }
-    
-    func bottomDrawerControllerDidChangeTopInset(_ controller: MDCBottomDrawerViewController,
-                                                 topInset: CGFloat) {
-        headerViewController.titleLabel.center =
-            CGPoint(x: headerViewController.view.frame.size.width / 2,
-                    y: (headerViewController.view.frame.size.height + topInset) / 2)
-    }
-    
-
     /*
     // MARK: - Navigation
 
@@ -179,5 +230,77 @@ class MainVC: UIViewController, MDCBottomDrawerViewControllerDelegate, UIScrollV
         // Pass the selected object to the new view controller.
     }
     */
+}
 
+extension MainVC{
+    private func setUpRequestUI() {
+        requestView.addSubview(requestInView)
+        requestView.addSubview(requestLabel)
+        requestView.addSubview(requestButton)
+        requestInView.addSubview(requestImage)
+        
+        requestLabel.snp.makeConstraints{ make in
+            make.top.equalToSuperview().offset(70)
+            make.leading.equalToSuperview().offset(80)
+            make.trailing.equalToSuperview().offset(-80)
+        }
+        
+        requestButton.snp.makeConstraints{ make in
+            make.top.equalTo(requestLabel.safeAreaLayoutGuide.snp.bottom).offset(15)
+            make.leading.equalToSuperview().offset(80)
+            make.width.equalTo(110)
+            make.height.equalTo(45)
+        }
+        
+        requestInView.snp.makeConstraints{ make in
+            make.top.equalToSuperview().offset(170)
+            make.leading.equalToSuperview().offset(65)
+            make.trailing.equalToSuperview().offset(-65)
+            make.bottom.equalToSuperview().offset(-90)
+        }
+        
+        requestImage.snp.makeConstraints{ make in
+            make.centerX.centerY.equalToSuperview()
+            make.height.equalTo(150)
+        }
+    }
+    
+    private func setUpOrderUI() {
+        ordersView.addSubview(orderInView)
+        ordersView.addSubview(orderLabel)
+        ordersView.addSubview(orderButton)
+        orderInView.addSubview(orderImage)
+        
+        orderLabel.snp.makeConstraints{ make in
+            make.top.equalToSuperview().offset(70)
+            make.leading.equalToSuperview().offset(80)
+        }
+        
+        orderButton.snp.makeConstraints{ make in
+            make.top.equalTo(orderLabel.safeAreaLayoutGuide.snp.bottom).offset(15)
+            make.leading.equalToSuperview().offset(80)
+            make.width.equalTo(110)
+            make.height.equalTo(45)
+        }
+        
+        orderInView.snp.makeConstraints{ make in
+            make.top.equalToSuperview().offset(170)
+            make.leading.equalToSuperview().offset(65)
+            make.trailing.equalToSuperview().offset(-65)
+            make.bottom.equalToSuperview().offset(-90)
+        }
+        
+        orderImage.snp.makeConstraints{ make in
+            make.centerX.centerY.equalToSuperview()
+            make.height.equalTo(150)
+        }
+    }
+}
+
+extension MainVC: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // floor 내림, ceil 올림
+        // contentOffset는 현재 스크롤된 좌표
+        pageControl.currentPage = Int(floor(mainScrollView.contentOffset.x / UIScreen.main.bounds.width))
+    }
 }

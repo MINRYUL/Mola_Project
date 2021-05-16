@@ -10,6 +10,7 @@ import SnapKit
 import Then
 
 class SignUpVC: UIViewController {
+    
     let signUpCategory: [SignUpCategory] = [
         SignUpCategory(name: "가입 정보", textField: [
             TextField(label: "이메일", placeHolder: "example@gmail.com", helpText: "이메일 형식에 맞게 작성해 주세요."),
@@ -82,8 +83,8 @@ class SignUpVC: UIViewController {
             maker.height.equalTo(588)
         }
     }
-    
 
+    
     /*
     // MARK: - Navigation
 
