@@ -265,6 +265,12 @@ extension MainVC{
         }
     }
     
+    @objc func orderButtonAction(sender: UIButton!) {
+        print("touch login button")
+        guard let orderMenuVC = tabBarController?.viewControllers?[1] else { return }
+        tabBarController?.selectedViewController = orderMenuVC
+    }
+    
     private func setUpOrderUI() {
         ordersView.addSubview(orderInView)
         ordersView.addSubview(orderLabel)
@@ -281,6 +287,7 @@ extension MainVC{
             make.leading.equalToSuperview().offset(80)
             make.width.equalTo(110)
             make.height.equalTo(45)
+            orderButton.addTarget(self, action: #selector(orderButtonAction), for: .touchUpInside)
         }
         
         orderInView.snp.makeConstraints{ make in

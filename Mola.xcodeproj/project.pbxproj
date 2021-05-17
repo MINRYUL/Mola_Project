@@ -20,6 +20,9 @@
 		DAA18FC126427915006E37DA /* OrderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA18FC026427915006E37DA /* OrderVC.swift */; };
 		DAABCE0A264A732F0067DD98 /* MyPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAABCE09264A732F0067DD98 /* MyPageVC.swift */; };
 		DAABCE1E264D3CB30067DD98 /* CustomSideMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAABCE1D264D3CB30067DD98 /* CustomSideMenuVC.swift */; };
+		DAABCE28265232A70067DD98 /* OrderMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAABCE27265232A70067DD98 /* OrderMenuVC.swift */; };
+		DAABCE2B265234E60067DD98 /* MyOrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAABCE2A265234E60067DD98 /* MyOrderModel.swift */; };
+		DAABCE2E265237130067DD98 /* MyOrderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAABCE2D265237130067DD98 /* MyOrderCell.swift */; };
 		DABFBBEF262ABAD70057EBDC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABFBBEE262ABAD70057EBDC /* AppDelegate.swift */; };
 		DABFBBF1262ABAD70057EBDC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABFBBF0262ABAD70057EBDC /* SceneDelegate.swift */; };
 		DABFBBF3262ABAD70057EBDC /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABFBBF2262ABAD70057EBDC /* LoginVC.swift */; };
@@ -46,6 +49,9 @@
 		DAA18FC026427915006E37DA /* OrderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderVC.swift; sourceTree = "<group>"; };
 		DAABCE09264A732F0067DD98 /* MyPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageVC.swift; sourceTree = "<group>"; };
 		DAABCE1D264D3CB30067DD98 /* CustomSideMenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomSideMenuVC.swift; path = /Users/minryul/Documents/Mola/Mola/CustomSideMenuVC.swift; sourceTree = "<absolute>"; };
+		DAABCE27265232A70067DD98 /* OrderMenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderMenuVC.swift; sourceTree = "<group>"; };
+		DAABCE2A265234E60067DD98 /* MyOrderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyOrderModel.swift; sourceTree = "<group>"; };
+		DAABCE2D265237130067DD98 /* MyOrderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyOrderCell.swift; sourceTree = "<group>"; };
 		DABFBBEB262ABAD70057EBDC /* Mola.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mola.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DABFBBEE262ABAD70057EBDC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DABFBBF0262ABAD70057EBDC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -84,6 +90,7 @@
 				DA1F0546263D495E00BE9E27 /* BottomDrawerSupplemental.swift */,
 				DA9382BF263937FC00A04F25 /* SignUpCell.swift */,
 				DAA18FBD26426BE5006E37DA /* MainCell.swift */,
+				DAABCE2D265237130067DD98 /* MyOrderCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -93,6 +100,7 @@
 			children = (
 				DA9382BB2639368300A04F25 /* SignUpModel.swift */,
 				DAA18FBA26426BCB006E37DA /* OrderModel.swift */,
+				DAABCE2A265234E60067DD98 /* MyOrderModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -139,6 +147,7 @@
 				DAABCE09264A732F0067DD98 /* MyPageVC.swift */,
 				DAA18FC026427915006E37DA /* OrderVC.swift */,
 				DA6C3021263A9F8E006574FB /* MainVC.swift */,
+				DAABCE27265232A70067DD98 /* OrderMenuVC.swift */,
 				DA1F0543263D443200BE9E27 /* NavigationVC.swift */,
 				DABFBBF2262ABAD70057EBDC /* LoginVC.swift */,
 				DADBD9B1263813D6004C522B /* SplashVC.swift */,
@@ -291,7 +300,9 @@
 				DA8D099C262C1B7700CF83F1 /* SignUpVC.swift in Sources */,
 				DA9382BC2639368300A04F25 /* SignUpModel.swift in Sources */,
 				DABFBBF1262ABAD70057EBDC /* SceneDelegate.swift in Sources */,
+				DAABCE28265232A70067DD98 /* OrderMenuVC.swift in Sources */,
 				DA1F0547263D495E00BE9E27 /* BottomDrawerSupplemental.swift in Sources */,
+				DAABCE2E265237130067DD98 /* MyOrderCell.swift in Sources */,
 				DA9382C0263937FC00A04F25 /* SignUpCell.swift in Sources */,
 				DA1F0544263D443200BE9E27 /* NavigationVC.swift in Sources */,
 				DAABCE1E264D3CB30067DD98 /* CustomSideMenuVC.swift in Sources */,
@@ -301,6 +312,7 @@
 				DAABCE0A264A732F0067DD98 /* MyPageVC.swift in Sources */,
 				DA6C3022263A9F8E006574FB /* MainVC.swift in Sources */,
 				DADBD9B526381AFD004C522B /* DeviceManager.swift in Sources */,
+				DAABCE2B265234E60067DD98 /* MyOrderModel.swift in Sources */,
 				DAA18FC126427915006E37DA /* OrderVC.swift in Sources */,
 				DADBD9B2263813D6004C522B /* SplashVC.swift in Sources */,
 				DAA18FBE26426BE5006E37DA /* MainCell.swift in Sources */,

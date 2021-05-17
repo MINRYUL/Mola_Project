@@ -103,7 +103,6 @@ class OrderVC: UIViewController, UINavigationControllerDelegate, UIScrollViewDel
         self.navigationController?.navigationBar.tintColor = .white
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 51/225, green: 153/255, blue: 255/255, alpha:1.0)
         self.navigationItem.setRightBarButtonItems([rightCompleteItem], animated: true)
-    
     }
     
     private func createUI() {

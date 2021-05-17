@@ -29,9 +29,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     @objc func showMainViewController(notification: Notification){
         let mainView = MainVC()
-        let orderView = OrderVC()
+        let orderMenuView = OrderMenuVC()
         let homeNav = UINavigationController(rootViewController: mainView)
-        let orderNav = UINavigationController(rootViewController: orderView)
+        let orderNav = UINavigationController(rootViewController: orderMenuView)
         
         let tab = UITabBarController()
         
