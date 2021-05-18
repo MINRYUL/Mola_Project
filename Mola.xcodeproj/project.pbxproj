@@ -12,6 +12,7 @@
 		DA1F0547263D495E00BE9E27 /* BottomDrawerSupplemental.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1F0546263D495E00BE9E27 /* BottomDrawerSupplemental.swift */; };
 		DA6C3022263A9F8E006574FB /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6C3021263A9F8E006574FB /* MainVC.swift */; };
 		DA6C302E263AB6B4006574FB /* String+Extansion.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6C302D263AB6B4006574FB /* String+Extansion.swift */; };
+		DA75790E265390580075ACD4 /* DetailOrderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA75790D265390580075ACD4 /* DetailOrderVC.swift */; };
 		DA8D099C262C1B7700CF83F1 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8D099B262C1B7700CF83F1 /* SignUpVC.swift */; };
 		DA9382BC2639368300A04F25 /* SignUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9382BB2639368300A04F25 /* SignUpModel.swift */; };
 		DA9382C0263937FC00A04F25 /* SignUpCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9382BF263937FC00A04F25 /* SignUpCell.swift */; };
@@ -41,6 +42,7 @@
 		DA1F0546263D495E00BE9E27 /* BottomDrawerSupplemental.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BottomDrawerSupplemental.swift; path = Mola/Views/BottomDrawerSupplemental.swift; sourceTree = SOURCE_ROOT; };
 		DA6C3021263A9F8E006574FB /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		DA6C302D263AB6B4006574FB /* String+Extansion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extansion.swift"; sourceTree = "<group>"; };
+		DA75790D265390580075ACD4 /* DetailOrderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailOrderVC.swift; sourceTree = "<group>"; };
 		DA8D099B262C1B7700CF83F1 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		DA9382BB2639368300A04F25 /* SignUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpModel.swift; sourceTree = "<group>"; };
 		DA9382BF263937FC00A04F25 /* SignUpCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SignUpCell.swift; path = Mola/Views/SignUpCell.swift; sourceTree = SOURCE_ROOT; };
@@ -152,6 +154,7 @@
 				DABFBBF2262ABAD70057EBDC /* LoginVC.swift */,
 				DADBD9B1263813D6004C522B /* SplashVC.swift */,
 				DA8D099B262C1B7700CF83F1 /* SignUpVC.swift */,
+				DA75790D265390580075ACD4 /* DetailOrderVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -299,6 +302,7 @@
 				DABFBBEF262ABAD70057EBDC /* AppDelegate.swift in Sources */,
 				DA8D099C262C1B7700CF83F1 /* SignUpVC.swift in Sources */,
 				DA9382BC2639368300A04F25 /* SignUpModel.swift in Sources */,
+				DA75790E265390580075ACD4 /* DetailOrderVC.swift in Sources */,
 				DABFBBF1262ABAD70057EBDC /* SceneDelegate.swift in Sources */,
 				DAABCE28265232A70067DD98 /* OrderMenuVC.swift in Sources */,
 				DA1F0547263D495E00BE9E27 /* BottomDrawerSupplemental.swift in Sources */,

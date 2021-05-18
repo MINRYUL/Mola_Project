@@ -8,8 +8,8 @@
 import Foundation
 
 struct MyOrder {
-    let name: String
-    let detail: String
-    let progression: Float
-    let entire: Float
+    var name: String
+    var detail: String
+    var progression: Float
+    var entire: Float
 }

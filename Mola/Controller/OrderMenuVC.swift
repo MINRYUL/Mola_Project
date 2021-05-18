@@ -97,7 +97,6 @@ class OrderMenuVC: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
 }
 
 extension OrderMenuVC: UITableViewDataSource, UITableViewDelegate {
@@ -125,6 +124,19 @@ extension OrderMenuVC: UITableViewDataSource, UITableViewDelegate {
         
         cell.backgroundColor = .systemGray6
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("detail order seleted")
+        let selectedOrder = orderModelList[indexPath.row]
+        let detailOrderVC = DetailOrderVC()
+        
+        detailOrderVC.orderModel = selectedOrder
+        navigationController?.pushViewController(detailOrderVC, animated: true)
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -155,3 +167,5 @@ extension OrderMenuVC: UITableViewDataSource, UITableViewDelegate {
     }
     
 }
+
+
