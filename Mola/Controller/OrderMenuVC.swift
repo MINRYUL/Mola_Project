@@ -9,12 +9,15 @@ import UIKit
 
 class OrderMenuVC: UIViewController {
     
+    let cellSpacingHeight: CGFloat = 5
+    
     let orderModelList: [MyOrder] = [
-        MyOrder(name: "강아지 라벨링", detail: "강아지 전체가 보이도록 사진을 라벨링 해주세요", progression: 1200, entire: 5000)
+        MyOrder(name: "강아지 라벨링", detail: "강아지 전체가 보이도록 사진을 라벨링 해주세요", progression: 1200, entire: 5000),
+        MyOrder(name: "꽃 라벨링", detail: "꽃잎이 모두 보이도록 사진을 라벨링 해주세요", progression: 1403, entire: 11000)
     ]
     
     private let orderTableView = UITableView(frame: CGRect.zero, style: .grouped).then {
-        $0.backgroundColor = .systemBackground
+        $0.backgroundColor = .systemGray6
         $0.register(MyOrderCell.self, forCellReuseIdentifier: MyOrderCell.identifier)
         $0.separatorStyle = .none
         $0.rowHeight = UITableView.automaticDimension
@@ -25,6 +28,9 @@ class OrderMenuVC: UIViewController {
         $0.backgroundColor = .systemTeal
         $0.text = "         외주 등록                                                           >"
         $0.textColor = .white
+        $0.clipsToBounds = true
+        $0.layer.cornerRadius = 15
+        $0.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
     }
 
     override func viewDidLoad() {
@@ -37,7 +43,7 @@ class OrderMenuVC: UIViewController {
     }
     
     private func setUpNavigation() {
-        self.navigationItem.title = "외주 메뉴"
+//        self.navigationItem.title = "외주 메뉴"
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
@@ -58,7 +64,7 @@ class OrderMenuVC: UIViewController {
     }
     
     private func createUI() {
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = .systemGray6
         orderTableView.dataSource = self
         orderTableView.delegate = self
         view.addSubview(orderTableView)
@@ -116,16 +122,24 @@ extension OrderMenuVC: UITableViewDataSource, UITableViewDelegate {
         
         progress.completedUnitCount = Int64(progressValue)
         cell.progressBar.setProgress(Float(progress.fractionCompleted), animated: true)
+        
+        cell.backgroundColor = .systemGray6
         return cell
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: 60))
-        headerView.backgroundColor = .systemBackground
+        headerView.backgroundColor = UIColor(red: 51/225, green: 153/255, blue: 255/255, alpha:1.0)
+        headerView.clipsToBounds = true
+        headerView.layer.cornerRadius = 8
+        headerView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+        
         let label = UILabel().then {
             $0.font = .boldSystemFont(ofSize: 24)
+            $0.textColor = .white
             $0.text = "나의 외주 목록"
         }
+        
         headerView.addSubview(label)
         
         label.snp.makeConstraints { make in
@@ -136,29 +150,8 @@ extension OrderMenuVC: UITableViewDataSource, UITableViewDelegate {
         return headerView
     }
     
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        
-        let footerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: 5))
-        let lineView = UIView()
-        
-        footerView.addSubview(lineView)
-        footerView.backgroundColor = .systemBackground
-        lineView.backgroundColor = .systemGray
-        
-        lineView.snp.makeConstraints { make in
-            make.left.right.equalTo(footerView).inset(UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20))
-            make.height.equalTo(1)
-            make.centerY.equalTo(footerView)
-        }
-        
-        return footerView
-    }
-    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 60
     }
     
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 20
-    }
 }

@@ -20,6 +20,9 @@ class MainVC: UIViewController {
     
     private var topSubView = UIView().then {
         $0.backgroundColor = UIColor(red: 51/225, green: 153/255, blue: 255/255, alpha:1.0)
+        $0.clipsToBounds = true
+        $0.layer.cornerRadius = 10
+        $0.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
     }
     
     private var userNameLabel = UILabel().then {
