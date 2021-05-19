@@ -30,16 +30,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     @objc func showMainViewController(notification: Notification){
         let mainView = MainVC()
         let orderMenuView = OrderMenuVC()
+        let outsourcingView = OutsourcingVC()
+        let profileView = ProfileVC()
         let homeNav = UINavigationController(rootViewController: mainView)
         let orderNav = UINavigationController(rootViewController: orderMenuView)
+        let outsourcingNav = UINavigationController(rootViewController: outsourcingView)
+        let profileNav = UINavigationController(rootViewController: profileView)
         
         let tab = UITabBarController()
         
-        tab.viewControllers = [homeNav, orderNav]
+        tab.viewControllers = [homeNav, outsourcingNav, orderNav, profileNav]
         tab.selectedIndex = 0
         
         homeNav.tabBarItem.image = UIImage(systemName: "house.fill")
+        outsourcingNav.tabBarItem.image = UIImage(systemName: "tag.fill")
         orderNav.tabBarItem.image = UIImage(systemName: "highlighter")
+        profileNav.tabBarItem.image = UIImage(systemName: "person.crop.square")
         self.window?.rootViewController = tab
         self.window?.makeKeyAndVisible()
     }

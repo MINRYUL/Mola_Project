@@ -95,6 +95,16 @@ class OrderVC: UIViewController, UINavigationControllerDelegate, UIScrollViewDel
         createUI()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
     private func setUpNavigation() {
         self.navigationItem.title = "외주 등록"
         self.navigationController?.navigationBar.isTranslucent = false

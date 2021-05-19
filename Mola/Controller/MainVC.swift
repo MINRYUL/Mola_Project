@@ -236,6 +236,13 @@ class MainVC: UIViewController {
 }
 
 extension MainVC{
+    
+    @objc func outsourcingButtonAction(sender: UIButton!) {
+        print("touch login button")
+        guard let outsourcingVC = tabBarController?.viewControllers?[1] else { return }
+        tabBarController?.selectedViewController = outsourcingVC
+    }
+    
     private func setUpRequestUI() {
         requestView.addSubview(requestInView)
         requestView.addSubview(requestLabel)
@@ -253,6 +260,7 @@ extension MainVC{
             make.leading.equalToSuperview().offset(80)
             make.width.equalTo(110)
             make.height.equalTo(45)
+            requestButton.addTarget(self, action: #selector(outsourcingButtonAction), for: .touchUpInside)
         }
         
         requestInView.snp.makeConstraints{ make in
@@ -270,7 +278,7 @@ extension MainVC{
     
     @objc func orderButtonAction(sender: UIButton!) {
         print("touch login button")
-        guard let orderMenuVC = tabBarController?.viewControllers?[1] else { return }
+        guard let orderMenuVC = tabBarController?.viewControllers?[2] else { return }
         tabBarController?.selectedViewController = orderMenuVC
     }
     

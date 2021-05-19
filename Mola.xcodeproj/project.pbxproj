@@ -10,6 +10,7 @@
 		915724D15D8EBBD96C64B303 /* Pods_Mola.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2EF5095118F121AAE29E91 /* Pods_Mola.framework */; };
 		DA1F0544263D443200BE9E27 /* NavigationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1F0543263D443200BE9E27 /* NavigationVC.swift */; };
 		DA1F0547263D495E00BE9E27 /* BottomDrawerSupplemental.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1F0546263D495E00BE9E27 /* BottomDrawerSupplemental.swift */; };
+		DA33B1102654F38F00AB2FE2 /* OutsourcingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA33B10F2654F38F00AB2FE2 /* OutsourcingVC.swift */; };
 		DA6C3022263A9F8E006574FB /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6C3021263A9F8E006574FB /* MainVC.swift */; };
 		DA6C302E263AB6B4006574FB /* String+Extansion.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6C302D263AB6B4006574FB /* String+Extansion.swift */; };
 		DA75790E265390580075ACD4 /* DetailOrderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA75790D265390580075ACD4 /* DetailOrderVC.swift */; };
@@ -19,7 +20,7 @@
 		DAA18FBB26426BCB006E37DA /* OrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA18FBA26426BCB006E37DA /* OrderModel.swift */; };
 		DAA18FBE26426BE5006E37DA /* MainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA18FBD26426BE5006E37DA /* MainCell.swift */; };
 		DAA18FC126427915006E37DA /* OrderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA18FC026427915006E37DA /* OrderVC.swift */; };
-		DAABCE0A264A732F0067DD98 /* MyPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAABCE09264A732F0067DD98 /* MyPageVC.swift */; };
+		DAABCE0A264A732F0067DD98 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAABCE09264A732F0067DD98 /* ProfileVC.swift */; };
 		DAABCE1E264D3CB30067DD98 /* CustomSideMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAABCE1D264D3CB30067DD98 /* CustomSideMenuVC.swift */; };
 		DAABCE28265232A70067DD98 /* OrderMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAABCE27265232A70067DD98 /* OrderMenuVC.swift */; };
 		DAABCE2B265234E60067DD98 /* MyOrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAABCE2A265234E60067DD98 /* MyOrderModel.swift */; };
@@ -40,6 +41,7 @@
 		D810955494EFB69E61777DC0 /* Pods-Mola.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mola.release.xcconfig"; path = "Target Support Files/Pods-Mola/Pods-Mola.release.xcconfig"; sourceTree = "<group>"; };
 		DA1F0543263D443200BE9E27 /* NavigationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationVC.swift; sourceTree = "<group>"; };
 		DA1F0546263D495E00BE9E27 /* BottomDrawerSupplemental.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BottomDrawerSupplemental.swift; path = Mola/Views/BottomDrawerSupplemental.swift; sourceTree = SOURCE_ROOT; };
+		DA33B10F2654F38F00AB2FE2 /* OutsourcingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutsourcingVC.swift; sourceTree = "<group>"; };
 		DA6C3021263A9F8E006574FB /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		DA6C302D263AB6B4006574FB /* String+Extansion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extansion.swift"; sourceTree = "<group>"; };
 		DA75790D265390580075ACD4 /* DetailOrderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailOrderVC.swift; sourceTree = "<group>"; };
@@ -49,7 +51,7 @@
 		DAA18FBA26426BCB006E37DA /* OrderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderModel.swift; sourceTree = "<group>"; };
 		DAA18FBD26426BE5006E37DA /* MainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCell.swift; sourceTree = "<group>"; };
 		DAA18FC026427915006E37DA /* OrderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderVC.swift; sourceTree = "<group>"; };
-		DAABCE09264A732F0067DD98 /* MyPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageVC.swift; sourceTree = "<group>"; };
+		DAABCE09264A732F0067DD98 /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		DAABCE1D264D3CB30067DD98 /* CustomSideMenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomSideMenuVC.swift; path = /Users/minryul/Documents/Mola/Mola/CustomSideMenuVC.swift; sourceTree = "<absolute>"; };
 		DAABCE27265232A70067DD98 /* OrderMenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderMenuVC.swift; sourceTree = "<group>"; };
 		DAABCE2A265234E60067DD98 /* MyOrderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyOrderModel.swift; sourceTree = "<group>"; };
@@ -145,8 +147,9 @@
 		DABFBC03262AC7E90057EBDC /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				DA33B10F2654F38F00AB2FE2 /* OutsourcingVC.swift */,
 				DAABCE1D264D3CB30067DD98 /* CustomSideMenuVC.swift */,
-				DAABCE09264A732F0067DD98 /* MyPageVC.swift */,
+				DAABCE09264A732F0067DD98 /* ProfileVC.swift */,
 				DAA18FC026427915006E37DA /* OrderVC.swift */,
 				DA6C3021263A9F8E006574FB /* MainVC.swift */,
 				DAABCE27265232A70067DD98 /* OrderMenuVC.swift */,
@@ -301,6 +304,7 @@
 				DABFBBF3262ABAD70057EBDC /* LoginVC.swift in Sources */,
 				DABFBBEF262ABAD70057EBDC /* AppDelegate.swift in Sources */,
 				DA8D099C262C1B7700CF83F1 /* SignUpVC.swift in Sources */,
+				DA33B1102654F38F00AB2FE2 /* OutsourcingVC.swift in Sources */,
 				DA9382BC2639368300A04F25 /* SignUpModel.swift in Sources */,
 				DA75790E265390580075ACD4 /* DetailOrderVC.swift in Sources */,
 				DABFBBF1262ABAD70057EBDC /* SceneDelegate.swift in Sources */,
@@ -313,7 +317,7 @@
 				DA6C302E263AB6B4006574FB /* String+Extansion.swift in Sources */,
 				DADBD9A626381202004C522B /* SloyTextField.swift in Sources */,
 				DAA18FBB26426BCB006E37DA /* OrderModel.swift in Sources */,
-				DAABCE0A264A732F0067DD98 /* MyPageVC.swift in Sources */,
+				DAABCE0A264A732F0067DD98 /* ProfileVC.swift in Sources */,
 				DA6C3022263A9F8E006574FB /* MainVC.swift in Sources */,
 				DADBD9B526381AFD004C522B /* DeviceManager.swift in Sources */,
 				DAABCE2B265234E60067DD98 /* MyOrderModel.swift in Sources */,
