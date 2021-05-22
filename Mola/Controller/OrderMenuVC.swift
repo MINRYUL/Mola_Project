@@ -80,7 +80,7 @@ class OrderMenuVC: UIViewController {
         
         orderTableView.snp.makeConstraints { make in
             make.top.trailing.leading.equalTo(view)
-            make.bottom.equalTo(requestLabel.safeAreaLayoutGuide.snp.top).offset(0)
+            make.bottom.equalTo(requestLabel.safeAreaLayoutGuide.snp.top)
 //            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(0)
 //            make.leading.equalToSuperview()
 //            make.trailing.equalToSuperview()

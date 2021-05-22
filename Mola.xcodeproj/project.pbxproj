@@ -14,6 +14,8 @@
 		DA6C3022263A9F8E006574FB /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6C3021263A9F8E006574FB /* MainVC.swift */; };
 		DA6C302E263AB6B4006574FB /* String+Extansion.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6C302D263AB6B4006574FB /* String+Extansion.swift */; };
 		DA75790E265390580075ACD4 /* DetailOrderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA75790D265390580075ACD4 /* DetailOrderVC.swift */; };
+		DA80CB142658F0A4008CFE4B /* PointHistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA80CB132658F0A4008CFE4B /* PointHistoryModel.swift */; };
+		DA80CB182658F3D1008CFE4B /* PointHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA80CB172658F3D1008CFE4B /* PointHistoryCell.swift */; };
 		DA8D099C262C1B7700CF83F1 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8D099B262C1B7700CF83F1 /* SignUpVC.swift */; };
 		DA9382BC2639368300A04F25 /* SignUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9382BB2639368300A04F25 /* SignUpModel.swift */; };
 		DA9382C0263937FC00A04F25 /* SignUpCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9382BF263937FC00A04F25 /* SignUpCell.swift */; };
@@ -45,6 +47,8 @@
 		DA6C3021263A9F8E006574FB /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		DA6C302D263AB6B4006574FB /* String+Extansion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extansion.swift"; sourceTree = "<group>"; };
 		DA75790D265390580075ACD4 /* DetailOrderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailOrderVC.swift; sourceTree = "<group>"; };
+		DA80CB132658F0A4008CFE4B /* PointHistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointHistoryModel.swift; sourceTree = "<group>"; };
+		DA80CB172658F3D1008CFE4B /* PointHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointHistoryCell.swift; sourceTree = "<group>"; };
 		DA8D099B262C1B7700CF83F1 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		DA9382BB2639368300A04F25 /* SignUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpModel.swift; sourceTree = "<group>"; };
 		DA9382BF263937FC00A04F25 /* SignUpCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SignUpCell.swift; path = Mola/Views/SignUpCell.swift; sourceTree = SOURCE_ROOT; };
@@ -95,6 +99,7 @@
 				DA9382BF263937FC00A04F25 /* SignUpCell.swift */,
 				DAA18FBD26426BE5006E37DA /* MainCell.swift */,
 				DAABCE2D265237130067DD98 /* MyOrderCell.swift */,
+				DA80CB172658F3D1008CFE4B /* PointHistoryCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -105,6 +110,7 @@
 				DA9382BB2639368300A04F25 /* SignUpModel.swift */,
 				DAA18FBA26426BCB006E37DA /* OrderModel.swift */,
 				DAABCE2A265234E60067DD98 /* MyOrderModel.swift */,
+				DA80CB132658F0A4008CFE4B /* PointHistoryModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -318,12 +324,14 @@
 				DADBD9A626381202004C522B /* SloyTextField.swift in Sources */,
 				DAA18FBB26426BCB006E37DA /* OrderModel.swift in Sources */,
 				DAABCE0A264A732F0067DD98 /* ProfileVC.swift in Sources */,
+				DA80CB182658F3D1008CFE4B /* PointHistoryCell.swift in Sources */,
 				DA6C3022263A9F8E006574FB /* MainVC.swift in Sources */,
 				DADBD9B526381AFD004C522B /* DeviceManager.swift in Sources */,
 				DAABCE2B265234E60067DD98 /* MyOrderModel.swift in Sources */,
 				DAA18FC126427915006E37DA /* OrderVC.swift in Sources */,
 				DADBD9B2263813D6004C522B /* SplashVC.swift in Sources */,
 				DAA18FBE26426BE5006E37DA /* MainCell.swift in Sources */,
+				DA80CB142658F0A4008CFE4B /* PointHistoryModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

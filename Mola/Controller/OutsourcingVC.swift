@@ -31,7 +31,7 @@ class OutsourcingVC: UIViewController {
     }
     
     private let subView = UIView().then() {
-        $0.backgroundColor = .systemGray5
+        $0.backgroundColor = .systemGray6
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 20
     }
@@ -45,6 +45,7 @@ class OutsourcingVC: UIViewController {
     private let requirementsLabel = UILabel().then() {
         $0.text = "꽃잎 전체가 보이도록 타이트하게 라벨링 해주세요."
         $0.font = .systemFont(ofSize: 15)
+        $0.numberOfLines = 3
         $0.textColor = .darkGray
     }
     
