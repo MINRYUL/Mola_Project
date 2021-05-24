@@ -11,7 +11,9 @@ class ProfileVC: UIViewController {
     
     let point: [PointModel] = [
         PointModel(name: "포인트 내역", pointHistory:
-                [PointHistory(type: "충전", beforeChange: 10000, afterChange: 5000, date: "5/22 5:05"),
+                [PointHistory(type: "휙득", beforeChange: 5000, afterChange: 5005, date: "5/22 5:10"),
+                PointHistory(type: "차감", beforeChange: 15000, afterChange: 5000, date: "5/22 5:07"),
+                PointHistory(type: "충전", beforeChange: 10000, afterChange: 15000, date: "5/22 5:05"),
                  PointHistory(type: "충전", beforeChange: 0, afterChange: 10000, date: "5/22 5:03"
                 )])
     ]
@@ -209,9 +211,25 @@ extension ProfileVC: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: PointHistoryCell.identifier, for: indexPath) as! PointHistoryCell
         cell.selectionStyle = .none
         cell.backgroundColor = .white
+        
+        if point[indexPath.section].pointHistory[indexPath.row].type == "충전" {
+            cell.pointName.textColor = .systemBlue
+            cell.typeView.backgroundColor = .systemBlue
+            cell.updatePoint.text = "+ " + (String)(point[indexPath.section].pointHistory[indexPath.row].afterChange - point[indexPath.section].pointHistory[indexPath.row].beforeChange)
+            cell.updatePoint.textColor = .systemBlue
+        } else if point[indexPath.section].pointHistory[indexPath.row].type == "차감"{
+            cell.pointName.textColor = .systemRed
+            cell.typeView.backgroundColor = .systemRed
+            cell.updatePoint.text =  (String)(point[indexPath.section].pointHistory[indexPath.row].afterChange - point[indexPath.section].pointHistory[indexPath.row].beforeChange)
+            cell.updatePoint.textColor = .systemRed
+        } else {
+            cell.pointName.textColor = .black
+            cell.typeView.backgroundColor = .darkGray
+            cell.updatePoint.text = "+ " + (String)(point[indexPath.section].pointHistory[indexPath.row].afterChange - point[indexPath.section].pointHistory[indexPath.row].beforeChange)
+            cell.updatePoint.textColor = .black
+        }
         cell.pointDate.text = point[indexPath.section].pointHistory[indexPath.row].date
         cell.pointName.text = point[indexPath.section].pointHistory[indexPath.row].type
-        cell.updatePoint.text = (String)(point[indexPath.section].pointHistory[indexPath.row].afterChange - point[indexPath.section].pointHistory[indexPath.row].beforeChange)
         cell.updateDetail.text = (String)(point[indexPath.section].pointHistory[indexPath.row].afterChange)
             
         cell.backgroundColor = .white
@@ -223,21 +241,24 @@ extension ProfileVC: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: 70))
-        headerView.backgroundColor = .white
+        let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: 60)).then() {
+            $0.backgroundColor = UIColor(red: 51/225, green: 153/255, blue: 255/255, alpha:1.0)
+            $0.layer.cornerRadius = 12
+            $0.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+        }
         
         let label = UILabel().then {
             $0.font = .boldSystemFont(ofSize: 24)
-            $0.textColor = .black
+            $0.textColor = .white
             $0.text = "나의 포인트 내역"
         }
         
-        let lineView = UIView().then {
-            $0.backgroundColor = .systemGray
-        }
+//        let lineView = UIView().then {
+//            $0.backgroundColor = .darkGray
+//        }
         
         headerView.addSubview(label)
-        headerView.addSubview(lineView)
+//        headerView.addSubview(lineView)
         
         label.snp.makeConstraints { make in
             make.top.equalTo(headerView.snp.top).offset(10)
@@ -245,11 +266,11 @@ extension ProfileVC: UITableViewDataSource, UITableViewDelegate {
             make.centerY.equalTo(headerView)
         }
         
-        lineView.snp.makeConstraints { make in
-            make.top.equalTo(label.safeAreaLayoutGuide.snp.bottom).offset(5)
-            make.left.right.equalTo(headerView).inset(UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20))
-            make.height.equalTo(1)
-        }
+//        lineView.snp.makeConstraints { make in
+//            make.top.equalTo(label.safeAreaLayoutGuide.snp.bottom).offset(10)
+//            make.left.right.equalTo(headerView).inset(UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20))
+//            make.height.equalTo(1)
+//        }
         
         return headerView
     }

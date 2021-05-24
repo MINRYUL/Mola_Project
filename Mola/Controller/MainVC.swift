@@ -118,6 +118,30 @@ class MainVC: UIViewController {
         $0.contentMode = .scaleAspectFit
     }
     
+    //MARK: - Profile UI
+    private var profileInView = UIView().then() {
+        $0.backgroundColor = .white
+        $0.layer.cornerRadius = 135
+    }
+    
+    private var profileLabel = UILabel().then() {
+        $0.font = .systemFont(ofSize: 31)
+        $0.text = "획득한 포인트를 \n확인해보세요!"
+        $0.textColor = .darkGray
+        $0.numberOfLines = 2
+    }
+    
+    private var profileButton = UIButton().then() {
+        $0.layer.cornerRadius = 14
+        $0.setTitle("내역확인", for: .normal)
+        $0.backgroundColor = .systemTeal
+    }
+    
+    private var profileImage = UIImageView().then() {
+        $0.image = UIImage(named: "main_profile")
+        $0.contentMode = .scaleAspectFit
+    }
+    
     @objc func navigationButton(sender: UIBarButtonItem!) {
         print("touch navigationButton button")
         let sidemenu = CustomSideMenuVC.getInstance()
@@ -221,8 +245,15 @@ class MainVC: UIViewController {
             make.left.equalToSuperview().offset(xOffset)
         }
         
+        profileView.snp.makeConstraints { make in
+            make.width.equalToSuperview()
+            make.height.equalTo(yOffset)
+            make.left.equalToSuperview().offset(xOffset * 2)
+        }
+        
         setUpRequestUI()
         setUpOrderUI()
+        setUpProfileUI()
     }
     /*
     // MARK: - Navigation
@@ -309,6 +340,44 @@ extension MainVC{
         }
         
         orderImage.snp.makeConstraints{ make in
+            make.centerX.centerY.equalToSuperview()
+            make.height.equalTo(150)
+        }
+    }
+    
+    @objc func profileButtonAction(sender: UIButton!) {
+        print("touch login button")
+        guard let profileVC = tabBarController?.viewControllers?[3] else { return }
+        tabBarController?.selectedViewController = profileVC
+    }
+    
+    private func setUpProfileUI() {
+        profileView.addSubview(profileInView)
+        profileView.addSubview(profileLabel)
+        profileView.addSubview(profileButton)
+        profileInView.addSubview(profileImage)
+        
+        profileLabel.snp.makeConstraints{ make in
+            make.top.equalToSuperview().offset(70)
+            make.leading.equalToSuperview().offset(80)
+        }
+        
+        profileButton.snp.makeConstraints{ make in
+            make.top.equalTo(profileLabel.safeAreaLayoutGuide.snp.bottom).offset(15)
+            make.leading.equalToSuperview().offset(80)
+            make.width.equalTo(110)
+            make.height.equalTo(45)
+            profileButton.addTarget(self, action: #selector(profileButtonAction), for: .touchUpInside)
+        }
+        
+        profileInView.snp.makeConstraints{ make in
+            make.top.equalToSuperview().offset(170)
+            make.leading.equalToSuperview().offset(65)
+            make.trailing.equalToSuperview().offset(-65)
+            make.bottom.equalToSuperview().offset(-90)
+        }
+        
+        profileImage.snp.makeConstraints{ make in
             make.centerX.centerY.equalToSuperview()
             make.height.equalTo(150)
         }
