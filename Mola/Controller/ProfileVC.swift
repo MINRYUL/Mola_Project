@@ -12,6 +12,20 @@ class ProfileVC: UIViewController {
     let point: [PointModel] = [
         PointModel(name: "포인트 내역", pointHistory:
                 [PointHistory(type: "휙득", beforeChange: 5000, afterChange: 5005, date: "5/22 5:10"),
+                 PointHistory(type: "차감", beforeChange: 15000, afterChange: 5000, date: "5/22 5:07"),
+                 PointHistory(type: "충전", beforeChange: 10000, afterChange: 15000, date: "5/22 5:05"),
+                 PointHistory(type: "충전", beforeChange: 10000, afterChange: 15000, date: "5/22 5:05"),
+                 PointHistory(type: "충전", beforeChange: 10000, afterChange: 15000, date: "5/22 5:05"),
+                 PointHistory(type: "차감", beforeChange: 15000, afterChange: 5000, date: "5/22 5:07"),
+                 PointHistory(type: "충전", beforeChange: 10000, afterChange: 15000, date: "5/22 5:05"),
+                 PointHistory(type: "충전", beforeChange: 10000, afterChange: 15000, date: "5/22 5:05"),
+                 PointHistory(type: "휙득", beforeChange: 5000, afterChange: 5005, date: "5/22 5:10"),
+                 PointHistory(type: "휙득", beforeChange: 5000, afterChange: 5005, date: "5/22 5:10"),
+                 PointHistory(type: "차감", beforeChange: 15000, afterChange: 5000, date: "5/22 5:07"),
+                 PointHistory(type: "휙득", beforeChange: 5000, afterChange: 5005, date: "5/22 5:10"),
+                 PointHistory(type: "휙득", beforeChange: 5000, afterChange: 5005, date: "5/22 5:10"),
+                 PointHistory(type: "휙득", beforeChange: 5000, afterChange: 5005, date: "5/22 5:10"),
+                 PointHistory(type: "휙득", beforeChange: 5000, afterChange: 5005, date: "5/22 5:10"),
                 PointHistory(type: "차감", beforeChange: 15000, afterChange: 5000, date: "5/22 5:07"),
                 PointHistory(type: "충전", beforeChange: 10000, afterChange: 15000, date: "5/22 5:05"),
                  PointHistory(type: "충전", beforeChange: 0, afterChange: 10000, date: "5/22 5:03"
@@ -19,37 +33,28 @@ class ProfileVC: UIViewController {
     ]
     
     private let pointHistoryTableView = UITableView(frame: CGRect.zero, style: .grouped).then {
-        $0.backgroundColor = .systemGray6
+        $0.backgroundColor = .systemGray5
         $0.register(PointHistoryCell.self, forCellReuseIdentifier: PointHistoryCell.identifier)
         $0.separatorStyle = .none
         $0.rowHeight = UITableView.automaticDimension
-        $0.estimatedRowHeight = 100
+        $0.estimatedRowHeight = UITableView.automaticDimension
+        $0.isScrollEnabled = true
     }
     
     private let scrollView = UIScrollView().then() {
-        $0.backgroundColor = .systemGray6
-        $0.isScrollEnabled = true
+        $0.backgroundColor = .systemGray5
+        $0.isScrollEnabled = false
         $0.sizeToFit()
     }
     
     private let contentView = UIView().then() {
-        $0.backgroundColor = .systemGray6
+        $0.backgroundColor = .systemGray5
     }
     
     private let subView = UIView().then() {
         $0.backgroundColor = UIColor(red: 51/225, green: 153/255, blue: 255/255, alpha:1.0)
-    }
-    
-    private let creditBackgroundView = UIView().then() {
-        $0.backgroundColor = .systemBlue
-        $0.clipsToBounds = true
-        $0.layer.cornerRadius = 10
-    }
-    
-    private let creditView = UIView().then() {
-        $0.backgroundColor = .lightText
-        $0.clipsToBounds = true
-        $0.layer.cornerRadius = 10
+        $0.layer.cornerRadius = 26
+        $0.layer.maskedCorners = [.layerMaxXMaxYCorner]
     }
     
     private var userNameLabel = UILabel().then {
@@ -67,13 +72,19 @@ class ProfileVC: UIViewController {
     private let chargeButton = UIButton().then {
         $0.layer.cornerRadius = 14
         $0.setTitle("충전하기", for: .normal)
-        $0.backgroundColor = .systemTeal
+        $0.setTitleColor(.white, for: .normal)
+        $0.backgroundColor = UIColor(red: 51/225, green: 153/255, blue: 255/255, alpha:1.0)
     }
     
     private let refundButton = UIButton().then {
         $0.layer.cornerRadius = 14
         $0.setTitle("환급받기", for: .normal)
-        $0.backgroundColor = .systemBlue
+        $0.setTitleColor(.white, for: .normal)
+        $0.backgroundColor = UIColor(red: 51/225, green: 153/255, blue: 255/255, alpha:1.0)
+    }
+    
+    private let buttonLineView = UIView().then {
+        $0.backgroundColor = .darkGray
     }
     
     override func viewDidLoad() {
@@ -105,25 +116,22 @@ class ProfileVC: UIViewController {
     }
     
     private func createUI() {
+        
+        scrollView.delegate = self
         pointHistoryTableView.dataSource = self
         pointHistoryTableView.delegate = self
         view.backgroundColor = .systemGray6
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         contentView.addSubview(subView)
-        contentView.addSubview(creditBackgroundView)
-        contentView.addSubview(creditView)
-        creditView.addSubview(userNameLabel)
-        creditView.addSubview(userPointLabel)
-        contentView.addSubview(chargeButton)
-        contentView.addSubview(refundButton)
+        subView.addSubview(userNameLabel)
+        subView.addSubview(userPointLabel)
+        subView.addSubview(chargeButton)
+        subView.addSubview(refundButton)
+        subView.addSubview(buttonLineView)
         contentView.addSubview(pointHistoryTableView)
         
         scrollView.snp.makeConstraints{ make in
-            make.top.equalTo(topLayoutGuide.snp.bottom)
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
-            make.bottom.equalToSuperview()
             make.width.equalToSuperview()
             make.edges.equalTo(view)
         }
@@ -136,54 +144,44 @@ class ProfileVC: UIViewController {
         
         subView.snp.makeConstraints{ make in
             make.top.leading.trailing.equalToSuperview()
-            make.height.equalTo(view.frame.width/2 - 90)
-        }
-        
-        creditBackgroundView.snp.makeConstraints{ make in
-            make.top.equalToSuperview().offset(view.frame.width/4 - 80)
-            make.bottom.equalTo(subView.safeAreaLayoutGuide.snp.bottom).offset(view.frame.width/4)
-            make.leading.equalToSuperview().offset(30)
-            make.trailing.equalToSuperview().offset(-30)
-        }
-        
-        creditView.snp.makeConstraints{ make in
-            make.top.equalToSuperview().offset(view.frame.width/4 - 78)
-            make.bottom.equalTo(subView.safeAreaLayoutGuide.snp.bottom).offset(view.frame.width/4)
-            make.leading.equalToSuperview().offset(30)
-            make.trailing.equalToSuperview().offset(-32)
-        }
-        
-        userNameLabel.snp.makeConstraints { make in
-            make.top.equalTo(creditView.safeAreaLayoutGuide.snp.top).offset(68)
-            make.leading.equalToSuperview().offset(70)
-            make.trailing.equalToSuperview().offset(-100)
+            make.height.equalTo(view.frame.width/2 - 30)
         }
         
         userPointLabel.snp.makeConstraints { make in
-            make.top.equalTo(userNameLabel).offset(20)
-            make.leading.equalTo(userNameLabel)
-            make.trailing.equalTo(userNameLabel)
+            make.centerY.centerX.equalToSuperview()
+        }
+        
+        userNameLabel.snp.makeConstraints { make in
+            make.leading.equalTo(userPointLabel).offset(10)
+            make.bottom.equalTo(userPointLabel.safeAreaLayoutGuide.snp.top).offset(-10)
         }
         
         chargeButton.snp.makeConstraints{ make in
-            make.top.equalTo(creditView.safeAreaLayoutGuide.snp.bottom).offset(10)
             make.leading.equalToSuperview().offset(30)
+            make.bottom.equalToSuperview().offset(-10)
             make.width.equalTo(view.frame.width/2 - 35)
             make.height.equalTo(50)
         }
         
+        buttonLineView.snp.makeConstraints{ make in
+            make.bottom.equalToSuperview().offset(-10)
+            make.width.equalTo(1)
+            make.height.equalTo(44)
+            make.centerX.equalToSuperview()
+        }
+        
         refundButton.snp.makeConstraints{ make in
-            make.top.equalTo(creditView.safeAreaLayoutGuide.snp.bottom).offset(10)
             make.trailing.equalToSuperview().offset(-30)
+            make.bottom.equalToSuperview().offset(-10)
             make.leading.equalTo(chargeButton.safeAreaLayoutGuide.snp.trailing).offset(5)
             make.width.equalTo(view.frame.width/2 - 35)
             make.height.equalTo(50)
         }
         
         pointHistoryTableView.snp.makeConstraints{ make in
-            make.top.equalTo(chargeButton.safeAreaLayoutGuide.snp.bottom).offset(10)
+            make.top.equalTo(subView.safeAreaLayoutGuide.snp.bottom).offset(10)
             make.leading.trailing.equalToSuperview()
-            make.bottom.equalTo(contentView.safeAreaLayoutGuide.snp.bottom)
+            make.bottom.equalTo(scrollView.safeAreaLayoutGuide.snp.bottom)
         }
     }
     
@@ -199,6 +197,7 @@ class ProfileVC: UIViewController {
 }
 
 extension ProfileVC: UITableViewDataSource, UITableViewDelegate {
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return point.count
     }
@@ -228,9 +227,11 @@ extension ProfileVC: UITableViewDataSource, UITableViewDelegate {
             cell.updatePoint.text = "+ " + (String)(point[indexPath.section].pointHistory[indexPath.row].afterChange - point[indexPath.section].pointHistory[indexPath.row].beforeChange)
             cell.updatePoint.textColor = .black
         }
+        
         cell.pointDate.text = point[indexPath.section].pointHistory[indexPath.row].date
         cell.pointName.text = point[indexPath.section].pointHistory[indexPath.row].type
-        cell.updateDetail.text = (String)(point[indexPath.section].pointHistory[indexPath.row].afterChange)
+        cell.updateDetail.text =  (String)(point[indexPath.section].pointHistory[indexPath.row].afterChange) +
+            " P"
             
         cell.backgroundColor = .white
         return cell
@@ -242,23 +243,18 @@ extension ProfileVC: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: 60)).then() {
-            $0.backgroundColor = UIColor(red: 51/225, green: 153/255, blue: 255/255, alpha:1.0)
-            $0.layer.cornerRadius = 12
-            $0.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+            $0.backgroundColor = .white
+            $0.layer.cornerRadius = 26
+            $0.layer.maskedCorners = [.layerMaxXMinYCorner,]
         }
         
         let label = UILabel().then {
-            $0.font = .boldSystemFont(ofSize: 24)
-            $0.textColor = .white
-            $0.text = "나의 포인트 내역"
+            $0.font = .boldSystemFont(ofSize: 23)
+            $0.textColor = .systemBlue
+            $0.text = "내역확인"
         }
         
-//        let lineView = UIView().then {
-//            $0.backgroundColor = .darkGray
-//        }
-        
         headerView.addSubview(label)
-//        headerView.addSubview(lineView)
         
         label.snp.makeConstraints { make in
             make.top.equalTo(headerView.snp.top).offset(10)
@@ -266,13 +262,18 @@ extension ProfileVC: UITableViewDataSource, UITableViewDelegate {
             make.centerY.equalTo(headerView)
         }
         
-//        lineView.snp.makeConstraints { make in
-//            make.top.equalTo(label.safeAreaLayoutGuide.snp.bottom).offset(10)
-//            make.left.right.equalTo(headerView).inset(UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20))
-//            make.height.equalTo(1)
-//        }
-        
         return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        
+        let footerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: 20)).then(){
+            $0.backgroundColor = .white
+            $0.layer.cornerRadius = 20
+            $0.layer.maskedCorners = [.layerMaxXMaxYCorner]
+        }
+        
+        return footerView
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

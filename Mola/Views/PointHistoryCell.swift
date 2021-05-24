@@ -22,7 +22,7 @@ class PointHistoryCell: UITableViewCell {
     }
     
     var pointName = UILabel().then() {
-        $0.font = .boldSystemFont(ofSize: 20)
+        $0.font = .boldSystemFont(ofSize: 18)
         $0.textColor = .black
     }
     
@@ -37,7 +37,7 @@ class PointHistoryCell: UITableViewCell {
     }
     
     let lineView = UIView().then() {
-        $0.backgroundColor = .systemGray
+        $0.backgroundColor = .systemGray2
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -63,28 +63,28 @@ class PointHistoryCell: UITableViewCell {
         }
         
         pointDate.snp.makeConstraints{ make in
-            make.top.equalTo(contentView).offset(3)
+            make.top.equalTo(contentView).offset(8)
             make.leading.equalTo(typeView.safeAreaLayoutGuide.snp.trailing).offset(10)
         }
         
         pointName.snp.makeConstraints{ make in
-            make.top.equalTo(pointDate.safeAreaLayoutGuide.snp.bottom).offset(6)
+            make.top.equalTo(pointDate.safeAreaLayoutGuide.snp.bottom).offset(10)
             make.leading.equalTo(typeView.safeAreaLayoutGuide.snp.trailing).offset(10)
         }
         
         updatePoint.snp.makeConstraints{ make in
-            make.top.equalTo(contentView).offset(15)
-            make.trailing.equalTo(contentView).offset(-10)
+            make.top.equalTo(contentView).offset(25)
+            make.trailing.equalTo(contentView).offset(-20)
         }
         
         updateDetail.snp.makeConstraints{ make in
             make.top.equalTo(updatePoint.safeAreaLayoutGuide.snp.bottom).offset(6)
-            make.trailing.equalTo(contentView).offset(-10)
-            make.bottom.equalTo(contentView).offset(-10)
+            make.trailing.equalTo(contentView).offset(-20)
+            make.bottom.equalTo(contentView).offset(-15)
         }
 
         lineView.snp.makeConstraints { make in
-            make.top.equalTo(contentView.safeAreaLayoutGuide.snp.bottom).offset(-2)
+            make.top.equalTo(contentView.safeAreaLayoutGuide.snp.bottom).offset(-1)
             make.left.right.equalTo(contentView).inset(UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20))
             make.height.equalTo(1)
         }
