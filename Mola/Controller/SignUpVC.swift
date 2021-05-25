@@ -233,8 +233,20 @@ extension SignUpVC : UITextFieldDelegate {
                             let userInformation : UserInformation = {
                                 UserInformation(email: self.email!, password: self.passwordCheck!, name: self.name!, phonenum: self.phonenum!)
                             }()
-                            sendUserInformation(requestURL: signUpRequestURL, userInfo: userInformation)
-                            return
+                            sendUserInformation(requestURL: signUpRequestURL, userInfo: userInformation) { res in
+                                switch res.result{
+                                case .success(let data):
+                                    if let jsonString = String(data: data, encoding: .utf8){
+                                        print("success")
+                                        print(jsonString)
+                                    }
+                                case .failure(let err):
+                                    print("err발생")
+                                    print(err)
+                                    checkInput = false
+                                    errorString = "네트워크 오류 발생"
+                                }
+                            }
                         } else {
                             errorString = "올바른 전화번호 형식이 아닙니다."
                         }
@@ -246,10 +258,22 @@ extension SignUpVC : UITextFieldDelegate {
                 }
             }
         }
+        if checkInput {
+            let alert: UIAlertController = UIAlertController(title: "성공", message: "모두의 라벨링 회원이 되신것을 환영합니다!", preferredStyle: .alert)
+            let action: UIAlertAction = UIAlertAction(title: "확인", style: .default, handler: popView)
+            alert.addAction(action)
+            present(alert, animated: true, completion: nil)
+            return
+        }
         let alert: UIAlertController = UIAlertController(title: "오류", message: errorString!, preferredStyle: .alert)
         let action: UIAlertAction = UIAlertAction(title: "확인", style: .default)
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
+    }
+    
+    @objc
+    private func popView(_ sender: UIAlertAction) {
+       self.navigationController?.popViewController(animated: true)
     }
     
     @objc
@@ -268,3 +292,4 @@ extension SignUpVC : UITextFieldDelegate {
     }
     
 }
+

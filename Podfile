@@ -16,5 +16,6 @@ target 'Mola' do
   pod 'MaterialComponents/NavigationDrawer'
   pod 'Mantis', '~> 1.5.2'
   pod 'SideMenu'
+  pod 'Alamofire', '~> 5.2'
 
 end

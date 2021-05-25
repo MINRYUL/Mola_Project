@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct UserInformation: Codable {
+struct UserInformation: Encodable {
     let email : String
     let password : String
     let name : String
