@@ -17,14 +17,10 @@ public class SignUpCell: UITableViewCell {
    
     static let identifier = "SignUpTableViewCell"
     
-//    let boardTitleLabel = UILabel().then {
-//        $0.font = .systemFont(ofSize: 17)
-//    }
-    
     let boardTextField = MDCOutlinedTextField().then {
         $0.font = .systemFont(ofSize: 15)
-//        $0.leadingAssistiveLabel.text = "This is helper text"
         $0.sizeToFit()
+        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.tintColor = .systemGray
     }
     

@@ -9,7 +9,6 @@ import UIKit
 import SideMenu
 
 class MainVC: UIViewController {
-
     private var sideMenuControllr: SideMenuNavigationController?
 
     //MAKR: - Main UI

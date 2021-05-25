@@ -8,18 +8,30 @@
 import UIKit
 import SnapKit
 import Then
+import MaterialComponents.MaterialTextControls_FilledTextAreas
+import MaterialComponents.MaterialTextControls_FilledTextFields
+import MaterialComponents.MaterialTextControls_OutlinedTextAreas
+import MaterialComponents.MaterialTextControls_OutlinedTextFields
 
 class SignUpVC: UIViewController {
+    
+    let signUpRequestURL: String = "http://13.209.232.235:8080/signup/"
+    
+    var email : String?
+    var password : String?
+    var passwordCheck : String?
+    var name : String?
+    var phonenum : String?
     
     let signUpCategory: [SignUpCategory] = [
         SignUpCategory(name: "가입 정보", textField: [
             TextField(label: "이메일", placeHolder: "example@gmail.com", helpText: "이메일 형식에 맞게 작성해 주세요."),
-            TextField(label: "비밀번호", placeHolder: "********", helpText: "대소문자 포함 8글자 이상 작성해 주세요."),
+            TextField(label: "비밀번호", placeHolder: "********", helpText: "대소문자, 숫자포함 8글자 이상 작성해 주세요."),
             TextField(label: "비밀번호 확인", placeHolder: "********", helpText: "비밀번호를 다시 한번 입력해 주세요.")
         ]),
         SignUpCategory(name: "회원 정보", textField: [
-            TextField(label: "닉네임", placeHolder: "", helpText: "자신이 사용할 닉네임을 작성해 주세요."),
-            TextField(label: "직업", placeHolder: "학생", helpText: "자신의 현재 직업을 작성해 주세요.")
+            TextField(label: "이름", placeHolder: "홍길동", helpText: "자신이 이름을 작성해주세요."),
+            TextField(label: "전화번호", placeHolder: "01012345678", helpText: "'-'없이 입력해주세요")
         ])
     ]
     
@@ -32,15 +44,10 @@ class SignUpVC: UIViewController {
         $0.rowHeight = UITableView.automaticDimension
         $0.estimatedRowHeight = 60
     }
-    
-    @objc func buttonPressed(sender: UIBarButtonItem!) {
-        print("touch navigationButton button")
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        self.view.backgroundColor = .white
         setUpNavigation()
         createUI()
     }
@@ -71,12 +78,12 @@ class SignUpVC: UIViewController {
     }
     
     private func createUI() {
+        self.view.backgroundColor = .white
         tableView.dataSource = self
         tableView.delegate = self
         view.addSubview(tableView)
         
         tableView.snp.makeConstraints { maker in
-//            maker.edges.equalTo(view)
             maker.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(0)
             maker.leading.equalToSuperview()
             maker.trailing.equalToSuperview()
@@ -112,6 +119,23 @@ extension SignUpVC: UITableViewDataSource, UITableViewDelegate {
         cell.boardTextField.placeholder = signUpCategory[indexPath.section].textField[indexPath.row].placeHolder
         cell.boardTextField.leadingAssistiveLabel.text = signUpCategory[indexPath.section].textField[indexPath.row].helpText
         
+        if signUpCategory[indexPath.section].textField[indexPath.row].label == "이메일" {
+            cell.boardTextField.keyboardType = .emailAddress
+        } else if signUpCategory[indexPath.section].textField[indexPath.row].label == "비밀번호" {
+            cell.boardTextField.keyboardType = .default
+            cell.boardTextField.isSecureTextEntry = true
+        } else if signUpCategory[indexPath.section].textField[indexPath.row].label == "비밀번호 확인" {
+            cell.boardTextField.keyboardType = .default
+            cell.boardTextField.isSecureTextEntry = true
+        } else if signUpCategory[indexPath.section].textField[indexPath.row].label == "이름" {
+            cell.boardTextField.keyboardType = .default
+        } else if signUpCategory[indexPath.section].textField[indexPath.row].label == "전화번호" {
+            cell.boardTextField.keyboardType = .numberPad
+        }
+        
+        cell.boardTextField.tag = indexPath.row
+        cell.boardTextField.delegate = self
+        cell.boardTextField.addTarget(self, action: #selector(valueChanged), for: .editingChanged)
         return cell
     }
     
@@ -159,4 +183,88 @@ extension SignUpVC: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
-
+extension SignUpVC : UITextFieldDelegate {
+    
+    @objc func buttonPressed(sender: UIBarButtonItem!) {
+        var checkInput : Bool! = true
+        var errorString : String! = "알 수 없는 오류"
+        
+        if let email : String = self.email {
+            print(email)
+        } else {
+            checkInput = false
+        }
+        
+        if let password : String = self.password {
+            print(password)
+        } else {
+            checkInput = false
+        }
+        
+        if let passwordCheck : String = self.passwordCheck {
+            print(passwordCheck)
+        } else {
+            checkInput = false
+        }
+        
+        if let name : String = self.name {
+            print(name)
+        } else {
+            checkInput = false
+        }
+        
+        if let phoneNum : String = self.phonenum {
+            print(phoneNum)
+        } else {
+            checkInput = false
+        }
+        
+        if checkInput == false {
+            errorString = "모든 정보를 입력해주세요"
+        }
+        
+        if checkInput {
+            if self.passwordCheck != self.password {
+                errorString = "비밀번호가 다릅니다."
+            } else {
+                if self.email!.isValidEmail {
+                    if self.passwordCheck!.isValidPassword {
+                        if self.phonenum!.isVaildPhoneNum {
+                            let userInformation : UserInformation = {
+                                UserInformation(email: self.email!, password: self.passwordCheck!, name: self.name!, phonenum: self.phonenum!)
+                            }()
+                            sendUserInformation(requestURL: signUpRequestURL, userInfo: userInformation)
+                            return
+                        } else {
+                            errorString = "올바른 전화번호 형식이 아닙니다."
+                        }
+                    } else {
+                        errorString = "올바른 비밀번호 형식이 아닙니다."
+                    }
+                } else {
+                    errorString = "올바른 이메일 형식이 아닙니다."
+                }
+            }
+        }
+        let alert: UIAlertController = UIAlertController(title: "오류", message: errorString!, preferredStyle: .alert)
+        let action: UIAlertAction = UIAlertAction(title: "확인", style: .default)
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    @objc
+    private func valueChanged(_ textField: MDCOutlinedTextField) {
+        if textField.label.text == "이메일" {
+            self.email = textField.text
+        } else if textField.label.text == "비밀번호" {
+            self.password = textField.text
+        } else if textField.label.text == "비밀번호 확인" {
+            self.passwordCheck = textField.text
+        } else if textField.label.text == "이름" {
+            self.name = textField.text
+        } else if textField.label.text == "전화번호" {
+            self.phonenum = textField.text
+        }
+    }
+    
+}
