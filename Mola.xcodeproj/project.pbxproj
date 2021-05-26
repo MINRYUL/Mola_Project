@@ -17,7 +17,8 @@
 		DA80CB142658F0A4008CFE4B /* PointHistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA80CB132658F0A4008CFE4B /* PointHistoryModel.swift */; };
 		DA80CB182658F3D1008CFE4B /* PointHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA80CB172658F3D1008CFE4B /* PointHistoryCell.swift */; };
 		DA84DE21265CC55300C659BB /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA84DE20265CC55300C659BB /* UserModel.swift */; };
-		DA84DE25265CE94E00C659BB /* SendSignUpData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA84DE24265CE94E00C659BB /* SendSignUpData.swift */; };
+		DA84DE25265CE94E00C659BB /* AlamofireClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA84DE24265CE94E00C659BB /* AlamofireClient.swift */; };
+		DA84DE35265E259A00C659BB /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA84DE34265E259A00C659BB /* Utility.swift */; };
 		DA8D099C262C1B7700CF83F1 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8D099B262C1B7700CF83F1 /* SignUpVC.swift */; };
 		DA9382BC2639368300A04F25 /* SignUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9382BB2639368300A04F25 /* SignUpModel.swift */; };
 		DA9382C0263937FC00A04F25 /* SignUpCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9382BF263937FC00A04F25 /* SignUpCell.swift */; };
@@ -52,7 +53,8 @@
 		DA80CB132658F0A4008CFE4B /* PointHistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointHistoryModel.swift; sourceTree = "<group>"; };
 		DA80CB172658F3D1008CFE4B /* PointHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointHistoryCell.swift; sourceTree = "<group>"; };
 		DA84DE20265CC55300C659BB /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserModel.swift; path = /Users/minryul/Documents/Mola/Mola/Model/UserModel.swift; sourceTree = "<absolute>"; };
-		DA84DE24265CE94E00C659BB /* SendSignUpData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendSignUpData.swift; sourceTree = "<group>"; };
+		DA84DE24265CE94E00C659BB /* AlamofireClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireClient.swift; sourceTree = "<group>"; };
+		DA84DE34265E259A00C659BB /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		DA8D099B262C1B7700CF83F1 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		DA9382BB2639368300A04F25 /* SignUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpModel.swift; sourceTree = "<group>"; };
 		DA9382BF263937FC00A04F25 /* SignUpCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SignUpCell.swift; path = Mola/Views/SignUpCell.swift; sourceTree = SOURCE_ROOT; };
@@ -111,9 +113,18 @@
 		DA84DE23265CE92900C659BB /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				DA84DE24265CE94E00C659BB /* SendSignUpData.swift */,
+				DA84DE24265CE94E00C659BB /* AlamofireClient.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		DA84DE33265E24BE00C659BB /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				DABFBBF0262ABAD70057EBDC /* SceneDelegate.swift */,
+				DABFBBEE262ABAD70057EBDC /* AppDelegate.swift */,
+			);
+			path = Delegate;
 			sourceTree = "<group>";
 		};
 		DA9382BA2639363200A04F25 /* Model */ = {
@@ -149,14 +160,13 @@
 		DABFBBED262ABAD70057EBDC /* Mola */ = {
 			isa = PBXGroup;
 			children = (
+				DA84DE33265E24BE00C659BB /* Delegate */,
 				DA84DE23265CE92900C659BB /* Service */,
 				DA6C302B263AB43D006574FB /* Views */,
 				DA9382BA2639363200A04F25 /* Model */,
 				DADBD9BD263823EF004C522B /* Manager */,
 				DADBD9A4263811ED004C522B /* Extension */,
 				DABFBC03262AC7E90057EBDC /* Controller */,
-				DABFBBEE262ABAD70057EBDC /* AppDelegate.swift */,
-				DABFBBF0262ABAD70057EBDC /* SceneDelegate.swift */,
 				DABFBBF7262ABAD80057EBDC /* Assets.xcassets */,
 				DABFBBF9262ABAD80057EBDC /* LaunchScreen.storyboard */,
 				DABFBBFC262ABAD80057EBDC /* Info.plist */,
@@ -195,6 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				DADBD9B426381AFD004C522B /* DeviceManager.swift */,
+				DA84DE34265E259A00C659BB /* Utility.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -321,10 +332,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA84DE35265E259A00C659BB /* Utility.swift in Sources */,
 				DABFBBF3262ABAD70057EBDC /* LoginVC.swift in Sources */,
 				DABFBBEF262ABAD70057EBDC /* AppDelegate.swift in Sources */,
 				DA8D099C262C1B7700CF83F1 /* SignUpVC.swift in Sources */,
-				DA84DE25265CE94E00C659BB /* SendSignUpData.swift in Sources */,
+				DA84DE25265CE94E00C659BB /* AlamofireClient.swift in Sources */,
 				DA33B1102654F38F00AB2FE2 /* OutsourcingVC.swift in Sources */,
 				DA9382BC2639368300A04F25 /* SignUpModel.swift in Sources */,
 				DA75790E265390580075ACD4 /* DetailOrderVC.swift in Sources */,

@@ -74,7 +74,8 @@ class SignUpVC: UIViewController {
         tabBarController?.tabBar.barTintColor = UIColor(red: 51/225, green: 153/255, blue: 255/255, alpha:1.0)
         tabBarController?.tabBar.tintColor = UIColor.white
         
-        self.navigationItem.setRightBarButtonItems([rightCompleteItem], animated: true)
+        self.navigationItem.setRightBarButton(rightCompleteItem, animated: true)
+        self.navigationItem.rightBarButtonItem?.isEnabled = false
     }
     
     private func createUI() {
@@ -233,7 +234,7 @@ extension SignUpVC : UITextFieldDelegate {
                             let userInformation : UserInformation = {
                                 UserInformation(email: self.email!, password: self.passwordCheck!, name: self.name!, phonenum: self.phonenum!)
                             }()
-                            sendUserInformation(requestURL: signUpRequestURL, userInfo: userInformation) { res in
+                            AlamofireClient.shared.sendUserInformation(requestURL: signUpRequestURL, userInfo: userInformation) { res in
                                 switch res.result{
                                 case .success(let data):
                                     if let jsonString = String(data: data, encoding: .utf8){
@@ -248,12 +249,15 @@ extension SignUpVC : UITextFieldDelegate {
                                 }
                             }
                         } else {
+                            checkInput = false
                             errorString = "올바른 전화번호 형식이 아닙니다."
                         }
                     } else {
+                        checkInput = false
                         errorString = "올바른 비밀번호 형식이 아닙니다."
                     }
                 } else {
+                    checkInput = false
                     errorString = "올바른 이메일 형식이 아닙니다."
                 }
             }
@@ -278,6 +282,7 @@ extension SignUpVC : UITextFieldDelegate {
     
     @objc
     private func valueChanged(_ textField: MDCOutlinedTextField) {
+        self.navigationItem.rightBarButtonItem?.isEnabled = true
         if textField.label.text == "이메일" {
             self.email = textField.text
         } else if textField.label.text == "비밀번호" {
@@ -290,6 +295,5 @@ extension SignUpVC : UITextFieldDelegate {
             self.phonenum = textField.text
         }
     }
-    
 }
 
