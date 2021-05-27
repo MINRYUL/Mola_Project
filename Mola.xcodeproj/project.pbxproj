@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		915724D15D8EBBD96C64B303 /* Pods_Mola.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2EF5095118F121AAE29E91 /* Pods_Mola.framework */; };
 		DA1F0544263D443200BE9E27 /* NavigationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1F0543263D443200BE9E27 /* NavigationVC.swift */; };
-		DA1F0547263D495E00BE9E27 /* BottomDrawerSupplemental.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1F0546263D495E00BE9E27 /* BottomDrawerSupplemental.swift */; };
 		DA33B1102654F38F00AB2FE2 /* OutsourcingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA33B10F2654F38F00AB2FE2 /* OutsourcingVC.swift */; };
 		DA6C3022263A9F8E006574FB /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6C3021263A9F8E006574FB /* MainVC.swift */; };
 		DA6C302E263AB6B4006574FB /* String+Extansion.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6C302D263AB6B4006574FB /* String+Extansion.swift */; };
@@ -18,15 +17,18 @@
 		DA80CB182658F3D1008CFE4B /* PointHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA80CB172658F3D1008CFE4B /* PointHistoryCell.swift */; };
 		DA84DE21265CC55300C659BB /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA84DE20265CC55300C659BB /* UserModel.swift */; };
 		DA84DE25265CE94E00C659BB /* AlamofireClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA84DE24265CE94E00C659BB /* AlamofireClient.swift */; };
-		DA84DE35265E259A00C659BB /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA84DE34265E259A00C659BB /* Utility.swift */; };
+		DA84DE35265E259A00C659BB /* UtilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA84DE34265E259A00C659BB /* UtilityManager.swift */; };
+		DA84DE3A265E7FB700C659BB /* CustomSideMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA84DE39265E7FB700C659BB /* CustomSideMenuVC.swift */; };
 		DA8D099C262C1B7700CF83F1 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8D099B262C1B7700CF83F1 /* SignUpVC.swift */; };
+		DA924140265F6DB10020DBA1 /* DocumentBrowserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA92413F265F6DB10020DBA1 /* DocumentBrowserVC.swift */; };
+		DA924145265F6FB60020DBA1 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA924144265F6FB60020DBA1 /* Document.swift */; };
+		DA924149265F70480020DBA1 /* DocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA924148265F70480020DBA1 /* DocumentView.swift */; };
 		DA9382BC2639368300A04F25 /* SignUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9382BB2639368300A04F25 /* SignUpModel.swift */; };
 		DA9382C0263937FC00A04F25 /* SignUpCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9382BF263937FC00A04F25 /* SignUpCell.swift */; };
 		DAA18FBB26426BCB006E37DA /* OrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA18FBA26426BCB006E37DA /* OrderModel.swift */; };
 		DAA18FBE26426BE5006E37DA /* MainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA18FBD26426BE5006E37DA /* MainCell.swift */; };
 		DAA18FC126427915006E37DA /* OrderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA18FC026427915006E37DA /* OrderVC.swift */; };
 		DAABCE0A264A732F0067DD98 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAABCE09264A732F0067DD98 /* ProfileVC.swift */; };
-		DAABCE1E264D3CB30067DD98 /* CustomSideMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAABCE1D264D3CB30067DD98 /* CustomSideMenuVC.swift */; };
 		DAABCE28265232A70067DD98 /* OrderMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAABCE27265232A70067DD98 /* OrderMenuVC.swift */; };
 		DAABCE2B265234E60067DD98 /* MyOrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAABCE2A265234E60067DD98 /* MyOrderModel.swift */; };
 		DAABCE2E265237130067DD98 /* MyOrderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAABCE2D265237130067DD98 /* MyOrderCell.swift */; };
@@ -45,7 +47,6 @@
 		8B8605BC1D007FC807FCA9BB /* Pods-Mola.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mola.debug.xcconfig"; path = "Target Support Files/Pods-Mola/Pods-Mola.debug.xcconfig"; sourceTree = "<group>"; };
 		D810955494EFB69E61777DC0 /* Pods-Mola.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mola.release.xcconfig"; path = "Target Support Files/Pods-Mola/Pods-Mola.release.xcconfig"; sourceTree = "<group>"; };
 		DA1F0543263D443200BE9E27 /* NavigationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationVC.swift; sourceTree = "<group>"; };
-		DA1F0546263D495E00BE9E27 /* BottomDrawerSupplemental.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BottomDrawerSupplemental.swift; path = Mola/Views/BottomDrawerSupplemental.swift; sourceTree = SOURCE_ROOT; };
 		DA33B10F2654F38F00AB2FE2 /* OutsourcingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutsourcingVC.swift; sourceTree = "<group>"; };
 		DA6C3021263A9F8E006574FB /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		DA6C302D263AB6B4006574FB /* String+Extansion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extansion.swift"; sourceTree = "<group>"; };
@@ -54,15 +55,18 @@
 		DA80CB172658F3D1008CFE4B /* PointHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointHistoryCell.swift; sourceTree = "<group>"; };
 		DA84DE20265CC55300C659BB /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserModel.swift; path = /Users/minryul/Documents/Mola/Mola/Model/UserModel.swift; sourceTree = "<absolute>"; };
 		DA84DE24265CE94E00C659BB /* AlamofireClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireClient.swift; sourceTree = "<group>"; };
-		DA84DE34265E259A00C659BB /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
+		DA84DE34265E259A00C659BB /* UtilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilityManager.swift; sourceTree = "<group>"; };
+		DA84DE39265E7FB700C659BB /* CustomSideMenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSideMenuVC.swift; sourceTree = "<group>"; };
 		DA8D099B262C1B7700CF83F1 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
+		DA92413F265F6DB10020DBA1 /* DocumentBrowserVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentBrowserVC.swift; sourceTree = "<group>"; };
+		DA924144265F6FB60020DBA1 /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
+		DA924148265F70480020DBA1 /* DocumentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentView.swift; sourceTree = "<group>"; };
 		DA9382BB2639368300A04F25 /* SignUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpModel.swift; sourceTree = "<group>"; };
 		DA9382BF263937FC00A04F25 /* SignUpCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SignUpCell.swift; path = Mola/Views/SignUpCell.swift; sourceTree = SOURCE_ROOT; };
 		DAA18FBA26426BCB006E37DA /* OrderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderModel.swift; sourceTree = "<group>"; };
 		DAA18FBD26426BE5006E37DA /* MainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCell.swift; sourceTree = "<group>"; };
 		DAA18FC026427915006E37DA /* OrderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderVC.swift; sourceTree = "<group>"; };
 		DAABCE09264A732F0067DD98 /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
-		DAABCE1D264D3CB30067DD98 /* CustomSideMenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomSideMenuVC.swift; path = /Users/minryul/Documents/Mola/Mola/CustomSideMenuVC.swift; sourceTree = "<absolute>"; };
 		DAABCE27265232A70067DD98 /* OrderMenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderMenuVC.swift; sourceTree = "<group>"; };
 		DAABCE2A265234E60067DD98 /* MyOrderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyOrderModel.swift; sourceTree = "<group>"; };
 		DAABCE2D265237130067DD98 /* MyOrderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyOrderCell.swift; sourceTree = "<group>"; };
@@ -101,8 +105,8 @@
 		DA6C302B263AB43D006574FB /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				DA1F0546263D495E00BE9E27 /* BottomDrawerSupplemental.swift */,
 				DA9382BF263937FC00A04F25 /* SignUpCell.swift */,
+				DA924148265F70480020DBA1 /* DocumentView.swift */,
 				DAA18FBD26426BE5006E37DA /* MainCell.swift */,
 				DAABCE2D265237130067DD98 /* MyOrderCell.swift */,
 				DA80CB172658F3D1008CFE4B /* PointHistoryCell.swift */,
@@ -134,6 +138,7 @@
 				DA9382BB2639368300A04F25 /* SignUpModel.swift */,
 				DAA18FBA26426BCB006E37DA /* OrderModel.swift */,
 				DAABCE2A265234E60067DD98 /* MyOrderModel.swift */,
+				DA924144265F6FB60020DBA1 /* Document.swift */,
 				DA80CB132658F0A4008CFE4B /* PointHistoryModel.swift */,
 			);
 			path = Model;
@@ -178,7 +183,6 @@
 			isa = PBXGroup;
 			children = (
 				DA33B10F2654F38F00AB2FE2 /* OutsourcingVC.swift */,
-				DAABCE1D264D3CB30067DD98 /* CustomSideMenuVC.swift */,
 				DAABCE09264A732F0067DD98 /* ProfileVC.swift */,
 				DAA18FC026427915006E37DA /* OrderVC.swift */,
 				DA6C3021263A9F8E006574FB /* MainVC.swift */,
@@ -188,6 +192,8 @@
 				DADBD9B1263813D6004C522B /* SplashVC.swift */,
 				DA8D099B262C1B7700CF83F1 /* SignUpVC.swift */,
 				DA75790D265390580075ACD4 /* DetailOrderVC.swift */,
+				DA84DE39265E7FB700C659BB /* CustomSideMenuVC.swift */,
+				DA92413F265F6DB10020DBA1 /* DocumentBrowserVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -205,7 +211,7 @@
 			isa = PBXGroup;
 			children = (
 				DADBD9B426381AFD004C522B /* DeviceManager.swift */,
-				DA84DE34265E259A00C659BB /* Utility.swift */,
+				DA84DE34265E259A00C659BB /* UtilityManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -332,27 +338,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA84DE35265E259A00C659BB /* Utility.swift in Sources */,
+				DA84DE35265E259A00C659BB /* UtilityManager.swift in Sources */,
 				DABFBBF3262ABAD70057EBDC /* LoginVC.swift in Sources */,
 				DABFBBEF262ABAD70057EBDC /* AppDelegate.swift in Sources */,
 				DA8D099C262C1B7700CF83F1 /* SignUpVC.swift in Sources */,
+				DA924145265F6FB60020DBA1 /* Document.swift in Sources */,
 				DA84DE25265CE94E00C659BB /* AlamofireClient.swift in Sources */,
 				DA33B1102654F38F00AB2FE2 /* OutsourcingVC.swift in Sources */,
 				DA9382BC2639368300A04F25 /* SignUpModel.swift in Sources */,
 				DA75790E265390580075ACD4 /* DetailOrderVC.swift in Sources */,
 				DABFBBF1262ABAD70057EBDC /* SceneDelegate.swift in Sources */,
 				DAABCE28265232A70067DD98 /* OrderMenuVC.swift in Sources */,
-				DA1F0547263D495E00BE9E27 /* BottomDrawerSupplemental.swift in Sources */,
+				DA84DE3A265E7FB700C659BB /* CustomSideMenuVC.swift in Sources */,
 				DAABCE2E265237130067DD98 /* MyOrderCell.swift in Sources */,
 				DA9382C0263937FC00A04F25 /* SignUpCell.swift in Sources */,
 				DA1F0544263D443200BE9E27 /* NavigationVC.swift in Sources */,
-				DAABCE1E264D3CB30067DD98 /* CustomSideMenuVC.swift in Sources */,
 				DA6C302E263AB6B4006574FB /* String+Extansion.swift in Sources */,
 				DADBD9A626381202004C522B /* SloyTextField.swift in Sources */,
 				DAA18FBB26426BCB006E37DA /* OrderModel.swift in Sources */,
 				DAABCE0A264A732F0067DD98 /* ProfileVC.swift in Sources */,
+				DA924149265F70480020DBA1 /* DocumentView.swift in Sources */,
 				DA80CB182658F3D1008CFE4B /* PointHistoryCell.swift in Sources */,
 				DA84DE21265CC55300C659BB /* UserModel.swift in Sources */,
+				DA924140265F6DB10020DBA1 /* DocumentBrowserVC.swift in Sources */,
 				DA6C3022263A9F8E006574FB /* MainVC.swift in Sources */,
 				DADBD9B526381AFD004C522B /* DeviceManager.swift in Sources */,
 				DAABCE2B265234E60067DD98 /* MyOrderModel.swift in Sources */,

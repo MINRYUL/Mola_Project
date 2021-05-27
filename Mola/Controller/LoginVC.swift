@@ -11,7 +11,7 @@ import Then
 
 class LoginVC: UIViewController {
     static let NotificationDone = NSNotification.Name(rawValue: "Main")
-    let loginRequestURL: String = "http://13.209.232.235:8080/login/"
+    let loginRequestURL: String = "http://13.209.232.235:8080/user/login/"
     
     var email : String?
     var password : String?
@@ -121,110 +121,108 @@ extension LoginVC : UITextFieldDelegate {
     }
     
     @objc func loginButtonAction(sender: UIButton!) {
-        print("touch login button")
-        var checkInput : Bool! = true
-        var errorString : String! = "알 수 없는 오류"
-        
-        if let email : String = self.email {
-            print(email)
-        } else {
-            checkInput = false
-            errorString = "이메일 형식이 잘못되었습니다."
-        }
-        
-        if let password : String = self.password {
-            print(password)
-        } else {
-            checkInput = false
-            errorString = "비밀번호를 잘못입력하였습니다."
-        }
-        
-        if checkInput {
-            let loginData : LoginData = {
-                LoginData(email: self.email!, password: self.password!)
-            }()
-            AlamofireClient.shared.requestUserLogin(requestURL: loginRequestURL, loginData: loginData) { res in
-                switch res.result{
-                case .success(let data):
-                    if let jsonString = String(data: data, encoding: .utf8){
-                        if let jsonDict: [String: Any] = jsonStringToDictionary(jsonString: jsonString){
-                            print(jsonDict)
-                            if let status : Int = jsonDict["status"] as? Int {
-                                if status >= 400{
-                                    checkInput = false
-                                    errorString = "아이디 비밀번호를 다시 확인해주세요"
-                                }
-                            } else {
-                                var userInfo = UserDetail.shared
-                                if let id : Int = jsonDict["id"] as? Int {
-                                    userInfo.id = id
-                                } else {
-                                    checkInput = false
-                                }
-                                
-                                if let email : String = jsonDict["email"] as? String {
-                                    userInfo.email = email
-                                } else {
-                                    checkInput = false
-                                }
-                                
-                                if let password : String = jsonDict["password"] as? String {
-                                    userInfo.password = password
-                                } else {
-                                    checkInput = false
-                                }
-                                
-                                if let name : String = jsonDict["name"] as? String {
-                                    userInfo.name = name
-                                } else {
-                                    checkInput = false
-                                }
-                                
-                                if let phonenum : String = jsonDict["phonenum"] as? String {
-                                    userInfo.phonenum = phonenum
-                                } else {
-                                    checkInput = false
-                                }
-                                
-                                if let point : Int = jsonDict["point"] as? Int {
-                                    userInfo.point = point
-                                } else {
-                                    checkInput = false
-                                }
-                                
-                                if checkInput == false{
-                                    errorString = "알 수 없는 오류"
-                                }
-                            }
-                            if checkInput {
-                                NotificationCenter.default.post(name: LoginVC.NotificationDone, object: nil)
-                                
-                            } else {
-                                DispatchQueue.main.async {
-                                    let alert: UIAlertController = UIAlertController(title: "오류", message: errorString!, preferredStyle: .alert)
-                                    let action: UIAlertAction = UIAlertAction(title: "확인", style: .default)
-                                    alert.addAction(action)
-                                    self.present(alert, animated: true)
-                                }
-                            }
-                        }
-                    }
-                case .failure(let err):
-                    print("err발생")
-                    print(err)
-                    checkInput = false
-                    errorString = "요청 오류"
-                }
-            }
-        }
-        
-        if checkInput == false {
-            let alert: UIAlertController = UIAlertController(title: "오류", message: errorString!, preferredStyle: .alert)
-            let action: UIAlertAction = UIAlertAction(title: "확인", style: .default)
-            alert.addAction(action)
-            present(alert, animated: true, completion: nil)
-        }
-//        NotificationCenter.default.post(name: LoginVC.NotificationDone, object: nil)
+//        print("touch login button")
+//        var checkInput : Bool! = true
+//        var errorString : String! = "알 수 없는 오류"
+//
+//        if let email : String = self.email {
+//            print(email)
+//        } else {
+//            checkInput = false
+//            errorString = "이메일 비밀번호를 모두 입력해주세요"
+//        }
+//
+//        if let password : String = self.password {
+//            print(password)
+//        } else {
+//            checkInput = false
+//            errorString = "이메일 비밀번호를 모두 입력해주세요"
+//        }
+//
+//        if checkInput {
+//            let loginData : LoginData = {
+//                LoginData(email: self.email!, password: self.password!)
+//            }()
+//            AlamofireClient.shared.requestUserLogin(requestURL: loginRequestURL, loginData: loginData) { res in
+//                switch res.result{
+//                case .success(let data):
+//                    if let jsonString = String(data: data, encoding: .utf8){
+//                        if let jsonDict: [String: Any] = UtilityManager.shared.jsonStringToDictionary(jsonString: jsonString){
+//                            print(jsonDict)
+//                            if let status : Int = jsonDict["status"] as? Int {
+//                                if status >= 400{
+//                                    checkInput = false
+//                                    errorString = "아이디 비밀번호를 다시 확인해주세요"
+//                                }
+//                            } else {
+//                                if let id : Int = jsonDict["id"] as? Int {
+//                                    UserDefaults.standard.set(id, forKey: "UserId")
+//                                } else {
+//                                    checkInput = false
+//                                }
+//
+//                                if let email : String = jsonDict["email"] as? String {
+//                                    UserDefaults.standard.set(email, forKey: "UserEmail")
+//                                } else {
+//                                    checkInput = false
+//                                }
+//
+//                                if let password : String = jsonDict["password"] as? String {
+//                                    UserDefaults.standard.set(password, forKey: "UserPassword")
+//                                } else {
+//                                    checkInput = false
+//                                }
+//
+//                                if let name : String = jsonDict["name"] as? String {
+//                                    UserDefaults.standard.set(name, forKey: "UserName")
+//                                } else {
+//                                    checkInput = false
+//                                }
+//
+//                                if let phonenum : String = jsonDict["phonenum"] as? String {
+//                                    UserDefaults.standard.set(phonenum, forKey: "UserPhonenum")
+//                                } else {
+//                                    checkInput = false
+//                                }
+//
+//                                if let point : Int = jsonDict["point"] as? Int {
+//                                    UserDefaults.standard.set(point, forKey: "UserPoint")
+//                                } else {
+//                                    checkInput = false
+//                                }
+//
+//                                if checkInput == false{
+//                                    errorString = "알 수 없는 오류"
+//                                }
+//                            }
+//                            if checkInput {
+//                                NotificationCenter.default.post(name: LoginVC.NotificationDone, object: nil)
+//                            } else {
+//                                DispatchQueue.main.async {
+//                                    let alert: UIAlertController = UIAlertController(title: "오류", message: errorString!, preferredStyle: .alert)
+//                                    let action: UIAlertAction = UIAlertAction(title: "확인", style: .default)
+//                                    alert.addAction(action)
+//                                    self.present(alert, animated: true)
+//                                }
+//                            }
+//                        }
+//                    }
+//                case .failure(let err):
+//                    print("err발생")
+//                    print(err)
+//                    checkInput = false
+//                    errorString = "요청 오류"
+//                }
+//            }
+//        }
+//
+//        if checkInput == false {
+//            let alert: UIAlertController = UIAlertController(title: "오류", message: errorString!, preferredStyle: .alert)
+//            let action: UIAlertAction = UIAlertAction(title: "확인", style: .default)
+//            alert.addAction(action)
+//            present(alert, animated: true, completion: nil)
+//        }
+        NotificationCenter.default.post(name: LoginVC.NotificationDone, object: nil)
     }
     
     @objc func signUpLabelTapped(_ sender: UITapGestureRecognizer) {

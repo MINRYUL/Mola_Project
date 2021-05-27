@@ -27,13 +27,13 @@ class MainVC: UIViewController {
     private var userNameLabel = UILabel().then {
         $0.font = .systemFont(ofSize: 14)
         $0.textColor = .white
-        $0.text = "김민창님의 포인트"
+        $0.text = "님의 포인트"
     }
     
     private var userPointLabel = UILabel().then {
         $0.font = .systemFont(ofSize: 32)
         $0.textColor = .white
-        $0.text = "330,312"
+        $0.text = "0"
     }
     
     private var pointButtonImage = UIImageView().then(){
@@ -180,6 +180,12 @@ class MainVC: UIViewController {
     }
     
     private func createUI() {
+        let point = UserDefaults.standard.value(forKey: "UserPoint") as! Int
+        let name = UserDefaults.standard.value(forKey: "UserName") as! String
+        userNameLabel.text = name + "님의 포인트"
+        userPointLabel.text = "\(point)"
+        
+        
         view.backgroundColor = .white
         self.mainScrollView.delegate = self
         
@@ -265,6 +271,7 @@ class MainVC: UIViewController {
     */
 }
 
+//MAKR: - Scroll init
 extension MainVC{
     
     @objc func outsourcingButtonAction(sender: UIButton!) {
@@ -383,6 +390,7 @@ extension MainVC{
     }
 }
 
+//MAKR: - PageControl delegate
 extension MainVC: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         // floor 내림, ceil 올림

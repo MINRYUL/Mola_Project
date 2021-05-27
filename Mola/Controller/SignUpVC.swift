@@ -15,7 +15,7 @@ import MaterialComponents.MaterialTextControls_OutlinedTextFields
 
 class SignUpVC: UIViewController {
     
-    let signUpRequestURL: String = "http://13.209.232.235:8080/signup/"
+    let signUpRequestURL: String = "http://13.209.232.235:8080/user/signup/"
     
     var email : String?
     var password : String?
@@ -238,8 +238,25 @@ extension SignUpVC : UITextFieldDelegate {
                                 switch res.result{
                                 case .success(let data):
                                     if let jsonString = String(data: data, encoding: .utf8){
-                                        print("success")
-                                        print(jsonString)
+                                        if let jsonDict: [String: Any] = UtilityManager.shared.jsonStringToDictionary(jsonString: jsonString){
+                                            print(jsonDict)
+                                            print(jsonDict["status"] ?? "오류")
+                                            if let status : Int = jsonDict["status"] as? Int {
+                                                if status >= 400{
+                                                    checkInput = false
+                                                    errorString = "아이디 비밀번호를 다시 확인해주세요"
+                                                }
+                                            }
+                                            
+                                            if checkInput == false {
+                                                DispatchQueue.main.async {
+                                                    let alert: UIAlertController = UIAlertController(title: "오류", message: errorString!, preferredStyle: .alert)
+                                                    let action: UIAlertAction = UIAlertAction(title: "확인", style: .default)
+                                                    alert.addAction(action)
+                                                    self.present(alert, animated: true)
+                                                }
+                                            }
+                                        }
                                     }
                                 case .failure(let err):
                                     print("err발생")

@@ -17,9 +17,7 @@ public class DeviceManager {
         }
     }
 
-    private init() {
-        
-    }
+    private init() { }
 
     private func checkDeviceNetworkStatus() -> Bool {
         print("Check to Device Natwork Status....")

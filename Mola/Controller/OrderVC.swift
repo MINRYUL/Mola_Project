@@ -13,7 +13,6 @@ import MaterialComponents.MaterialTextControls_OutlinedTextFields
 import Mantis
 
 class OrderVC: UIViewController, UINavigationControllerDelegate, UIScrollViewDelegate {
-    
     lazy var imagePicker: UIImagePickerController = {
         let picker: UIImagePickerController = UIImagePickerController()
         picker.sourceType = .photoLibrary
@@ -47,10 +46,9 @@ class OrderVC: UIViewController, UINavigationControllerDelegate, UIScrollViewDel
         $0.text = "업로드 파일 선택"
         $0.textColor = .darkGray
     }
-    
-    private var uploadButton = UIImageView().then() {
-        $0.image = UIImage(systemName: "chevron.forward")
-        $0.tintColor = .black
+
+    private var uploadButton = UIButton().then() {
+        $0.setImage(UIImage(systemName: "chevron.forward"),for: .normal)
         $0.sizeToFit()
     }
     
@@ -86,6 +84,12 @@ class OrderVC: UIViewController, UINavigationControllerDelegate, UIScrollViewDel
     
     @objc func buttonPressed(sender: UIBarButtonItem!) {
         print("touch navigationButton button")
+    }
+    
+    @objc func uploadButtonAction(sender: UIButton!) {
+        let documentVC = DocumentBrowserVC.getInstance()
+        documentVC.hostViewController = self
+        present(documentVC, animated: true, completion: nil)
     }
         
     override func viewDidLoad() {
@@ -162,6 +166,7 @@ class OrderVC: UIViewController, UINavigationControllerDelegate, UIScrollViewDel
             make.top.equalTo(labelingText.safeAreaLayoutGuide.snp.bottom).offset(20)
             make.leading.equalToSuperview().offset(135)
             make.height.equalTo(18)
+            uploadButton.addTarget(self, action: #selector(uploadButtonAction), for: .touchUpInside)
         }
         
         creditText.snp.makeConstraints{ make in
