@@ -53,7 +53,8 @@ class OrderMenuVC: UIViewController {
     
     @objc func orderLabelTapped(_ sender: UITapGestureRecognizer) {
         print("labelTapped")
-        let orderVC = OrderVC()
+        let orderVC = OrderVC.getInstance()
+        orderVC.hostViewController = self
         self.navigationController?.pushViewController(orderVC, animated: true)
     }
     

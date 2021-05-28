@@ -13,6 +13,9 @@ import MaterialComponents.MaterialTextControls_OutlinedTextFields
 import Mantis
 
 class OrderVC: UIViewController, UINavigationControllerDelegate, UIScrollViewDelegate {
+    
+    var hostViewController: UIViewController? = nil
+    
     lazy var imagePicker: UIImagePickerController = {
         let picker: UIImagePickerController = UIImagePickerController()
         picker.sourceType = .photoLibrary
@@ -102,6 +105,11 @@ class OrderVC: UIViewController, UINavigationControllerDelegate, UIScrollViewDel
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = true
+        if OrderVC.documentInstance == nil {
+            uploadLabel.text = "업로드 파일 선택"
+        } else {
+            uploadLabel.text = OrderVC.documentInstance?.fileURL.lastPathComponent
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -219,6 +227,27 @@ class OrderVC: UIViewController, UINavigationControllerDelegate, UIScrollViewDel
         // Pass the selected object to the new view controller.
     }
     */
+    
+    static private var instance: OrderVC? = nil
+    static private var documentInstance: Document? = nil
+    
+    static func getInstance() -> OrderVC {
+        if(instance == nil) {
+            instance = OrderVC()
+        }
+        return instance!
+    }
+    
+    static func setDocument(document: Document?) -> Bool{
+        if (document == nil) {
+            return false
+        }
+        documentInstance = document
+        if(self.instance != nil) {
+            self.instance?.uploadLabel.text = self.documentInstance?.fileURL.lastPathComponent
+        }
+        return true
+    }
 
 }
 

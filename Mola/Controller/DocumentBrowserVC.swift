@@ -80,12 +80,6 @@ class DocumentBrowserVC: UIDocumentBrowserViewController, UIDocumentBrowserViewC
         })
     }
     
-    func closeDocument(_ document: Document) {
-        dismiss(animated: true) {
-            document.close(completionHandler: nil)
-        }
-    }
-    
     static private var instance: DocumentBrowserVC? = nil
     
     static func getInstance() -> DocumentBrowserVC {
