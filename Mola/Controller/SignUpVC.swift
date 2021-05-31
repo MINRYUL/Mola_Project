@@ -253,7 +253,7 @@ extension SignUpVC : UITextFieldDelegate {
                                             if let status : Int = jsonDict["status"] as? Int {
                                                 if status >= 400{
                                                     checkInput = false
-                                                    errorString = "아이디 비밀번호를 다시 확인해주세요"
+                                                    errorString = "네트워크 연결이 불안정합니다."
                                                 }
                                             }
                                             

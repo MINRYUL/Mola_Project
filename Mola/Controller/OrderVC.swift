@@ -106,7 +106,7 @@ class OrderVC: UIViewController, UINavigationControllerDelegate, UIScrollViewDel
                             if let status : Int = jsonDict["status"] as? Int {
                                 if status >= 400{
                                     checkInput = false
-                                    errorString = "인터넷 연결 상태를 확인해주세요."
+                                    errorString = "네트워크 연결이 불안정합니다."
                                 }
                             }
                             if checkInput == false {
