@@ -103,6 +103,15 @@ class SignUpVC: UIViewController {
     }
     */
 
+    
+    static private var instance: SignUpVC? = nil
+    
+    static func getInstance() -> SignUpVC {
+        if(instance == nil) {
+            instance = SignUpVC()
+        }
+        return instance!
+    }
 }
 
 extension SignUpVC: UITableViewDataSource, UITableViewDelegate {
@@ -234,7 +243,7 @@ extension SignUpVC : UITextFieldDelegate {
                             let userInformation : UserInformation = {
                                 UserInformation(email: self.email!, password: self.passwordCheck!, name: self.name!, phonenum: self.phonenum!)
                             }()
-                            AlamofireClient.shared.sendUserInformation(requestURL: signUpRequestURL, userInfo: userInformation) { res in
+                            MolaApi.shared.uploadUserInformation(requestURL: signUpRequestURL, userInfo: userInformation) { res in
                                 switch res.result{
                                 case .success(let data):
                                     if let jsonString = String(data: data, encoding: .utf8){

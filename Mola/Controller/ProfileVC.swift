@@ -87,6 +87,15 @@ class ProfileVC: UIViewController {
         $0.backgroundColor = .darkGray
     }
     
+    @objc func chargeButtonAction(sender: UIButton!) {
+        let chargeVC = ChargeVC.getInstance()
+        self.navigationController?.pushViewController(chargeVC, animated: true)
+    }
+    
+    @objc func refundButtonAction(sender: UIButton!) {
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -161,6 +170,7 @@ class ProfileVC: UIViewController {
             make.bottom.equalToSuperview().offset(-10)
             make.width.equalTo(view.frame.width/2 - 35)
             make.height.equalTo(50)
+            chargeButton.addTarget(self, action: #selector(chargeButtonAction), for: .touchUpInside)
         }
         
         buttonLineView.snp.makeConstraints{ make in
@@ -168,6 +178,7 @@ class ProfileVC: UIViewController {
             make.width.equalTo(1)
             make.height.equalTo(44)
             make.centerX.equalToSuperview()
+            refundButton.addTarget(self, action: #selector(refundButtonAction), for: .touchUpInside)
         }
         
         refundButton.snp.makeConstraints{ make in

@@ -227,7 +227,7 @@ extension LoginVC : UITextFieldDelegate {
     
     @objc func signUpLabelTapped(_ sender: UITapGestureRecognizer) {
         print("labelTapped")
-        let signUpVC = SignUpVC()
+        let signUpVC = SignUpVC.getInstance()
         self.navigationController?.pushViewController(signUpVC, animated: true)
     }
 }

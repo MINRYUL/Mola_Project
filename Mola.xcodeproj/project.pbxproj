@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		915724D15D8EBBD96C64B303 /* Pods_Mola.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2EF5095118F121AAE29E91 /* Pods_Mola.framework */; };
+		DA0F3E53266223CD00FCEE97 /* ChargeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0F3E52266223CD00FCEE97 /* ChargeVC.swift */; };
 		DA1F0544263D443200BE9E27 /* NavigationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1F0543263D443200BE9E27 /* NavigationVC.swift */; };
 		DA33B1102654F38F00AB2FE2 /* OutsourcingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA33B10F2654F38F00AB2FE2 /* OutsourcingVC.swift */; };
 		DA6C3022263A9F8E006574FB /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6C3021263A9F8E006574FB /* MainVC.swift */; };
@@ -16,7 +17,7 @@
 		DA80CB142658F0A4008CFE4B /* PointHistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA80CB132658F0A4008CFE4B /* PointHistoryModel.swift */; };
 		DA80CB182658F3D1008CFE4B /* PointHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA80CB172658F3D1008CFE4B /* PointHistoryCell.swift */; };
 		DA84DE21265CC55300C659BB /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA84DE20265CC55300C659BB /* UserModel.swift */; };
-		DA84DE25265CE94E00C659BB /* AlamofireClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA84DE24265CE94E00C659BB /* AlamofireClient.swift */; };
+		DA84DE25265CE94E00C659BB /* MolaApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA84DE24265CE94E00C659BB /* MolaApi.swift */; };
 		DA84DE35265E259A00C659BB /* UtilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA84DE34265E259A00C659BB /* UtilityManager.swift */; };
 		DA84DE3A265E7FB700C659BB /* CustomSideMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA84DE39265E7FB700C659BB /* CustomSideMenuVC.swift */; };
 		DA8D099C262C1B7700CF83F1 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8D099B262C1B7700CF83F1 /* SignUpVC.swift */; };
@@ -46,6 +47,7 @@
 		0F2EF5095118F121AAE29E91 /* Pods_Mola.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mola.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B8605BC1D007FC807FCA9BB /* Pods-Mola.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mola.debug.xcconfig"; path = "Target Support Files/Pods-Mola/Pods-Mola.debug.xcconfig"; sourceTree = "<group>"; };
 		D810955494EFB69E61777DC0 /* Pods-Mola.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mola.release.xcconfig"; path = "Target Support Files/Pods-Mola/Pods-Mola.release.xcconfig"; sourceTree = "<group>"; };
+		DA0F3E52266223CD00FCEE97 /* ChargeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChargeVC.swift; sourceTree = "<group>"; };
 		DA1F0543263D443200BE9E27 /* NavigationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationVC.swift; sourceTree = "<group>"; };
 		DA33B10F2654F38F00AB2FE2 /* OutsourcingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutsourcingVC.swift; sourceTree = "<group>"; };
 		DA6C3021263A9F8E006574FB /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
@@ -54,7 +56,7 @@
 		DA80CB132658F0A4008CFE4B /* PointHistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointHistoryModel.swift; sourceTree = "<group>"; };
 		DA80CB172658F3D1008CFE4B /* PointHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointHistoryCell.swift; sourceTree = "<group>"; };
 		DA84DE20265CC55300C659BB /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserModel.swift; path = /Users/minryul/Documents/Mola/Mola/Model/UserModel.swift; sourceTree = "<absolute>"; };
-		DA84DE24265CE94E00C659BB /* AlamofireClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireClient.swift; sourceTree = "<group>"; };
+		DA84DE24265CE94E00C659BB /* MolaApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MolaApi.swift; sourceTree = "<group>"; };
 		DA84DE34265E259A00C659BB /* UtilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilityManager.swift; sourceTree = "<group>"; };
 		DA84DE39265E7FB700C659BB /* CustomSideMenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSideMenuVC.swift; sourceTree = "<group>"; };
 		DA8D099B262C1B7700CF83F1 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
@@ -117,7 +119,7 @@
 		DA84DE23265CE92900C659BB /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				DA84DE24265CE94E00C659BB /* AlamofireClient.swift */,
+				DA84DE24265CE94E00C659BB /* MolaApi.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -184,6 +186,7 @@
 			children = (
 				DA33B10F2654F38F00AB2FE2 /* OutsourcingVC.swift */,
 				DAABCE09264A732F0067DD98 /* ProfileVC.swift */,
+				DA0F3E52266223CD00FCEE97 /* ChargeVC.swift */,
 				DAA18FC026427915006E37DA /* OrderVC.swift */,
 				DA6C3021263A9F8E006574FB /* MainVC.swift */,
 				DAABCE27265232A70067DD98 /* OrderMenuVC.swift */,
@@ -343,7 +346,7 @@
 				DABFBBEF262ABAD70057EBDC /* AppDelegate.swift in Sources */,
 				DA8D099C262C1B7700CF83F1 /* SignUpVC.swift in Sources */,
 				DA924145265F6FB60020DBA1 /* Document.swift in Sources */,
-				DA84DE25265CE94E00C659BB /* AlamofireClient.swift in Sources */,
+				DA84DE25265CE94E00C659BB /* MolaApi.swift in Sources */,
 				DA33B1102654F38F00AB2FE2 /* OutsourcingVC.swift in Sources */,
 				DA9382BC2639368300A04F25 /* SignUpModel.swift in Sources */,
 				DA75790E265390580075ACD4 /* DetailOrderVC.swift in Sources */,
@@ -363,6 +366,7 @@
 				DA924140265F6DB10020DBA1 /* DocumentBrowserVC.swift in Sources */,
 				DA6C3022263A9F8E006574FB /* MainVC.swift in Sources */,
 				DADBD9B526381AFD004C522B /* DeviceManager.swift in Sources */,
+				DA0F3E53266223CD00FCEE97 /* ChargeVC.swift in Sources */,
 				DAABCE2B265234E60067DD98 /* MyOrderModel.swift in Sources */,
 				DAA18FC126427915006E37DA /* OrderVC.swift in Sources */,
 				DADBD9B2263813D6004C522B /* SplashVC.swift in Sources */,

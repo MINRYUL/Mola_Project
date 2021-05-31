@@ -16,15 +16,18 @@ class OrderVC: UIViewController, UINavigationControllerDelegate, UIScrollViewDel
     
     var hostViewController: UIViewController? = nil
     
+    static private var instance: OrderVC? = nil
+    static private var documentInstance: Document? = nil
+    
     lazy var imagePicker: UIImagePickerController = {
         let picker: UIImagePickerController = UIImagePickerController()
         picker.sourceType = .photoLibrary
         picker.delegate = self
         return picker
     }()
-    
-    private let rightCompleteItem = UIBarButtonItem(title: "완료하기", style: .plain, target: self, action: #selector(buttonPressed))
 
+    lazy var rightRequestItem = UIBarButtonItem(title: "완료하기", style: .plain, target: self, action: #selector(requestButtonPressed))
+    
     private let scrollView = UIScrollView().then() {
         $0.backgroundColor = .systemBackground
         $0.isScrollEnabled = true
@@ -85,14 +88,64 @@ class OrderVC: UIViewController, UINavigationControllerDelegate, UIScrollViewDel
         $0.sizeToFit()
     }
     
-    @objc func buttonPressed(sender: UIBarButtonItem!) {
-        print("touch navigationButton button")
+    @objc func requestButtonPressed(sender: UIBarButtonItem!) {
+        print("push complete Button")
+        var checkInput : Bool! = true
+        var errorString : String! = "알 수 없는 오류"
+        
+        do {
+            let data = try Data(contentsOf: OrderVC.documentInstance!.fileURL)
+            
+            MolaApi.shared.uploadDocument(requestURL: "https://yourserverurl", file: data, filename: (OrderVC.documentInstance?.fileURL.lastPathComponent)!) { res in
+                switch res.result{
+                case .success(let data):
+                    if let jsonString = String(data: data, encoding: .utf8){
+                        if let jsonDict: [String: Any] = UtilityManager.shared.jsonStringToDictionary(jsonString: jsonString){
+                            print(jsonDict)
+                            print(jsonDict["status"] ?? "오류")
+                            if let status : Int = jsonDict["status"] as? Int {
+                                if status >= 400{
+                                    checkInput = false
+                                    errorString = "인터넷 연결 상태를 확인해주세요."
+                                }
+                            }
+                            if checkInput == false {
+                                DispatchQueue.main.async {
+                                    let alert: UIAlertController = UIAlertController(title: "오류", message: errorString!, preferredStyle: .alert)
+                                    let action: UIAlertAction = UIAlertAction(title: "확인", style: .default)
+                                    alert.addAction(action)
+                                    self.present(alert, animated: true)
+                                }
+                            }
+                        }
+                    }
+                case .failure(let err):
+                    print("err발생")
+                    print(err)
+                }
+            }
+        } catch {
+            DispatchQueue.main.async {
+                let alert: UIAlertController = UIAlertController(title: "오류", message: "업로드 파일을 다시 확인해 주세요.", preferredStyle: .alert)
+                let action: UIAlertAction = UIAlertAction(title: "확인", style: .default)
+                alert.addAction(action)
+                self.present(alert, animated: true)
+            }
+        }
     }
     
     @objc func uploadButtonAction(sender: UIButton!) {
-        let documentVC = DocumentBrowserVC.getInstance()
-        documentVC.hostViewController = self
-        present(documentVC, animated: true, completion: nil)
+
+        DispatchQueue.main.async {
+            let alert: UIAlertController = UIAlertController(title: "알림", message: ".zip으로 압축된 파일만 업로드 가능합니다!", preferredStyle: .alert)
+            let action = UIAlertAction(title: "확인", style: .default) { (action) in
+                let documentVC = DocumentBrowserVC.getInstance()
+                documentVC.hostViewController = self
+                self.present(documentVC, animated: true, completion: nil)
+            }
+            alert.addAction(action)
+            self.present(alert, animated: true)
+        }
     }
         
     override func viewDidLoad() {
@@ -104,10 +157,11 @@ class OrderVC: UIViewController, UINavigationControllerDelegate, UIScrollViewDel
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.tabBarController?.tabBar.isHidden = true
         if OrderVC.documentInstance == nil {
             uploadLabel.text = "업로드 파일 선택"
+            self.navigationItem.rightBarButtonItem?.isEnabled = false
         } else {
+            self.navigationItem.rightBarButtonItem?.isEnabled = true
             uploadLabel.text = OrderVC.documentInstance?.fileURL.lastPathComponent
         }
     }
@@ -124,7 +178,8 @@ class OrderVC: UIViewController, UINavigationControllerDelegate, UIScrollViewDel
         self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         self.navigationController?.navigationBar.tintColor = .white
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 51/225, green: 153/255, blue: 255/255, alpha:1.0)
-        self.navigationItem.setRightBarButtonItems([rightCompleteItem], animated: true)
+        self.navigationItem.setRightBarButton(rightRequestItem, animated: true)
+        self.navigationItem.rightBarButtonItem?.isEnabled = false
     }
     
     private func createUI() {
@@ -228,9 +283,6 @@ class OrderVC: UIViewController, UINavigationControllerDelegate, UIScrollViewDel
     }
     */
     
-    static private var instance: OrderVC? = nil
-    static private var documentInstance: Document? = nil
-    
     static func getInstance() -> OrderVC {
         if(instance == nil) {
             instance = OrderVC()
@@ -245,6 +297,7 @@ class OrderVC: UIViewController, UINavigationControllerDelegate, UIScrollViewDel
         documentInstance = document
         if(self.instance != nil) {
             self.instance?.uploadLabel.text = self.documentInstance?.fileURL.lastPathComponent
+            OrderVC.getInstance().navigationItem.rightBarButtonItem?.isEnabled = true
         }
         return true
     }
@@ -276,6 +329,7 @@ extension OrderVC: UIImagePickerControllerDelegate {
         self.dismiss(animated: true, completion: nil)
         let cropViewController = Mantis.cropViewController(image: originalImage!)
         cropViewController.delegate = self
+        cropViewController.modalPresentationStyle = .fullScreen
         self.present(cropViewController, animated: true)
     }
     
