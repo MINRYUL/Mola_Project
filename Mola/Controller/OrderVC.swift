@@ -13,8 +13,13 @@ import MaterialComponents.MaterialTextControls_OutlinedTextFields
 import Mantis
 
 class OrderVC: UIViewController, UINavigationControllerDelegate, UIScrollViewDelegate {
+    let fileUploadURL: String = "http://13.209.232.235:8080/file/upload/"
+    let orderUploadURL: String = "http://13.209.232.235:8080/outsource/submit/"
     
     var hostViewController: UIViewController? = nil
+    var name: String?
+    var credit: String?
+    var requirements: String?
     
     static private var instance: OrderVC? = nil
     static private var documentInstance: Document? = nil
@@ -93,10 +98,35 @@ class OrderVC: UIViewController, UINavigationControllerDelegate, UIScrollViewDel
         var checkInput : Bool! = true
         var errorString : String! = "알 수 없는 오류"
         
-        do {
-            let data = try Data(contentsOf: OrderVC.documentInstance!.fileURL)
+        if let name: String = self.name {
+            print(name)
+        } else {
+            checkInput = false
+        }
+        
+        if let credit: String = self.credit {
+            print(credit)
+        } else {
+            checkInput = false
+        }
+        
+        if let requirements: String = self.requirements {
+            print(requirements)
+        } else {
+            checkInput = false
+        }
+        
+        if checkInput {
+            let id: Int = UserDefaults.standard.value(forKey: "UserId") as! Int
+            var formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd"
+            let currentDate = formatter.string(from: Date())
+
+            let orderModel : Order = {
+                Order(userId: id, creationDate: currentDate, requirements: self.requirements!, credit: Int(self.credit!)!, title: self.name!)
+            }()
             
-            MolaApi.shared.uploadDocument(requestURL: "https://yourserverurl", file: data, filename: (OrderVC.documentInstance?.fileURL.lastPathComponent)!) { res in
+            MolaApi.shared.uploadOrder(requestURL: orderUploadURL, order: orderModel) { res in
                 switch res.result{
                 case .success(let data):
                     if let jsonString = String(data: data, encoding: .utf8){
@@ -116,6 +146,53 @@ class OrderVC: UIViewController, UINavigationControllerDelegate, UIScrollViewDel
                                     alert.addAction(action)
                                     self.present(alert, animated: true)
                                 }
+                            } else {
+                                do {
+                                    let data = try Data(contentsOf: OrderVC.documentInstance!.fileURL)
+                                    if let outId : Int = jsonDict["outsourceId"] as? Int {
+                                        let fileData : FileData = {
+                                            FileData(file: data, userId: id, outSourceId: outId)
+                                        }()
+                                        MolaApi.shared.uploadDocument(requestURL: self.fileUploadURL, fileData: fileData) { res in
+                                            switch res.result{
+                                            case .success(let data):
+                                                if let jsonString = String(data: data, encoding: .utf8){
+                                                    if let jsonDict: [String: Any] = UtilityManager.shared.jsonStringToDictionary(jsonString: jsonString){
+                                                        print(jsonDict)
+                                                        print(jsonDict["status"] ?? "오류")
+                                                        if let status : Int = jsonDict["status"] as? Int {
+                                                            if status >= 400{
+                                                                checkInput = false
+                                                                errorString = "네트워크 연결이 불안정합니다."
+                                                            }
+                                                        }
+                                                        if checkInput == false {
+                                                            DispatchQueue.main.async {
+                                                                let alert: UIAlertController = UIAlertController(title: "오류", message: errorString!, preferredStyle: .alert)
+                                                                let action: UIAlertAction = UIAlertAction(title: "확인", style: .default)
+                                                                alert.addAction(action)
+                                                                self.present(alert, animated: true)
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            case .failure(let err):
+                                                print("err발생")
+                                                print(err)
+                                            }
+                                        }
+                                    } else {
+                                        
+                                    }
+                                    
+                                } catch {
+                                    DispatchQueue.main.async {
+                                        let alert: UIAlertController = UIAlertController(title: "오류", message: "업로드 파일을 다시 확인해 주세요.", preferredStyle: .alert)
+                                        let action: UIAlertAction = UIAlertAction(title: "확인", style: .default)
+                                        alert.addAction(action)
+                                        self.present(alert, animated: true)
+                                    }
+                                }
                             }
                         }
                     }
@@ -124,9 +201,11 @@ class OrderVC: UIViewController, UINavigationControllerDelegate, UIScrollViewDel
                     print(err)
                 }
             }
-        } catch {
+            
+        }
+        if checkInput == false {
             DispatchQueue.main.async {
-                let alert: UIAlertController = UIAlertController(title: "오류", message: "업로드 파일을 다시 확인해 주세요.", preferredStyle: .alert)
+                let alert: UIAlertController = UIAlertController(title: "오류", message: "모든 항목을 작성해주세요.", preferredStyle: .alert)
                 let action: UIAlertAction = UIAlertAction(title: "확인", style: .default)
                 alert.addAction(action)
                 self.present(alert, animated: true)
@@ -135,7 +214,6 @@ class OrderVC: UIViewController, UINavigationControllerDelegate, UIScrollViewDel
     }
     
     @objc func uploadButtonAction(sender: UIButton!) {
-
         DispatchQueue.main.async {
             let alert: UIAlertController = UIAlertController(title: "알림", message: ".zip으로 압축된 파일만 업로드 가능합니다!", preferredStyle: .alert)
             let action = UIAlertAction(title: "확인", style: .default) { (action) in
@@ -266,6 +344,17 @@ class OrderVC: UIViewController, UINavigationControllerDelegate, UIScrollViewDel
             make.centerX.equalToSuperview()
         }
         
+        self.labelingText.tag = 1
+        self.labelingText.delegate = self
+        self.labelingText.addTarget(self, action: #selector(valueChanged), for: .editingChanged)
+        
+        self.creditText.tag = 2
+        self.creditText.delegate = self
+        self.creditText.addTarget(self, action: #selector(valueChanged), for: .editingChanged)
+        
+        self.requirementsText.tag = 3
+        self.requirementsText.textView.delegate = self
+        
         let imageTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(touchUpSelectImageButton(_:)))
 
         self.exampleImage.addGestureRecognizer(imageTapGestureRecognizer)
@@ -335,5 +424,23 @@ extension OrderVC: UIImagePickerControllerDelegate {
     
     @objc private func touchUpSelectImageButton(_ sender: UITapGestureRecognizer) {
         self.present(self.imagePicker, animated: true, completion: nil)
+    }
+}
+
+extension OrderVC : UITextFieldDelegate, UITextViewDelegate {
+    @objc
+    private func valueChanged(_ textField: MDCFilledTextField) {
+        switch textField.tag{
+        case (1):
+            self.name = textField.text
+        case (2):
+            self.credit = textField.text
+        default:
+            return
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        self.requirements = textView.text
     }
 }

@@ -12,7 +12,11 @@ struct OrderList {
     let order: [Order]
 }
 
-struct Order {
-    let name: String
-    let detail: String
+struct Order: Encodable{
+    let userId: Int
+    let creationDate: String
+    let requirements: String
+    let credit: Int
+    let title: String
 }
+

@@ -36,21 +36,26 @@ class MolaApi {
             .responseData(completionHandler: completionHandler)
     }
     
-    func uploadDocument(requestURL: String, file: Data, filename : String, completionHandler : @escaping (AFDataResponse<Data>) -> Void) {
+    func uploadOrder(requestURL: String, order: Order, completionHandler: @escaping (AFDataResponse<Data>) -> Void) {
+        
+        AF.request(requestURL,
+                   method: .post,
+                   parameters: order,
+                   encoder: JSONParameterEncoder.default)
+            .responseData(completionHandler: completionHandler)
+    }
+    
+    func uploadDocument(requestURL: String, fileData: FileData, completionHandler : @escaping (AFDataResponse<Data>) -> Void) {
         let headers: HTTPHeaders = [
             "Content-type": "multipart/form-data"
         ]
         
-        AF.upload(
-            multipartFormData: { multipartFormData in
-                multipartFormData.append(file, withName: "upload_data" , fileName: filename, mimeType: "application/zip")
-            },
-            to: requestURL, method: .post , headers: headers)
-            .response { response in
-                if let data = response.data{
-                    //handle the response however you like
-                }
-            }
+        AF.request(requestURL,
+                   method: .post,
+                   parameters: fileData,
+                   encoder: JSONParameterEncoder.default,
+                   headers: headers)
+            .responseData(completionHandler: completionHandler)
        }
 }
 

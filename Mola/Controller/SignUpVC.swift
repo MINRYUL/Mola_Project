@@ -15,7 +15,7 @@ import MaterialComponents.MaterialTextControls_OutlinedTextFields
 
 class SignUpVC: UIViewController {
     
-    let signUpRequestURL: String = "http://13.209.232.235:8080/user/signup/"
+    let signUpRequestURL: String = "http://13.209.232.235:8080/user/signup"
     
     var email : String?
     var password : String?
@@ -25,12 +25,12 @@ class SignUpVC: UIViewController {
     
     let signUpCategory: [SignUpCategory] = [
         SignUpCategory(name: "가입 정보", textField: [
-            TextField(label: "이메일", placeHolder: "example@gmail.com", helpText: "이메일 형식에 맞게 작성해 주세요."),
-            TextField(label: "비밀번호", placeHolder: "********", helpText: "대소문자, 숫자포함 8글자 이상 작성해 주세요."),
-            TextField(label: "비밀번호 확인", placeHolder: "********", helpText: "비밀번호를 다시 한번 입력해 주세요.")
+            TextField(label: "이메일", placeHolder: "example@gmail.com", helpText: "이메일 형식에 맞게 작성해주세요."),
+            TextField(label: "비밀번호", placeHolder: "********", helpText: "대소문자, 숫자포함 8글자 이상 작성해주세요."),
+            TextField(label: "비밀번호 확인", placeHolder: "********", helpText: "비밀번호를 다시 한번 입력해주세요.")
         ]),
         SignUpCategory(name: "회원 정보", textField: [
-            TextField(label: "이름", placeHolder: "홍길동", helpText: "자신이 이름을 작성해주세요."),
+            TextField(label: "이름", placeHolder: "홍길동", helpText: "자신의 이름을 작성해주세요."),
             TextField(label: "전화번호", placeHolder: "01012345678", helpText: "'-'없이 입력해주세요")
         ])
     ]
@@ -134,9 +134,11 @@ extension SignUpVC: UITableViewDataSource, UITableViewDelegate {
         } else if signUpCategory[indexPath.section].textField[indexPath.row].label == "비밀번호" {
             cell.boardTextField.keyboardType = .default
             cell.boardTextField.isSecureTextEntry = true
+            cell.boardTextField.textContentType = .password
         } else if signUpCategory[indexPath.section].textField[indexPath.row].label == "비밀번호 확인" {
             cell.boardTextField.keyboardType = .default
             cell.boardTextField.isSecureTextEntry = true
+            cell.boardTextField.textContentType = .password
         } else if signUpCategory[indexPath.section].textField[indexPath.row].label == "이름" {
             cell.boardTextField.keyboardType = .default
         } else if signUpCategory[indexPath.section].textField[indexPath.row].label == "전화번호" {
@@ -241,8 +243,9 @@ extension SignUpVC : UITextFieldDelegate {
                     if self.passwordCheck!.isValidPassword {
                         if self.phonenum!.isVaildPhoneNum {
                             let userInformation : UserInformation = {
-                                UserInformation(email: self.email!, password: self.passwordCheck!, name: self.name!, phonenum: self.phonenum!)
+                                UserInformation(email: self.email!, password: self.passwordCheck!.capitalized, name: self.name!, phoneNum: self.phonenum!)
                             }()
+                            print(userInformation.password)
                             MolaApi.shared.uploadUserInformation(requestURL: signUpRequestURL, userInfo: userInformation) { res in
                                 switch res.result{
                                 case .success(let data):
@@ -263,6 +266,14 @@ extension SignUpVC : UITextFieldDelegate {
                                                     let action: UIAlertAction = UIAlertAction(title: "확인", style: .default)
                                                     alert.addAction(action)
                                                     self.present(alert, animated: true)
+                                                }
+                                            } else {
+                                                DispatchQueue.main.async {
+                                                    let alert: UIAlertController = UIAlertController(title: "성공", message: "모두의 라벨링 회원이 되신것을 환영합니다!", preferredStyle: .alert)
+                                                    let action: UIAlertAction = UIAlertAction(title: "확인", style: .default, handler: self.popView)
+                                                    alert.addAction(action)
+                                                    self.present(alert, animated: true, completion: nil)
+                                                    return
                                                 }
                                             }
                                         }
@@ -288,17 +299,12 @@ extension SignUpVC : UITextFieldDelegate {
                 }
             }
         }
-        if checkInput {
-            let alert: UIAlertController = UIAlertController(title: "성공", message: "모두의 라벨링 회원이 되신것을 환영합니다!", preferredStyle: .alert)
-            let action: UIAlertAction = UIAlertAction(title: "확인", style: .default, handler: popView)
+        if checkInput == false {
+            let alert: UIAlertController = UIAlertController(title: "오류", message: errorString!, preferredStyle: .alert)
+            let action: UIAlertAction = UIAlertAction(title: "확인", style: .default)
             alert.addAction(action)
             present(alert, animated: true, completion: nil)
-            return
         }
-        let alert: UIAlertController = UIAlertController(title: "오류", message: errorString!, preferredStyle: .alert)
-        let action: UIAlertAction = UIAlertAction(title: "확인", style: .default)
-        alert.addAction(action)
-        present(alert, animated: true, completion: nil)
     }
     
     @objc

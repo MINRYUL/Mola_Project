@@ -11,7 +11,7 @@ struct UserInformation: Encodable {
     let email : String
     let password : String
     let name : String
-    let phonenum : String
+    let phoneNum : String
 }
 
 struct LoginData: Encodable {

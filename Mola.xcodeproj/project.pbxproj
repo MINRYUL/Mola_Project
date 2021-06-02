@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		915724D15D8EBBD96C64B303 /* Pods_Mola.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2EF5095118F121AAE29E91 /* Pods_Mola.framework */; };
 		DA0F3E53266223CD00FCEE97 /* ChargeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0F3E52266223CD00FCEE97 /* ChargeVC.swift */; };
+		DA0F3E572666370900FCEE97 /* FileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0F3E562666370900FCEE97 /* FileModel.swift */; };
 		DA1F0544263D443200BE9E27 /* NavigationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1F0543263D443200BE9E27 /* NavigationVC.swift */; };
 		DA33B1102654F38F00AB2FE2 /* OutsourcingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA33B10F2654F38F00AB2FE2 /* OutsourcingVC.swift */; };
 		DA6C3022263A9F8E006574FB /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6C3021263A9F8E006574FB /* MainVC.swift */; };
@@ -48,6 +49,7 @@
 		8B8605BC1D007FC807FCA9BB /* Pods-Mola.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mola.debug.xcconfig"; path = "Target Support Files/Pods-Mola/Pods-Mola.debug.xcconfig"; sourceTree = "<group>"; };
 		D810955494EFB69E61777DC0 /* Pods-Mola.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mola.release.xcconfig"; path = "Target Support Files/Pods-Mola/Pods-Mola.release.xcconfig"; sourceTree = "<group>"; };
 		DA0F3E52266223CD00FCEE97 /* ChargeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChargeVC.swift; sourceTree = "<group>"; };
+		DA0F3E562666370900FCEE97 /* FileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileModel.swift; sourceTree = "<group>"; };
 		DA1F0543263D443200BE9E27 /* NavigationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationVC.swift; sourceTree = "<group>"; };
 		DA33B10F2654F38F00AB2FE2 /* OutsourcingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutsourcingVC.swift; sourceTree = "<group>"; };
 		DA6C3021263A9F8E006574FB /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 				DAABCE2A265234E60067DD98 /* MyOrderModel.swift */,
 				DA924144265F6FB60020DBA1 /* Document.swift */,
 				DA80CB132658F0A4008CFE4B /* PointHistoryModel.swift */,
+				DA0F3E562666370900FCEE97 /* FileModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -368,6 +371,7 @@
 				DADBD9B526381AFD004C522B /* DeviceManager.swift in Sources */,
 				DA0F3E53266223CD00FCEE97 /* ChargeVC.swift in Sources */,
 				DAABCE2B265234E60067DD98 /* MyOrderModel.swift in Sources */,
+				DA0F3E572666370900FCEE97 /* FileModel.swift in Sources */,
 				DAA18FC126427915006E37DA /* OrderVC.swift in Sources */,
 				DADBD9B2263813D6004C522B /* SplashVC.swift in Sources */,
 				DAA18FBE26426BE5006E37DA /* MainCell.swift in Sources */,
