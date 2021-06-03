@@ -9,6 +9,7 @@ import Foundation
 
 struct FileData: Encodable {
     let file : Data
+    let fileName : String
     let userId : Int
     let outSourceId : Int
 }

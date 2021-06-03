@@ -93,6 +93,11 @@ class OrderVC: UIViewController, UINavigationControllerDelegate, UIScrollViewDel
         $0.sizeToFit()
     }
     
+    @objc
+    private func popView(_ sender: UIAlertAction) {
+       self.navigationController?.popViewController(animated: true)
+    }
+    
     @objc func requestButtonPressed(sender: UIBarButtonItem!) {
         print("push complete Button")
         var checkInput : Bool! = true
@@ -149,9 +154,10 @@ class OrderVC: UIViewController, UINavigationControllerDelegate, UIScrollViewDel
                             } else {
                                 do {
                                     let data = try Data(contentsOf: OrderVC.documentInstance!.fileURL)
+                                    
                                     if let outId : Int = jsonDict["outsourceId"] as? Int {
                                         let fileData : FileData = {
-                                            FileData(file: data, userId: id, outSourceId: outId)
+                                            FileData(file: data, fileName: (OrderVC.documentInstance?.fileURL.lastPathComponent)!, userId: id, outSourceId: outId)
                                         }()
                                         MolaApi.shared.uploadDocument(requestURL: self.fileUploadURL, fileData: fileData) { res in
                                             switch res.result{
@@ -161,17 +167,20 @@ class OrderVC: UIViewController, UINavigationControllerDelegate, UIScrollViewDel
                                                         print(jsonDict)
                                                         print(jsonDict["status"] ?? "오류")
                                                         if let status : Int = jsonDict["status"] as? Int {
-                                                            if status >= 400{
-                                                                checkInput = false
-                                                                errorString = "네트워크 연결이 불안정합니다."
-                                                            }
-                                                        }
-                                                        if checkInput == false {
-                                                            DispatchQueue.main.async {
-                                                                let alert: UIAlertController = UIAlertController(title: "오류", message: errorString!, preferredStyle: .alert)
-                                                                let action: UIAlertAction = UIAlertAction(title: "확인", style: .default)
-                                                                alert.addAction(action)
-                                                                self.present(alert, animated: true)
+                                                            if status == 200{
+                                                                DispatchQueue.main.async {
+                                                                    let alert: UIAlertController = UIAlertController(title: "완료", message: "외주 신청이 완료되었습니다.", preferredStyle: .alert)
+                                                                    let action: UIAlertAction = UIAlertAction(title: "확인", style: .default, handler: self.popView)
+                                                                    alert.addAction(action)
+                                                                    self.present(alert, animated: true, completion: nil)
+                                                                }
+                                                            } else {
+                                                                DispatchQueue.main.async {
+                                                                    let alert: UIAlertController = UIAlertController(title: "오류", message: "파일 업로드에 실패하였습니다. 다시 시도하여주십시오.", preferredStyle: .alert)
+                                                                    let action: UIAlertAction = UIAlertAction(title: "확인", style: .default)
+                                                                    alert.addAction(action)
+                                                                    self.present(alert, animated: true)
+                                                                }
                                                             }
                                                         }
                                                     }

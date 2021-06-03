@@ -46,16 +46,19 @@ class MolaApi {
     }
     
     func uploadDocument(requestURL: String, fileData: FileData, completionHandler : @escaping (AFDataResponse<Data>) -> Void) {
-        let headers: HTTPHeaders = [
-            "Content-type": "multipart/form-data"
+        
+        let parameters = [
+            "userId" : fileData.userId,
+            "outSourceId" : fileData.outSourceId
         ]
         
-        AF.request(requestURL,
-                   method: .post,
-                   parameters: fileData,
-                   encoder: JSONParameterEncoder.default,
-                   headers: headers)
-            .responseData(completionHandler: completionHandler)
-       }
+        AF.upload(multipartFormData: { multipartFormData in
+            // zip파일 넣어주기
+            multipartFormData.append(fileData.file, withName: "file", fileName: fileData.fileName, mimeType: "application/zip")
+            // body를 넣어주기
+            for (key, value) in parameters {
+                multipartFormData.append("\(value)".data(using: .utf8)!, withName: key, mimeType: "text/plain")
+            }
+        }, to: requestURL, method: .post).responseData(completionHandler: completionHandler)
+    }
 }
-
