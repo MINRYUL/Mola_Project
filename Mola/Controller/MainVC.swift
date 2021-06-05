@@ -36,9 +36,9 @@ class MainVC: UIViewController {
         $0.text = "0"
     }
     
-    private var pointButtonImage = UIImageView().then(){
-        $0.image = UIImage(systemName: "chevron.forward")
-        $0.contentMode = .scaleAspectFit
+    private var mainPointButton = UIButton().then() {
+        $0.setImage(UIImage(systemName: "chevron.forward"),for: .normal)
+        $0.sizeToFit()
         $0.tintColor = .white
     }
     
@@ -199,7 +199,7 @@ class MainVC: UIViewController {
         view.addSubview(pageControl)
         topSubView.addSubview(userNameLabel)
         topSubView.addSubview(userPointLabel)
-        topSubView.addSubview(pointButtonImage)
+        topSubView.addSubview(mainPointButton)
         
         _ = [requestView, ordersView, profileView].map { self.mainScrollView.addSubview($0) }
         
@@ -227,10 +227,11 @@ class MainVC: UIViewController {
             make.trailing.equalTo(userNameLabel)
         }
         
-        pointButtonImage.snp.makeConstraints { make in
+        mainPointButton.snp.makeConstraints { make in
             make.top.equalTo(userPointLabel).offset(9)
             make.leading.equalTo(userPointLabel).offset(20)
             make.trailing.equalTo(userPointLabel).offset(-5)
+            mainPointButton.addTarget(self, action: #selector(profileButtonAction), for: .touchUpInside)
         }
         
         mainScrollView.snp.makeConstraints { make in

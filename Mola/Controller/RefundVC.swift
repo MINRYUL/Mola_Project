@@ -1,26 +1,26 @@
 //
-//  ChargeVC.swift
+//  refundVC.swift
 //  Mola
 //
-//  Created by 김민창 on 2021/05/29.
+//  Created by 김민창 on 2021/06/05.
 //
 
 import UIKit
 
-class ChargeVC: UIViewController {
+class RefundVC: UIViewController {
     
-    lazy var rightRequestItem = UIBarButtonItem(title: "충전하기", style: .plain, target: self, action: #selector(chargeButtonPressed))
+    lazy var rightRequestItem = UIBarButtonItem(title: "환급받기", style: .plain, target: self, action: #selector(refundButtonPressed))
     
-    private var chargePointField = SloyTextField().then {
-        $0.placeholder = "충전할 금액을 입력해주세요."
-        $0.largeContentTitle = "충전"
+    private var refundPointField = SloyTextField().then {
+        $0.placeholder = "환급 받을 금액을 입력해주세요."
+        $0.largeContentTitle = "환급"
         $0.tintColor = .systemTeal
     }
     
-    @objc func chargeButtonPressed(sender: UIBarButtonItem!) {
-        print("push charge button")
+    @objc func refundButtonPressed(sender: UIBarButtonItem!) {
+        print("push refund button")
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -36,15 +36,16 @@ class ChargeVC: UIViewController {
     
     private func createUI() {
         view.backgroundColor = .white
-        view.addSubview(chargePointField)
+        view.addSubview(refundPointField)
         
-        chargePointField.snp.makeConstraints { make in
+        refundPointField.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(35)
             make.trailing.equalToSuperview().offset(-35)
             make.centerY.equalToSuperview().offset(-100)
             make.height.equalTo(70)
         }
     }
+    
 
     /*
     // MARK: - Navigation
@@ -55,13 +56,14 @@ class ChargeVC: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
-    static private var instance: ChargeVC? = nil
     
-    static func getInstance() -> ChargeVC {
+    static private var instance: RefundVC? = nil
+    
+    static func getInstance() -> RefundVC {
         if(instance == nil) {
-            instance = ChargeVC()
+            instance = RefundVC()
         }
         return instance!
     }
+
 }

@@ -174,14 +174,13 @@ class OrderVC: UIViewController, UINavigationControllerDelegate, UIScrollViewDel
                                                                     alert.addAction(action)
                                                                     self.present(alert, animated: true, completion: nil)
                                                                 }
-                                                            } else {
-                                                                DispatchQueue.main.async {
-                                                                    let alert: UIAlertController = UIAlertController(title: "오류", message: "파일 업로드에 실패하였습니다. 다시 시도하여주십시오.", preferredStyle: .alert)
-                                                                    let action: UIAlertAction = UIAlertAction(title: "확인", style: .default)
-                                                                    alert.addAction(action)
-                                                                    self.present(alert, animated: true)
-                                                                }
                                                             }
+                                                        }
+                                                        DispatchQueue.main.async {
+                                                            let alert: UIAlertController = UIAlertController(title: "오류", message: "파일 업로드에 실패하였습니다. 다시 시도하여주십시오.", preferredStyle: .alert)
+                                                            let action: UIAlertAction = UIAlertAction(title: "확인", style: .default)
+                                                            alert.addAction(action)
+                                                            self.present(alert, animated: true)
                                                         }
                                                     }
                                                 }

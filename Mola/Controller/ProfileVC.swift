@@ -60,13 +60,13 @@ class ProfileVC: UIViewController {
     private var userNameLabel = UILabel().then {
         $0.font = .systemFont(ofSize: 14)
         $0.textColor = .white
-        $0.text = "김민창님의 포인트"
+        $0.text = "님의 포인트"
     }
     
     private var userPointLabel = UILabel().then {
         $0.font = .systemFont(ofSize: 32)
         $0.textColor = .white
-        $0.text = "330,312"
+        $0.text = "0"
     }
     
     private let chargeButton = UIButton().then {
@@ -93,7 +93,8 @@ class ProfileVC: UIViewController {
     }
     
     @objc func refundButtonAction(sender: UIButton!) {
-        
+        let refundVC = RefundVC.getInstance()
+        self.navigationController?.pushViewController(refundVC, animated: true)
     }
     
     override func viewDidLoad() {
@@ -125,6 +126,8 @@ class ProfileVC: UIViewController {
     }
     
     private func createUI() {
+        let point = UserDefaults.standard.value(forKey: "UserPoint") as! Int
+        let name = UserDefaults.standard.value(forKey: "UserName") as! String
         
         scrollView.delegate = self
         pointHistoryTableView.dataSource = self
@@ -157,12 +160,14 @@ class ProfileVC: UIViewController {
         }
         
         userPointLabel.snp.makeConstraints { make in
+            userPointLabel.text = "\(point)"
             make.centerY.centerX.equalToSuperview()
         }
         
         userNameLabel.snp.makeConstraints { make in
-            make.leading.equalTo(userPointLabel).offset(10)
+            userNameLabel.text = name + "님의 포인트"
             make.bottom.equalTo(userPointLabel.safeAreaLayoutGuide.snp.top).offset(-10)
+            make.centerX.equalToSuperview()
         }
         
         chargeButton.snp.makeConstraints{ make in
