@@ -69,4 +69,17 @@ class MolaApi {
                    encoder: JSONParameterEncoder.default)
             .responseData(completionHandler: completionHandler)
     }
+    
+    func getOutSourceImage(requestURL: String, completionHandler : @escaping (AFDataResponse<Data>) -> Void) {
+        AF.request(requestURL)
+            .responseData(completionHandler: completionHandler)
+    }
+    
+    func pushLabelingImageInfo(requestURL: String, info: LabelingImageInfo, completionHandler : @escaping (AFDataResponse<Data>) -> Void) {
+        AF.request(requestURL,
+                   method: .post,
+                   parameters: info,
+                   encoder: JSONParameterEncoder.default)
+            .responseData(completionHandler: completionHandler)
+    }
 }

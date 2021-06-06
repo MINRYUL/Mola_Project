@@ -23,13 +23,6 @@ class OrderVC: UIViewController, UINavigationControllerDelegate, UIScrollViewDel
     
     static private var instance: OrderVC? = nil
     static private var documentInstance: Document? = nil
-    
-    lazy var imagePicker: UIImagePickerController = {
-        let picker: UIImagePickerController = UIImagePickerController()
-        picker.sourceType = .photoLibrary
-        picker.delegate = self
-        return picker
-    }()
 
     lazy var rightRequestItem = UIBarButtonItem(title: "완료하기", style: .plain, target: self, action: #selector(requestButtonPressed))
     
@@ -69,17 +62,6 @@ class OrderVC: UIViewController, UINavigationControllerDelegate, UIScrollViewDel
         $0.placeholder = "사진 한장 당 보상 크레딧 설정"
         $0.tintColor = .systemGray
         $0.sizeToFit()
-    }
-    
-    private var imageExampleText = UILabel().then() {
-        $0.font = .systemFont(ofSize: 15)
-        $0.text = "이미지 예시를 설정 해주세요."
-        $0.textColor = .darkGray
-    }
-    
-    private var exampleImage = UIImageView().then {
-        $0.contentMode = .scaleAspectFit
-        $0.backgroundColor = .lightGray
     }
     
     private var requirementsLabel = UILabel().then {
@@ -285,8 +267,6 @@ class OrderVC: UIViewController, UINavigationControllerDelegate, UIScrollViewDel
         contentView.addSubview(uploadLabel)
         contentView.addSubview(uploadButton)
         contentView.addSubview(creditText)
-        contentView.addSubview(imageExampleText)
-        contentView.addSubview(exampleImage)
         contentView.addSubview(requirementsLabel)
         contentView.addSubview(requirementsText)
         
@@ -331,23 +311,9 @@ class OrderVC: UIViewController, UINavigationControllerDelegate, UIScrollViewDel
             make.trailing.equalToSuperview().offset(-20)
             make.centerX.equalToSuperview()
         }
-        
-        imageExampleText.snp.makeConstraints{ make in
-            make.top.equalTo(creditText.safeAreaLayoutGuide.snp.bottom).offset(20)
-            make.leading.equalToSuperview().offset(20)
-            make.trailing.equalToSuperview().offset(-100)
-        }
-        
-        exampleImage.snp.makeConstraints{ make in
-            make.top.equalTo(imageExampleText.safeAreaLayoutGuide.snp.bottom).offset(10)
-            make.leading.equalToSuperview().offset(30)
-            make.trailing.equalToSuperview().offset(-30)
-            make.height.equalTo(310)
-            make.centerX.equalToSuperview()
-        }
-        
+
         requirementsLabel.snp.makeConstraints{ make in
-            make.top.equalTo(exampleImage.safeAreaLayoutGuide.snp.bottom).offset(20)
+            make.top.equalTo(creditText.safeAreaLayoutGuide.snp.bottom).offset(20)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-100)
         }
@@ -369,11 +335,6 @@ class OrderVC: UIViewController, UINavigationControllerDelegate, UIScrollViewDel
         
         self.requirementsText.tag = 3
         self.requirementsText.textView.delegate = self
-        
-        let imageTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(touchUpSelectImageButton(_:)))
-
-        self.exampleImage.addGestureRecognizer(imageTapGestureRecognizer)
-        exampleImage.isUserInteractionEnabled = true
     }
 
 
@@ -406,40 +367,6 @@ class OrderVC: UIViewController, UINavigationControllerDelegate, UIScrollViewDel
         return true
     }
 
-}
-
-extension OrderVC: CropViewControllerDelegate {
-    
-    func cropViewControllerDidCrop(_ cropViewController: CropViewController, cropped: UIImage, transformation: Transformation) {
-        self.exampleImage.image = cropped
-        self.exampleImage.backgroundColor = .white
-        dismiss(animated: true, completion: nil)
-    }
-    
-    func cropViewControllerDidCancel(_ cropViewController: CropViewController, original: UIImage) {
-        dismiss(animated: true, completion: nil)
-    }
-    
-}
-
-extension OrderVC: UIImagePickerControllerDelegate {
-    
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        self.dismiss(animated: true, completion: nil)
-    }
-
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
-        self.dismiss(animated: true, completion: nil)
-        let cropViewController = Mantis.cropViewController(image: originalImage!)
-        cropViewController.delegate = self
-        cropViewController.modalPresentationStyle = .fullScreen
-        self.present(cropViewController, animated: true)
-    }
-    
-    @objc private func touchUpSelectImageButton(_ sender: UITapGestureRecognizer) {
-        self.present(self.imagePicker, animated: true, completion: nil)
-    }
 }
 
 extension OrderVC : UITextFieldDelegate, UITextViewDelegate {

@@ -6,12 +6,22 @@
 //
 
 import UIKit
+import Mantis
 
-class OutsourcingVC: UIViewController {
+class OutsourcingVC: UIViewController, UINavigationControllerDelegate {
     
-    private let leftRefrashItem = UIBarButtonItem(title: "새로고침", style: .plain, target: self, action: #selector(leftButtonPressed))
+    let getImageURL: String = "http://13.209.232.235:8080/image"
+    let pushLabelingInfoURL: String = "http://13.209.232.235:8080/image/:"
     
-    private let rightNextItem = UIBarButtonItem(title: "다음사진", style: .plain, target: self, action: #selector(rightButtonPressed))
+    var imageId: Int?
+    var xCoordinate: Float = 0
+    var yCoordinate: Float = 0
+    var height: Float = 0
+    var width: Float = 0
+    
+    lazy var leftRefrashItem = UIBarButtonItem(title: "새로고침", style: .plain, target: self, action: #selector(leftButtonPressed))
+    
+    lazy var rightCompleteItem = UIBarButtonItem(title: "다음사진", style: .plain, target: self, action: #selector(rightButtonPressed))
     
     private let detailImage = UIImageView().then() {
         $0.backgroundColor = .black
@@ -25,7 +35,7 @@ class OutsourcingVC: UIViewController {
     }
     
     private let creditabel = UILabel().then() {
-        $0.text = "+5 Point"
+        $0.text = " Point"
         $0.textColor = .black
         $0.font = .systemFont(ofSize: 16)
     }
@@ -36,14 +46,8 @@ class OutsourcingVC: UIViewController {
         $0.layer.cornerRadius = 20
     }
     
-    private let orderNameLabel = UILabel().then() {
-        $0.text = "꽃 라벨링"
-        $0.font = .boldSystemFont(ofSize: 21)
-        $0.textColor = .black
-    }
-    
     private let requirementsLabel = UILabel().then() {
-        $0.text = "꽃잎 전체가 보이도록 타이트하게 라벨링 해주세요."
+        $0.text = ""
         $0.font = .systemFont(ofSize: 15)
         $0.numberOfLines = 3
         $0.textColor = .darkGray
@@ -52,10 +56,54 @@ class OutsourcingVC: UIViewController {
     
     @objc func leftButtonPressed(sender: UIBarButtonItem!) {
         print("touch left navigationButton button")
+        self.didReceiveOutSourceImage()
     }
     
     @objc func rightButtonPressed(sender: UIBarButtonItem!) {
         print("touch right navigationButton button")
+        self.didReceiveOutSourceImage()
+        self.navigationItem.rightBarButtonItem?.isEnabled = false
+        var checkInput: Bool = true
+        var errorString: String = "알 수 없는 에러입니다."
+        
+        if let id: Int = self.imageId {
+            print(id)
+        } else {
+            checkInput = false
+            errorString = "새로고침 이후 다시 시도해주세요."
+        }
+        
+        if height == 0 || width == 0 {
+            checkInput = false
+            errorString = "새로고침 이후 라벨링을 다시 시도해주세요."
+        }
+        
+        if checkInput {
+            let lebeingInfo : LabelingImageInfo = {
+                LabelingImageInfo(userId: UserDefaults.standard.value(forKey: "UserId") as! Int, xCoordinate: self.xCoordinate, yCoordinate: self.yCoordinate, height: self.height, width: self.width)
+            }()
+            
+            let finalURL: String = "\(pushLabelingInfoURL)\(imageId!)"
+            MolaApi.shared.pushLabelingImageInfo(requestURL: finalURL, info: lebeingInfo) { res in
+                switch res.result{
+                case .success(let data):
+                    if let jsonString = String(data: data, encoding: .utf8){
+                        if let jsonDict: [String: Any] = UtilityManager.shared.jsonStringToDictionary(jsonString: jsonString){
+                            print(jsonDict)
+                        }
+                    }
+                case .failure(let err):
+                    print(err)
+                }
+            }
+        } else {
+        DispatchQueue.main.async {
+            let alert: UIAlertController = UIAlertController(title: "오류", message: errorString, preferredStyle: .alert)
+            let action: UIAlertAction = UIAlertAction(title: "확인", style: .default)
+            alert.addAction(action)
+            self.present(alert, animated: true, completion: nil)
+            }
+        }
     }
     
     override func viewDidLoad() {
@@ -65,6 +113,7 @@ class OutsourcingVC: UIViewController {
         self.navigationController?.navigationBar.barTintColor = .black
         setupNavigation()
         createUI()
+        didReceiveOutSourceImage()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -77,11 +126,43 @@ class OutsourcingVC: UIViewController {
         tabBarController?.tabBar.barTintColor = UIColor(red: 51/225, green: 153/255, blue: 255/255, alpha:1.0)
     }
     
+    private func didReceiveOutSourceImage() {
+        MolaApi.shared.getOutSourceImage(requestURL: getImageURL) {
+            res in
+            switch res.result{
+            case .success(let data):
+                do {
+                    let imageData: Image = try JSONDecoder().decode(Image.self, from: data)
+                    DispatchQueue.global().async {
+                        guard let imageURL: URL = URL(string: imageData.url) else { return }
+                        guard let changeImage: Data = try? Data(contentsOf: imageURL) else { return }
+                        DispatchQueue.main.async {
+                            self.imageId = imageData.imageId
+                            UIView.transition(with: self.detailImage,
+                                              duration: 0.7,
+                                              options: .transitionCrossDissolve,
+                                              animations: {
+                                                self.detailImage.image = UIImage(data: changeImage)
+                                              }, completion: nil)
+                        }
+                    }
+                    
+                } catch(let err){
+                    print(err)
+                }
+            case .failure(let err):
+                print("err")
+                print(err)
+            }
+        }
+    }
+    
     private func setupNavigation() {
         self.navigationItem.title = "일 하기"
         
-        self.navigationItem.setLeftBarButtonItems([leftRefrashItem], animated: true)
-        self.navigationItem.setRightBarButtonItems([rightNextItem], animated: true)
+        self.navigationItem.setLeftBarButton(leftRefrashItem, animated: true)
+        self.navigationItem.setRightBarButton(rightCompleteItem, animated: true)
+        self.navigationItem.rightBarButtonItem?.isEnabled = false
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
@@ -95,7 +176,6 @@ class OutsourcingVC: UIViewController {
         view.addSubview(explainLabel)
         view.addSubview(creditabel)
         view.addSubview(subView)
-        subView.addSubview(orderNameLabel)
         subView.addSubview(requirementsLabel)
         
         detailImage.snp.makeConstraints{ make in
@@ -120,15 +200,16 @@ class OutsourcingVC: UIViewController {
             make.bottom.equalToSuperview().offset(-100)
         }
         
-        orderNameLabel.snp.makeConstraints{ make in
-            make.top.leading.equalToSuperview().offset(20)
-        }
-        
         requirementsLabel.snp.makeConstraints{ make in
-            make.top.equalTo(orderNameLabel.safeAreaLayoutGuide.snp.bottom).offset(20)
+            make.top.leading.equalToSuperview().offset(20)
             make.leading.equalToSuperview().offset(15)
             make.trailing.equalToSuperview().offset(-15)
         }
+        
+        let imageTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(touchUpSelectImageButton(_:)))
+
+        self.detailImage.addGestureRecognizer(imageTapGestureRecognizer)
+        detailImage.isUserInteractionEnabled = true
     }
     
     /*
@@ -141,4 +222,29 @@ class OutsourcingVC: UIViewController {
     }
     */
 
+}
+
+extension OutsourcingVC: CropViewControllerDelegate {
+    
+    func cropViewControllerDidCrop(_ cropViewController: CropViewController, cropped: UIImage, transformation: Transformation) {
+        print(transformation)
+        xCoordinate = Float(transformation.scrollBounds.minX)
+        yCoordinate = Float(transformation.scrollBounds.minY)
+        width = Float(transformation.scrollBounds.width)
+        height = Float(transformation.scrollBounds.height)
+        self.detailImage.image = cropped
+        dismiss(animated: true, completion: nil)
+        self.navigationItem.rightBarButtonItem?.isEnabled = true
+    }
+    
+    func cropViewControllerDidCancel(_ cropViewController: CropViewController, original: UIImage) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @objc private func touchUpSelectImageButton(_ sender: UITapGestureRecognizer) {
+        let cropViewController = Mantis.cropViewController(image: self.detailImage.image!)
+        cropViewController.delegate = self
+        cropViewController.modalPresentationStyle = .fullScreen
+        self.present(cropViewController, animated: true)
+    }
 }
