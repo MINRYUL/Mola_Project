@@ -9,7 +9,7 @@ import UIKit
 
 class DetailOrderVC: UIViewController {
     
-    var orderModel: MyOrder?
+    var outSourceModel: OutSource?
     
     private let rightRefrashItem = UIBarButtonItem(title: "새로고침", style: .plain, target: self, action: #selector(buttonPressed))
     
@@ -64,7 +64,7 @@ class DetailOrderVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.title = orderModel?.name
+        self.title = outSourceModel?.title
         self.navigationController?.navigationBar.barTintColor = .black
         self.tabBarController?.tabBar.isHidden = true
         setProgress()
@@ -125,7 +125,7 @@ class DetailOrderVC: UIViewController {
     }
     
     private func setProgress() {
-        let progressValue : Float = Float((orderModel!.progression / orderModel!.entire) * 100)
+        let progressValue : Float = Float(((outSourceModel?.imgCompleted ?? 0) / (outSourceModel?.imgTotal ?? 0)) * 100)
         let progress = Progress(totalUnitCount: 100)
         
         progress.completedUnitCount = 0

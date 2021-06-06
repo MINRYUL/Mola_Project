@@ -161,9 +161,22 @@ extension LoginVC : UITextFieldDelegate {
                                 } else {
                                     checkInput = false
                                 }
-
+                                
                                 if let email : String = jsonDict["email"] as? String {
                                     UserDefaults.standard.set(email, forKey: "UserEmail")
+                                } else {
+                                    checkInput = false
+                                }
+                                
+                                if let id : Int = jsonDict["point"] as? Int {
+                                    UserDefaults.standard.set(id, forKey: "UserPoint")
+                                } else {
+                                    checkInput = false
+                                }
+
+                                
+                                if let id : String = jsonDict["name"] as? String {
+                                    UserDefaults.standard.set(id, forKey: "UserName")
                                 } else {
                                     checkInput = false
                                 }

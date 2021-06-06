@@ -10,13 +10,10 @@ import UIKit
 class OrderMenuVC: UIViewController {
     
     let cellSpacingHeight: CGFloat = 5
+    let requestOutSourceListURL = "http://13.209.232.235:8080/outsource/searchUserOSList"
+    var outSourceList: OutSourceList?
     
-    let orderModelList: [MyOrder] = [
-        MyOrder(name: "강아지 라벨링", detail: "강아지 전체가 보이도록 사진을 라벨링 해주세요", progression: 1200, entire: 5000),
-        MyOrder(name: "꽃 라벨링", detail: "꽃잎이 모두 보이도록 사진을 라벨링 해주세요", progression: 1403, entire: 11000)
-    ]
-    
-    private let orderTableView = UITableView(frame: CGRect.zero, style: .grouped).then {
+    private let outSourceTableView = UITableView(frame: CGRect.zero, style: .grouped).then {
         $0.backgroundColor = .systemGray6
         $0.register(MyOrderCell.self, forCellReuseIdentifier: MyOrderCell.identifier)
         $0.separatorStyle = .none
@@ -42,8 +39,51 @@ class OrderMenuVC: UIViewController {
         createUI()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        didReceiveOutSoruces()
+    }
+    
+    private func didReceiveOutSoruces() {
+        let id: MyId = {
+            MyId(id: UserDefaults.standard.value(forKey: "UserId") as! Int )
+        }()
+        
+        MolaApi.shared.requestOutSourceList(requestURL: requestOutSourceListURL, id: id){
+            res in
+            switch res.result {
+            case .success(let data):
+                if let jsonString = String(data: data, encoding: .utf8){
+                    if let jsonDict: [String: Any] =
+                        UtilityManager.shared.jsonStringToDictionary(jsonString: jsonString){
+                        print(jsonDict)
+                        if let status : Int = jsonDict["httpStatusCode"] as? Int {
+                            if status >= 300 {
+                                print("err")
+                            } else {
+                                do {
+                                    let outSourceData: OutSourceList = try JSONDecoder().decode(OutSourceList.self, from: data)
+                                    self.outSourceList = outSourceData
+                                    DispatchQueue.main.async {
+                                        self.outSourceTableView.reloadData()
+                                    }
+                                } catch(let err) {
+                                    print(err.localizedDescription)
+                                }
+                            }
+                        } else {
+                            print("err")
+                        }
+                    }
+                }
+            case .failure(let err):
+                print("err발생")
+                print(err)
+            }
+        }
+    }
+    
     private func setUpNavigation() {
-//        self.navigationItem.title = "외주 메뉴"
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
@@ -66,9 +106,9 @@ class OrderMenuVC: UIViewController {
     
     private func createUI() {
         self.view.backgroundColor = .systemGray6
-        orderTableView.dataSource = self
-        orderTableView.delegate = self
-        view.addSubview(orderTableView)
+        outSourceTableView.dataSource = self
+        outSourceTableView.delegate = self
+        view.addSubview(outSourceTableView)
         view.addSubview(requestLabel)
         setupLabelTap()
         
@@ -79,12 +119,9 @@ class OrderMenuVC: UIViewController {
             make.height.equalTo(65)
         }
         
-        orderTableView.snp.makeConstraints { make in
+        outSourceTableView.snp.makeConstraints { make in
             make.top.trailing.leading.equalTo(view)
             make.bottom.equalTo(requestLabel.safeAreaLayoutGuide.snp.top)
-//            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(0)
-//            make.leading.equalToSuperview()
-//            make.trailing.equalToSuperview()
             
         }
     }
@@ -105,18 +142,18 @@ extension OrderMenuVC: UITableViewDataSource, UITableViewDelegate {
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return orderModelList.count
+        return outSourceList?.outSources.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MyOrderCell.identifier, for: indexPath) as! MyOrderCell
         cell.selectionStyle = .none
         
-        let progressValue : Float = Float((orderModelList[indexPath.row].progression / orderModelList[indexPath.row].entire) * 100)
+        let progressValue : Float = Float(((outSourceList?.outSources[indexPath.row].imgCompleted ?? 0) / (outSourceList?.outSources[indexPath.row].imgTotal ?? 1)) * 100)
         let progress = Progress(totalUnitCount: 100)
         progress.completedUnitCount = 0
         
-        cell.labelNameLabel.text = orderModelList[indexPath.row].name
+        cell.labelNameLabel.text = outSourceList?.outSources[indexPath.row].title ?? " "
         cell.progressLabel.text = "\(progressValue) %"
         cell.progressBar.progress = 0.0
         
@@ -133,10 +170,10 @@ extension OrderMenuVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("detail order seleted")
-        let selectedOrder = orderModelList[indexPath.row]
+        let selectedOrder = outSourceList?.outSources[indexPath.row]
         let detailOrderVC = DetailOrderVC()
         
-        detailOrderVC.orderModel = selectedOrder
+        detailOrderVC.outSourceModel = selectedOrder
         navigationController?.pushViewController(detailOrderVC, animated: true)
     }
     

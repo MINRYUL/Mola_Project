@@ -7,11 +7,6 @@
 
 import Foundation
 
-struct OrderList {
-    let name: String
-    let order: [Order]
-}
-
 struct Order: Encodable{
     let userId: Int
     let creationDate: String

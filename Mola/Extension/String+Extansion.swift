@@ -25,4 +25,10 @@ extension String {
         let phoneNumPredicate = NSPredicate(format: "SELF MATCHES %@ ", phoneNumFormat)
         return phoneNumPredicate.evaluate(with: self)
     }
+    
+    var isVaildCredit: Bool {
+        let creditFormat = "^(?=.*[0-9]).{1,2}"
+        let creditPredicate = NSPredicate(format: "SELF MATCHES %@ ", creditFormat)
+        return creditPredicate.evaluate(with: self)
+    }
 }

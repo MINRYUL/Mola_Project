@@ -107,18 +107,25 @@ class OrderVC: UIViewController, UINavigationControllerDelegate, UIScrollViewDel
             print(name)
         } else {
             checkInput = false
+            errorString = "모든 항목을 작성해주세요."
         }
         
         if let credit: String = self.credit {
             print(credit)
+            if credit.isVaildCredit == false {
+                checkInput = false
+                errorString = "크레딧은 일, 십의 자리 숫자만 입력가능합니다."
+            }
         } else {
             checkInput = false
+            errorString = "모든 항목을 작성해주세요."
         }
         
         if let requirements: String = self.requirements {
             print(requirements)
         } else {
             checkInput = false
+            errorString = "모든 항목을 작성해주세요."
         }
         
         if checkInput {
@@ -213,7 +220,7 @@ class OrderVC: UIViewController, UINavigationControllerDelegate, UIScrollViewDel
         }
         if checkInput == false {
             DispatchQueue.main.async {
-                let alert: UIAlertController = UIAlertController(title: "오류", message: "모든 항목을 작성해주세요.", preferredStyle: .alert)
+                let alert: UIAlertController = UIAlertController(title: "오류", message: errorString, preferredStyle: .alert)
                 let action: UIAlertAction = UIAlertAction(title: "확인", style: .default)
                 alert.addAction(action)
                 self.present(alert, animated: true)

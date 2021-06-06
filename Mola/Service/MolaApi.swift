@@ -61,4 +61,12 @@ class MolaApi {
             }
         }, to: requestURL, method: .post).responseData(completionHandler: completionHandler)
     }
+    
+    func requestOutSourceList(requestURL: String, id: MyId, completionHandler : @escaping (AFDataResponse<Data>) -> Void) {
+        AF.request(requestURL,
+                   method: .post,
+                   parameters: id,
+                   encoder: JSONParameterEncoder.default)
+            .responseData(completionHandler: completionHandler)
+    }
 }
