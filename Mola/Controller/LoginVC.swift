@@ -168,15 +168,15 @@ extension LoginVC : UITextFieldDelegate {
                                     checkInput = false
                                 }
                                 
-                                if let id : Int = jsonDict["point"] as? Int {
-                                    UserDefaults.standard.set(id, forKey: "UserPoint")
+                                if let point : Int = jsonDict["point"] as? Int {
+                                    UserDefaults.standard.set(point, forKey: "UserPoint")
                                 } else {
                                     checkInput = false
                                 }
 
-                                
-                                if let id : String = jsonDict["name"] as? String {
-                                    UserDefaults.standard.set(id, forKey: "UserName")
+                        
+                                if let name : String = jsonDict["name"] as? String {
+                                    UserDefaults.standard.set(name, forKey: "UserName")
                                 } else {
                                     checkInput = false
                                 }
@@ -204,14 +204,13 @@ extension LoginVC : UITextFieldDelegate {
                     errorString = "요청 오류"
                 }
             }
-        }
-
-        if checkInput == false {
+        } else {
             let alert: UIAlertController = UIAlertController(title: "오류", message: errorString!, preferredStyle: .alert)
             let action: UIAlertAction = UIAlertAction(title: "확인", style: .default)
             alert.addAction(action)
             present(alert, animated: true, completion: nil)
         }
+        
 //        NotificationCenter.default.post(name: LoginVC.NotificationDone, object: nil)
     }
     

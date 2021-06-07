@@ -82,4 +82,11 @@ class MolaApi {
                    encoder: JSONParameterEncoder.default)
             .responseData(completionHandler: completionHandler)
     }
+    
+    
+    func changeUserPoint(requestURL: String, completionHandler : @escaping (AFDataResponse<Data>) -> Void) {
+        AF.request(requestURL,
+                   method: .post)
+            .responseData(completionHandler: completionHandler)
+    }
 }

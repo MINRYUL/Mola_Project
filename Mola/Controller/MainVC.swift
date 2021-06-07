@@ -162,6 +162,12 @@ class MainVC: UIViewController {
         self.createUI()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        let point = UserDefaults.standard.value(forKey: "UserPoint") as! Int
+        userPointLabel.text = "\(point)"
+    }
+    
     private func setupNavigation() {
         self.navigationItem.title = "모두의 라벨링"
                 
@@ -180,11 +186,8 @@ class MainVC: UIViewController {
     }
     
     private func createUI() {
-        let point = UserDefaults.standard.value(forKey: "UserPoint") as! Int
         let name = UserDefaults.standard.value(forKey: "UserName") as! String
         userNameLabel.text = name + "님의 포인트"
-        userPointLabel.text = "\(point)"
-        
         
         view.backgroundColor = .white
         self.mainScrollView.delegate = self

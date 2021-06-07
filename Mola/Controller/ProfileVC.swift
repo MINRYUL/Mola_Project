@@ -107,6 +107,9 @@ class ProfileVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        super.viewWillAppear(true)
+        let point = UserDefaults.standard.value(forKey: "UserPoint") as! Int
+        userPointLabel.text = "\(point)"
     }
     
     override func viewWillDisappear(_ animated: Bool) {
