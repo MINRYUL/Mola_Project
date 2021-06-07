@@ -17,6 +17,9 @@ struct LabelingImageInfo: Encodable {
 }
 
 struct Image: Decodable {
+    let status: Int
     let url: String
     let imageId: Int
+    let requirements: String
+    let credit: Int
 }

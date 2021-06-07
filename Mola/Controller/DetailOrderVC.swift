@@ -10,12 +10,18 @@ import UIKit
 class DetailOrderVC: UIViewController {
     
     var outSourceModel: OutSource?
+    var imageCount: Int?
     
     private let rightRefrashItem = UIBarButtonItem(title: "새로고침", style: .plain, target: self, action: #selector(buttonPressed))
     
     private let detailImage = UIImageView().then() {
         $0.backgroundColor = .black
         $0.contentMode = .scaleAspectFit
+    }
+    
+    private let labelingView = UIView().then() {
+        $0.backgroundColor = .white
+        $0.alpha = 0.37
     }
     
     private let returnButton = UIButton().then() {
@@ -52,6 +58,9 @@ class DetailOrderVC: UIViewController {
     
     @objc func buttonPressed(sender: UIBarButtonItem!) {
         print("touch navigationButton button")
+        self.imageCount! += 1
+        labelingView.removeFromSuperview()
+        didChangeImageView()
     }
 
     override func viewDidLoad() {
@@ -68,12 +77,40 @@ class DetailOrderVC: UIViewController {
         self.navigationController?.navigationBar.barTintColor = .black
         self.tabBarController?.tabBar.isHidden = true
         setProgress()
+        didChangeImageView()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 51/225, green: 153/255, blue: 255/255, alpha:1.0)
         self.tabBarController?.tabBar.isHidden = false
+    }
+    
+    private func didChangeImageView(){
+        DispatchQueue.global().async {
+            guard let imageURL: URL = URL(string: (self.outSourceModel?.completedImageList[self.imageCount!].url)!) else { return }
+            guard let changeImage: Data = try? Data(contentsOf: imageURL) else { return }
+            DispatchQueue.main.async {
+                UIView.transition(with: self.detailImage,
+                                  duration: 0.7,
+                                  options: .transitionCrossDissolve,
+                                  animations: {
+                                    self.detailImage.image = UIImage(data: changeImage)
+                                  }, completion: nil)
+                self.setLabelingView()
+            }
+        }
+    }
+    
+    private func setLabelingView() {
+        view.addSubview(labelingView)
+        
+        labelingView.snp.makeConstraints{ make in
+            make.top.equalTo(detailImage).offset((self.outSourceModel?.completedImageList[self.imageCount!].xcoordinate)!)
+            make.leading.equalTo(detailImage).offset((self.outSourceModel?.completedImageList[self.imageCount!].ycoordinate)!)
+            make.height.equalTo((self.outSourceModel?.completedImageList[self.imageCount!].height)!)
+            make.width.equalTo((self.outSourceModel?.completedImageList[self.imageCount!].width)!)
+        }
     }
 
     private func createUI() {
@@ -125,7 +162,7 @@ class DetailOrderVC: UIViewController {
     }
     
     private func setProgress() {
-        let progressValue : Float = Float(((outSourceModel?.imgCompleted ?? 0) / (outSourceModel?.imgTotal ?? 0)) * 100)
+        let progressValue : Float = ((Float)(outSourceModel?.imgCompleted ?? 0) / (Float)(outSourceModel?.imgTotal ?? 0)) * 100
         let progress = Progress(totalUnitCount: 100)
         
         progress.completedUnitCount = 0

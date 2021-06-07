@@ -13,6 +13,8 @@
 		DA0F3E5A266B5D7F00FCEE97 /* RefundVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0F3E59266B5D7F00FCEE97 /* RefundVC.swift */; };
 		DA0F3E5F266CA79000FCEE97 /* BaseURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0F3E5E266CA79000FCEE97 /* BaseURL.swift */; };
 		DA0F3E64266CC42900FCEE97 /* ImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0F3E63266CC42900FCEE97 /* ImageModel.swift */; };
+		DA0F3E6C266E52B300FCEE97 /* UIImageView+Extansion.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0F3E6B266E52B300FCEE97 /* UIImageView+Extansion.swift */; };
+		DA0F3E70266E5FEE00FCEE97 /* UIImage+Extansion.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0F3E6F266E5FEE00FCEE97 /* UIImage+Extansion.swift */; };
 		DA1F0544263D443200BE9E27 /* NavigationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1F0543263D443200BE9E27 /* NavigationVC.swift */; };
 		DA33B1102654F38F00AB2FE2 /* OutsourcingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA33B10F2654F38F00AB2FE2 /* OutsourcingVC.swift */; };
 		DA6C3022263A9F8E006574FB /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6C3021263A9F8E006574FB /* MainVC.swift */; };
@@ -56,6 +58,8 @@
 		DA0F3E59266B5D7F00FCEE97 /* RefundVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefundVC.swift; sourceTree = "<group>"; };
 		DA0F3E5E266CA79000FCEE97 /* BaseURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseURL.swift; sourceTree = "<group>"; };
 		DA0F3E63266CC42900FCEE97 /* ImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModel.swift; sourceTree = "<group>"; };
+		DA0F3E6B266E52B300FCEE97 /* UIImageView+Extansion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extansion.swift"; sourceTree = "<group>"; };
+		DA0F3E6F266E5FEE00FCEE97 /* UIImage+Extansion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extansion.swift"; sourceTree = "<group>"; };
 		DA1F0543263D443200BE9E27 /* NavigationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationVC.swift; sourceTree = "<group>"; };
 		DA33B10F2654F38F00AB2FE2 /* OutsourcingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutsourcingVC.swift; sourceTree = "<group>"; };
 		DA6C3021263A9F8E006574FB /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
@@ -218,6 +222,8 @@
 			children = (
 				DADBD9A526381202004C522B /* SloyTextField.swift */,
 				DA6C302D263AB6B4006574FB /* String+Extansion.swift */,
+				DA0F3E6B266E52B300FCEE97 /* UIImageView+Extansion.swift */,
+				DA0F3E6F266E5FEE00FCEE97 /* UIImage+Extansion.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -360,6 +366,7 @@
 				DA924145265F6FB60020DBA1 /* Document.swift in Sources */,
 				DA84DE25265CE94E00C659BB /* MolaApi.swift in Sources */,
 				DA0F3E64266CC42900FCEE97 /* ImageModel.swift in Sources */,
+				DA0F3E70266E5FEE00FCEE97 /* UIImage+Extansion.swift in Sources */,
 				DA33B1102654F38F00AB2FE2 /* OutsourcingVC.swift in Sources */,
 				DA9382BC2639368300A04F25 /* SignUpModel.swift in Sources */,
 				DA75790E265390580075ACD4 /* DetailOrderVC.swift in Sources */,
@@ -382,6 +389,7 @@
 				DA6C3022263A9F8E006574FB /* MainVC.swift in Sources */,
 				DADBD9B526381AFD004C522B /* DeviceManager.swift in Sources */,
 				DA0F3E53266223CD00FCEE97 /* ChargeVC.swift in Sources */,
+				DA0F3E6C266E52B300FCEE97 /* UIImageView+Extansion.swift in Sources */,
 				DAABCE2B265234E60067DD98 /* OutSourceModel.swift in Sources */,
 				DA0F3E572666370900FCEE97 /* FileModel.swift in Sources */,
 				DAA18FC126427915006E37DA /* OrderVC.swift in Sources */,

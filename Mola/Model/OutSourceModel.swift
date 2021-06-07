@@ -27,6 +27,15 @@ struct OutSource: Decodable{
     let imgCompleted: Int
     let credit: Int
     let title: String
-    let outsourceCreationDate: String
+    let completedImageList: [CompletedImage]
+}
+
+struct CompletedImage: Decodable {
+    let id: Int
+    let url: String
+    let height: Float
+    let width: Float
+    let xcoordinate: Float
+    let ycoordinate: Float
 }
 

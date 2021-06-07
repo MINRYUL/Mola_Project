@@ -13,6 +13,7 @@ class OutsourcingVC: UIViewController, UINavigationControllerDelegate {
     let getImageURL: String = "http://13.209.232.235:8080/image"
     let pushLabelingInfoURL: String = "http://13.209.232.235:8080/image/"
     
+    var initLabelingView: Bool = false
     var imageId: Int?
     var xCoordinate: Float = 0
     var yCoordinate: Float = 0
@@ -37,7 +38,12 @@ class OutsourcingVC: UIViewController, UINavigationControllerDelegate {
     private let creditabel = UILabel().then() {
         $0.text = " Point"
         $0.textColor = .black
-        $0.font = .systemFont(ofSize: 16)
+        $0.font = .systemFont(ofSize: 13)
+    }
+    
+    private let labelingView = UIView().then() {
+        $0.backgroundColor = .white
+        $0.alpha = 0.25
     }
     
     private let subView = UIView().then() {
@@ -48,7 +54,7 @@ class OutsourcingVC: UIViewController, UINavigationControllerDelegate {
     
     private let requirementsLabel = UILabel().then() {
         $0.text = ""
-        $0.font = .systemFont(ofSize: 15)
+        $0.font = .systemFont(ofSize: 17)
         $0.numberOfLines = 3
         $0.textColor = .darkGray
     }
@@ -126,7 +132,15 @@ class OutsourcingVC: UIViewController, UINavigationControllerDelegate {
         tabBarController?.tabBar.barTintColor = UIColor(red: 51/225, green: 153/255, blue: 255/255, alpha:1.0)
     }
     
+    private func removeLebelingView() {
+        if initLabelingView {
+            labelingView.removeFromSuperview()
+            initLabelingView = false
+        }
+    }
+    
     private func didReceiveOutSourceImage() {
+        removeLebelingView()
         MolaApi.shared.getOutSourceImage(requestURL: getImageURL) {
             res in
             switch res.result{
@@ -144,6 +158,8 @@ class OutsourcingVC: UIViewController, UINavigationControllerDelegate {
                                               animations: {
                                                 self.detailImage.image = UIImage(data: changeImage)
                                               }, completion: nil)
+                            self.requirementsLabel.text = imageData.requirements
+                            self.creditabel.text = "\(imageData.credit) 포인트 휙득 가능"
                         }
                     }
                     
@@ -154,6 +170,19 @@ class OutsourcingVC: UIViewController, UINavigationControllerDelegate {
                 print("err")
                 print(err)
             }
+        }
+    }
+    
+    private func setLabelingView() {
+        view.addSubview(labelingView)
+        let imageSize = detailImage.contentClippingRect
+        
+        print(imageSize)
+        labelingView.snp.makeConstraints{ make in
+            make.top.equalTo(detailImage).offset((Float)(imageSize.origin.y) + self.yCoordinate)
+            make.leading.equalTo(detailImage).offset((Float)(imageSize.origin.x) + self.xCoordinate)
+            make.height.equalTo(self.height)
+            make.width.equalTo(self.width)
         }
     }
     
@@ -230,9 +259,20 @@ extension OutsourcingVC: CropViewControllerDelegate {
         print(transformation)
         xCoordinate = Float(transformation.scrollBounds.minX)
         yCoordinate = Float(transformation.scrollBounds.minY)
-        width = Float(transformation.scrollBounds.width)
-        height = Float(transformation.scrollBounds.height)
-        self.detailImage.image = cropped
+        width = Float(cropped.getWidth)
+        height = Float(cropped.getHeight)
+        print(cropped.size.width)
+        print(cropped.size.height)
+        
+        print(detailImage.image?.size.width)
+        print(detailImage.image?.size.height)
+        if initLabelingView == false {
+            initLabelingView = true
+            setLabelingView()
+        } else {
+            labelingView.removeFromSuperview()
+            setLabelingView()
+        }
         dismiss(animated: true, completion: nil)
         self.navigationItem.rightBarButtonItem?.isEnabled = true
     }

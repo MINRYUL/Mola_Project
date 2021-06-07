@@ -149,7 +149,7 @@ extension OrderMenuVC: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: MyOrderCell.identifier, for: indexPath) as! MyOrderCell
         cell.selectionStyle = .none
         
-        let progressValue : Float = Float(((outSourceList?.outSources[indexPath.row].imgCompleted ?? 0) / (outSourceList?.outSources[indexPath.row].imgTotal ?? 1)) * 100)
+        let progressValue : Float = ((Float)(outSourceList?.outSources[indexPath.row].imgCompleted ?? 0) / (Float)(outSourceList?.outSources[indexPath.row].imgTotal ?? 1)) * 100
         let progress = Progress(totalUnitCount: 100)
         progress.completedUnitCount = 0
         
@@ -174,6 +174,7 @@ extension OrderMenuVC: UITableViewDataSource, UITableViewDelegate {
         let detailOrderVC = DetailOrderVC()
         
         detailOrderVC.outSourceModel = selectedOrder
+        detailOrderVC.imageCount = 0
         navigationController?.pushViewController(detailOrderVC, animated: true)
     }
     
