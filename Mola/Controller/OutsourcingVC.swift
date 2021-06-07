@@ -11,7 +11,7 @@ import Mantis
 class OutsourcingVC: UIViewController, UINavigationControllerDelegate {
     
     let getImageURL: String = "http://13.209.232.235:8080/image"
-    let pushLabelingInfoURL: String = "http://13.209.232.235:8080/image/:"
+    let pushLabelingInfoURL: String = "http://13.209.232.235:8080/image/"
     
     var imageId: Int?
     var xCoordinate: Float = 0
@@ -61,7 +61,6 @@ class OutsourcingVC: UIViewController, UINavigationControllerDelegate {
     
     @objc func rightButtonPressed(sender: UIBarButtonItem!) {
         print("touch right navigationButton button")
-        self.didReceiveOutSourceImage()
         self.navigationItem.rightBarButtonItem?.isEnabled = false
         var checkInput: Bool = true
         var errorString: String = "알 수 없는 에러입니다."
@@ -75,7 +74,7 @@ class OutsourcingVC: UIViewController, UINavigationControllerDelegate {
         
         if height == 0 || width == 0 {
             checkInput = false
-            errorString = "새로고침 이후 라벨링을 다시 시도해주세요."
+            errorString = "새로고침 이후 다시 시도해주세요."
         }
         
         if checkInput {
@@ -90,6 +89,7 @@ class OutsourcingVC: UIViewController, UINavigationControllerDelegate {
                     if let jsonString = String(data: data, encoding: .utf8){
                         if let jsonDict: [String: Any] = UtilityManager.shared.jsonStringToDictionary(jsonString: jsonString){
                             print(jsonDict)
+                            self.didReceiveOutSourceImage()
                         }
                     }
                 case .failure(let err):

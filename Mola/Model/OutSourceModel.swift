@@ -16,7 +16,7 @@ struct MyId: Encodable {
 }
 
 struct OutSourceList: Decodable {
-    let httpStatusCode: Int
+    let status: Int
     let outSources: [OutSource]
 }
 

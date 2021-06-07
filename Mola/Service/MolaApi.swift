@@ -89,4 +89,10 @@ class MolaApi {
                    method: .post)
             .responseData(completionHandler: completionHandler)
     }
+    
+    func requestPointRecord(requestURL: String, completionHandler : @escaping (AFDataResponse<Data>) -> Void) {
+        AF.request(requestURL,
+                   method: .post)
+            .responseData(completionHandler: completionHandler)
+    }
 }

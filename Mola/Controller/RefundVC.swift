@@ -44,7 +44,7 @@ class RefundVC: UIViewController {
                     if let jsonString = String(data: data, encoding: .utf8){
                         if let jsonDict: [String: Any] = UtilityManager.shared.jsonStringToDictionary(jsonString: jsonString){
                             print(jsonDict)
-                            if let status : Int = jsonDict["httpStatusCode"] as? Int {
+                            if let status : Int = jsonDict["status"] as? Int {
                                 if status == 200 {
                                     if let point : Int = jsonDict["point"] as? Int {
                                         UserDefaults.standard.set(point, forKey: "UserPoint")

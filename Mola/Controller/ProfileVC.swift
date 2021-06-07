@@ -9,28 +9,8 @@ import UIKit
 
 class ProfileVC: UIViewController {
     
-    let point: [PointModel] = [
-        PointModel(name: "포인트 내역", pointHistory:
-                [PointHistory(type: "휙득", beforeChange: 5000, afterChange: 5005, date: "5/22 5:10"),
-                 PointHistory(type: "차감", beforeChange: 15000, afterChange: 5000, date: "5/22 5:07"),
-                 PointHistory(type: "충전", beforeChange: 10000, afterChange: 15000, date: "5/22 5:05"),
-                 PointHistory(type: "충전", beforeChange: 10000, afterChange: 15000, date: "5/22 5:05"),
-                 PointHistory(type: "충전", beforeChange: 10000, afterChange: 15000, date: "5/22 5:05"),
-                 PointHistory(type: "차감", beforeChange: 15000, afterChange: 5000, date: "5/22 5:07"),
-                 PointHistory(type: "충전", beforeChange: 10000, afterChange: 15000, date: "5/22 5:05"),
-                 PointHistory(type: "충전", beforeChange: 10000, afterChange: 15000, date: "5/22 5:05"),
-                 PointHistory(type: "휙득", beforeChange: 5000, afterChange: 5005, date: "5/22 5:10"),
-                 PointHistory(type: "휙득", beforeChange: 5000, afterChange: 5005, date: "5/22 5:10"),
-                 PointHistory(type: "차감", beforeChange: 15000, afterChange: 5000, date: "5/22 5:07"),
-                 PointHistory(type: "휙득", beforeChange: 5000, afterChange: 5005, date: "5/22 5:10"),
-                 PointHistory(type: "휙득", beforeChange: 5000, afterChange: 5005, date: "5/22 5:10"),
-                 PointHistory(type: "휙득", beforeChange: 5000, afterChange: 5005, date: "5/22 5:10"),
-                 PointHistory(type: "휙득", beforeChange: 5000, afterChange: 5005, date: "5/22 5:10"),
-                PointHistory(type: "차감", beforeChange: 15000, afterChange: 5000, date: "5/22 5:07"),
-                PointHistory(type: "충전", beforeChange: 10000, afterChange: 15000, date: "5/22 5:05"),
-                 PointHistory(type: "충전", beforeChange: 0, afterChange: 10000, date: "5/22 5:03"
-                )])
-    ]
+    let requestPointRecordURL = "http://13.209.232.235:8080/user/searchPointHistory/"
+    var pointModel: PointModel?
     
     private let pointHistoryTableView = UITableView(frame: CGRect.zero, style: .grouped).then {
         $0.backgroundColor = .systemGray5
@@ -110,10 +90,49 @@ class ProfileVC: UIViewController {
         super.viewWillAppear(true)
         let point = UserDefaults.standard.value(forKey: "UserPoint") as! Int
         userPointLabel.text = "\(point)"
+        didReceivePointRecord()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+    }
+    
+    private func didReceivePointRecord() {
+        let id = UserDefaults.standard.value(forKey: "UserId") as! Int
+        let resultURL = "\(requestPointRecordURL)\(id)/"
+        MolaApi.shared.changeUserPoint(requestURL: resultURL) { res in
+            switch res.result{
+            case .success(let data):
+                if let jsonString = String(data: data, encoding: .utf8){
+                    if let jsonDict: [String: Any] =
+                        UtilityManager.shared.jsonStringToDictionary(jsonString: jsonString){
+                        print(jsonDict)
+                        if let status : Int = jsonDict["status"] as? Int {
+                            if status >= 300 {
+                                print("err")
+                            } else {
+                                do {
+                                    let pointModel: PointModel = try JSONDecoder().decode(PointModel.self, from: data)
+                                    self.pointModel = pointModel
+                                    self.pointModel?.pointRecord = pointModel.pointRecord.reversed()
+                                    
+                                    DispatchQueue.main.async {
+                                        self.pointHistoryTableView.reloadData()
+                                    }
+                                } catch(let err) {
+                                    print(err.localizedDescription)
+                                }
+                            }
+                        } else {
+                            print("err")
+                        }
+                    }
+                }
+            case .failure(let err):
+                print("err")
+                print(err)
+            }
+        }
     }
 
     private func setUpNavigation() {
@@ -217,12 +236,8 @@ class ProfileVC: UIViewController {
 
 extension ProfileVC: UITableViewDataSource, UITableViewDelegate {
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return point.count
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return point[section].pointHistory.count
+        return (pointModel?.pointRecord.count) ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -230,27 +245,30 @@ extension ProfileVC: UITableViewDataSource, UITableViewDelegate {
         cell.selectionStyle = .none
         cell.backgroundColor = .white
         
-        if point[indexPath.section].pointHistory[indexPath.row].type == "충전" {
+        let changeValue = (pointModel?.pointRecord[indexPath.row].pointAfter)! - (pointModel?.pointRecord[indexPath.row].pointBefore)!
+        
+        if changeValue >= 100 {
             cell.pointName.textColor = .systemBlue
             cell.typeView.backgroundColor = .systemBlue
-            cell.updatePoint.text = "+ " + (String)(point[indexPath.section].pointHistory[indexPath.row].afterChange - point[indexPath.section].pointHistory[indexPath.row].beforeChange)
+            cell.updatePoint.text = "+ " + (String)(changeValue)
+            cell.pointName.text = "충전"
             cell.updatePoint.textColor = .systemBlue
-        } else if point[indexPath.section].pointHistory[indexPath.row].type == "차감"{
+        } else if changeValue < 0 {
             cell.pointName.textColor = .systemRed
             cell.typeView.backgroundColor = .systemRed
-            cell.updatePoint.text =  (String)(point[indexPath.section].pointHistory[indexPath.row].afterChange - point[indexPath.section].pointHistory[indexPath.row].beforeChange)
+            cell.updatePoint.text =  (String)(changeValue)
+            cell.pointName.text = "차감"
             cell.updatePoint.textColor = .systemRed
         } else {
             cell.pointName.textColor = .black
             cell.typeView.backgroundColor = .darkGray
-            cell.updatePoint.text = "+ " + (String)(point[indexPath.section].pointHistory[indexPath.row].afterChange - point[indexPath.section].pointHistory[indexPath.row].beforeChange)
+            cell.updatePoint.text = "+ " + (String)(changeValue)
+            cell.pointName.text = "휙득"
             cell.updatePoint.textColor = .black
         }
         
-        cell.pointDate.text = point[indexPath.section].pointHistory[indexPath.row].date
-        cell.pointName.text = point[indexPath.section].pointHistory[indexPath.row].type
-        cell.updateDetail.text =  (String)(point[indexPath.section].pointHistory[indexPath.row].afterChange) +
-            " P"
+        cell.pointDate.text = pointModel?.pointRecord[indexPath.row].pointChangeDate
+        cell.updateDetail.text = "\((pointModel?.pointRecord[indexPath.row].pointAfter)!) P"
             
         cell.backgroundColor = .white
         return cell

@@ -18,7 +18,7 @@
 		DA6C3022263A9F8E006574FB /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6C3021263A9F8E006574FB /* MainVC.swift */; };
 		DA6C302E263AB6B4006574FB /* String+Extansion.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6C302D263AB6B4006574FB /* String+Extansion.swift */; };
 		DA75790E265390580075ACD4 /* DetailOrderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA75790D265390580075ACD4 /* DetailOrderVC.swift */; };
-		DA80CB142658F0A4008CFE4B /* PointHistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA80CB132658F0A4008CFE4B /* PointHistoryModel.swift */; };
+		DA80CB142658F0A4008CFE4B /* PointRecordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA80CB132658F0A4008CFE4B /* PointRecordModel.swift */; };
 		DA80CB182658F3D1008CFE4B /* PointHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA80CB172658F3D1008CFE4B /* PointHistoryCell.swift */; };
 		DA84DE21265CC55300C659BB /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA84DE20265CC55300C659BB /* UserModel.swift */; };
 		DA84DE25265CE94E00C659BB /* MolaApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA84DE24265CE94E00C659BB /* MolaApi.swift */; };
@@ -61,7 +61,7 @@
 		DA6C3021263A9F8E006574FB /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		DA6C302D263AB6B4006574FB /* String+Extansion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extansion.swift"; sourceTree = "<group>"; };
 		DA75790D265390580075ACD4 /* DetailOrderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailOrderVC.swift; sourceTree = "<group>"; };
-		DA80CB132658F0A4008CFE4B /* PointHistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointHistoryModel.swift; sourceTree = "<group>"; };
+		DA80CB132658F0A4008CFE4B /* PointRecordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointRecordModel.swift; sourceTree = "<group>"; };
 		DA80CB172658F3D1008CFE4B /* PointHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointHistoryCell.swift; sourceTree = "<group>"; };
 		DA84DE20265CC55300C659BB /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserModel.swift; path = /Users/minryul/Documents/Mola/Mola/Model/UserModel.swift; sourceTree = "<absolute>"; };
 		DA84DE24265CE94E00C659BB /* MolaApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MolaApi.swift; sourceTree = "<group>"; };
@@ -150,7 +150,7 @@
 				DAA18FBA26426BCB006E37DA /* OrderModel.swift */,
 				DAABCE2A265234E60067DD98 /* OutSourceModel.swift */,
 				DA924144265F6FB60020DBA1 /* Document.swift */,
-				DA80CB132658F0A4008CFE4B /* PointHistoryModel.swift */,
+				DA80CB132658F0A4008CFE4B /* PointRecordModel.swift */,
 				DA0F3E562666370900FCEE97 /* FileModel.swift */,
 				DA0F3E63266CC42900FCEE97 /* ImageModel.swift */,
 			);
@@ -387,7 +387,7 @@
 				DAA18FC126427915006E37DA /* OrderVC.swift in Sources */,
 				DADBD9B2263813D6004C522B /* SplashVC.swift in Sources */,
 				DAA18FBE26426BE5006E37DA /* MainCell.swift in Sources */,
-				DA80CB142658F0A4008CFE4B /* PointHistoryModel.swift in Sources */,
+				DA80CB142658F0A4008CFE4B /* PointRecordModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -57,7 +57,7 @@ class OrderMenuVC: UIViewController {
                     if let jsonDict: [String: Any] =
                         UtilityManager.shared.jsonStringToDictionary(jsonString: jsonString){
                         print(jsonDict)
-                        if let status : Int = jsonDict["httpStatusCode"] as? Int {
+                        if let status : Int = jsonDict["status"] as? Int {
                             if status >= 300 {
                                 print("err")
                             } else {
