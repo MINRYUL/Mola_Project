@@ -12,13 +12,14 @@ class OutsourcingVC: UIViewController, UINavigationControllerDelegate {
     
     let getImageURL: String = "http://13.209.232.235:8080/image"
     let pushLabelingInfoURL: String = "http://13.209.232.235:8080/image/"
+    let pointURL: String = "http://13.209.232.235:8080/user/updatePoint/"
     
     var initLabelingView: Bool = false
     var imageId: Int?
-    var xCoordinate: Float = 0
-    var yCoordinate: Float = 0
-    var height: Float = 0
-    var width: Float = 0
+    var xCoordinate: Double = 0
+    var yCoordinate: Double = 0
+    var height: Double = 0
+    var width: Double = 0
     
     lazy var leftRefrashItem = UIBarButtonItem(title: "새로고침", style: .plain, target: self, action: #selector(leftButtonPressed))
     
@@ -42,8 +43,10 @@ class OutsourcingVC: UIViewController, UINavigationControllerDelegate {
     }
     
     private let labelingView = UIView().then() {
-        $0.backgroundColor = .white
-        $0.alpha = 0.25
+        $0.backgroundColor = .gray
+        $0.alpha = 0.45
+        $0.layer.borderWidth = 2
+        $0.layer.borderColor = UIColor.black.cgColor
     }
     
     private let subView = UIView().then() {
@@ -62,7 +65,7 @@ class OutsourcingVC: UIViewController, UINavigationControllerDelegate {
     
     @objc func leftButtonPressed(sender: UIBarButtonItem!) {
         print("touch left navigationButton button")
-        self.didReceiveOutSourceImage()
+        self.didReceiveOutSourceImage(complete: false)
     }
     
     @objc func rightButtonPressed(sender: UIBarButtonItem!) {
@@ -85,7 +88,7 @@ class OutsourcingVC: UIViewController, UINavigationControllerDelegate {
         
         if checkInput {
             let lebeingInfo : LabelingImageInfo = {
-                LabelingImageInfo(userId: UserDefaults.standard.value(forKey: "UserId") as! Int, xCoordinate: self.xCoordinate, yCoordinate: self.yCoordinate, height: self.height, width: self.width)
+                LabelingImageInfo(userId: UserDefaults.standard.value(forKey: "UserId") as! Int, xCoordinate: self.xCoordinate, yCoordinate: self.yCoordinate, height: self.height, width: Float(self.width))
             }()
             
             let finalURL: String = "\(pushLabelingInfoURL)\(imageId!)"
@@ -95,7 +98,7 @@ class OutsourcingVC: UIViewController, UINavigationControllerDelegate {
                     if let jsonString = String(data: data, encoding: .utf8){
                         if let jsonDict: [String: Any] = UtilityManager.shared.jsonStringToDictionary(jsonString: jsonString){
                             print(jsonDict)
-                            self.didReceiveOutSourceImage()
+                            self.didReceiveOutSourceImage(complete: true)
                         }
                     }
                 case .failure(let err):
@@ -119,7 +122,7 @@ class OutsourcingVC: UIViewController, UINavigationControllerDelegate {
         self.navigationController?.navigationBar.barTintColor = .black
         setupNavigation()
         createUI()
-        didReceiveOutSourceImage()
+        didReceiveOutSourceImage(complete: false)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -137,9 +140,14 @@ class OutsourcingVC: UIViewController, UINavigationControllerDelegate {
             labelingView.removeFromSuperview()
             initLabelingView = false
         }
+        
+        xCoordinate = 0.0
+        yCoordinate = 0.0
+        height = 0.0
+        width = 0.0
     }
     
-    private func didReceiveOutSourceImage() {
+    private func didReceiveOutSourceImage(complete: Bool) {
         removeLebelingView()
         MolaApi.shared.getOutSourceImage(requestURL: getImageURL) {
             res in
@@ -162,7 +170,26 @@ class OutsourcingVC: UIViewController, UINavigationControllerDelegate {
                             self.creditabel.text = "\(imageData.credit) 포인트 휙득 가능"
                         }
                     }
-                    
+                    if complete {
+                        let id = UserDefaults.standard.value(forKey: "UserId") as! Int
+                        let resultURL: String = "\(self.pointURL)\(id)/\(imageData.credit)"
+                        MolaApi.shared.changeUserPoint(requestURL: resultURL) { res in
+                            switch res.result{
+                            case .success(let data):
+                                if let jsonString = String(data: data, encoding: .utf8){
+                                    if let jsonDict: [String: Any] = UtilityManager.shared.jsonStringToDictionary(jsonString: jsonString){
+                                        print(jsonDict)
+                                        if let point : Int = jsonDict["point"] as? Int {
+                                            UserDefaults.standard.set(point, forKey: "UserPoint")
+                                        }
+                                    }
+                                }
+                            case .failure(let err):
+                                print("err")
+                                print(err)
+                            }
+                        }
+                    }
                 } catch(let err){
                     print(err)
                 }
@@ -177,13 +204,14 @@ class OutsourcingVC: UIViewController, UINavigationControllerDelegate {
         view.addSubview(labelingView)
         let imageSize = detailImage.contentClippingRect
         
-        print(imageSize)
-        labelingView.snp.makeConstraints{ make in
-            make.top.equalTo(detailImage).offset((Float)(imageSize.origin.y) + self.yCoordinate)
-            make.leading.equalTo(detailImage).offset((Float)(imageSize.origin.x) + self.xCoordinate)
-            make.height.equalTo(self.height)
-            make.width.equalTo(self.width)
-        }
+        let viewPos: CGPoint = CGPoint(x: ((Double)(imageSize.origin.x) + self.xCoordinate), y: ((Double)(imageSize.origin.y) + self.yCoordinate))
+        let viewSize: CGSize = CGSize(width: ((Double)(imageSize.size.width) * self.width), height: ((Double)(imageSize.size.height) * self.height))
+        
+        let rect: CGRect = .init(origin: viewPos, size: viewSize)
+        
+        labelingView.frame = rect
+        
+        print(rect)
     }
     
     private func setupNavigation() {
@@ -257,15 +285,11 @@ extension OutsourcingVC: CropViewControllerDelegate {
     
     func cropViewControllerDidCrop(_ cropViewController: CropViewController, cropped: UIImage, transformation: Transformation) {
         print(transformation)
-        xCoordinate = Float(transformation.scrollBounds.minX)
-        yCoordinate = Float(transformation.scrollBounds.minY)
-        width = Float(cropped.getWidth)
-        height = Float(cropped.getHeight)
-        print(cropped.size.width)
-        print(cropped.size.height)
+        xCoordinate = Double(transformation.scrollBounds.minX/transformation.scale)
+        yCoordinate = Double(transformation.scrollBounds.minY/transformation.scale)
+        height = (Double)((cropped.getHeight)/(detailImage.image!.getHeight))
+        width = (Double)((cropped.getWidth)/(detailImage.image!.getWidth))
         
-        print(detailImage.image?.size.width)
-        print(detailImage.image?.size.height)
         if initLabelingView == false {
             initLabelingView = true
             setLabelingView()

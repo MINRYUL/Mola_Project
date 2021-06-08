@@ -12,7 +12,7 @@ class DetailOrderVC: UIViewController {
     var outSourceModel: OutSource?
     var imageCount: Int?
     
-    private let rightRefrashItem = UIBarButtonItem(title: "새로고침", style: .plain, target: self, action: #selector(buttonPressed))
+    lazy var rightRefrashItem = UIBarButtonItem(title: "다음사진", style: .plain, target: self, action: #selector(buttonPressed))
     
     private let detailImage = UIImageView().then() {
         $0.backgroundColor = .black
@@ -20,16 +20,10 @@ class DetailOrderVC: UIViewController {
     }
     
     private let labelingView = UIView().then() {
-        $0.backgroundColor = .white
-        $0.alpha = 0.37
-    }
-    
-    private let returnButton = UIButton().then() {
-        $0.setTitle("반려하기", for: .normal)
-        $0.setTitleColor(.white, for: .normal)
-        $0.backgroundColor = .darkGray
-        $0.clipsToBounds = true
-        $0.layer.cornerRadius = 8
+        $0.backgroundColor = .gray
+        $0.alpha = 0.45
+        $0.layer.borderWidth = 2
+        $0.layer.borderColor = UIColor.black.cgColor
     }
     
     private let explainLabel = UILabel().then() {
@@ -58,16 +52,25 @@ class DetailOrderVC: UIViewController {
     
     @objc func buttonPressed(sender: UIBarButtonItem!) {
         print("touch navigationButton button")
-        self.imageCount! += 1
-        labelingView.removeFromSuperview()
-        didChangeImageView()
+        
+        print(outSourceModel?.completedImageList.count)
+        if (outSourceModel?.completedImageList.count ?? 0) - 1 <= self.imageCount ?? 0 {
+            let alert: UIAlertController = UIAlertController(title: "알림", message: "현재까지 완료된 마지막 사진입니다.", preferredStyle: .alert)
+            let action: UIAlertAction = UIAlertAction(title: "확인", style: .default)
+            alert.addAction(action)
+            self.present(alert, animated: true, completion: nil)
+        } else {
+            self.imageCount! += 1
+            labelingView.removeFromSuperview()
+            didChangeImageView()
+        }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.navigationItem.setRightBarButtonItems([rightRefrashItem], animated: true)
+        self.navigationItem.setRightBarButton(rightRefrashItem, animated: true)
         createUI()
     }
     
@@ -104,19 +107,20 @@ class DetailOrderVC: UIViewController {
     
     private func setLabelingView() {
         view.addSubview(labelingView)
+        let imageSize = detailImage.contentClippingRect
         
-        labelingView.snp.makeConstraints{ make in
-            make.top.equalTo(detailImage).offset((self.outSourceModel?.completedImageList[self.imageCount!].xcoordinate)!)
-            make.leading.equalTo(detailImage).offset((self.outSourceModel?.completedImageList[self.imageCount!].ycoordinate)!)
-            make.height.equalTo((self.outSourceModel?.completedImageList[self.imageCount!].height)!)
-            make.width.equalTo((self.outSourceModel?.completedImageList[self.imageCount!].width)!)
-        }
+        let viewPos: CGPoint = CGPoint(x: ((Double)(imageSize.origin.x) + (self.outSourceModel?.completedImageList[imageCount!].xcoordinate ?? 0)), y: ((Double)(imageSize.origin.y) + (self.outSourceModel?.completedImageList[imageCount!].ycoordinate ?? 0)))
+        
+        let viewSize: CGSize = CGSize(width: ((Double)(imageSize.size.width) * (self.outSourceModel?.completedImageList[imageCount!].width ?? 0)), height: ((Double)(imageSize.size.height) * (self.outSourceModel?.completedImageList[imageCount!].height ?? 0)))
+        
+        let rect: CGRect = .init(origin: viewPos, size: viewSize)
+        
+        labelingView.frame = rect
     }
 
     private func createUI() {
         view.backgroundColor = .systemGray4
         view.addSubview(detailImage)
-        view.addSubview(returnButton)
         view.addSubview(explainLabel)
         view.addSubview(progressView)
         progressView.addSubview(progressLabel)
@@ -132,18 +136,11 @@ class DetailOrderVC: UIViewController {
             make.trailing.equalToSuperview().offset(-10)
         }
         
-        returnButton.snp.makeConstraints{ make in
-            make.top.equalTo(detailImage.safeAreaLayoutGuide.snp.bottom).offset(5)
-            make.leading.equalToSuperview().offset(5)
-            make.width.equalTo(150)
-            make.height.equalTo(35)
-        }
-        
         progressView.snp.makeConstraints{ make in
             make.centerX.equalToSuperview()
             make.leading.equalToSuperview().offset(10)
             make.trailing.equalToSuperview().offset(-10)
-            make.top.equalTo(returnButton.safeAreaLayoutGuide.snp.bottom).offset(10)
+            make.top.equalTo(explainLabel.safeAreaLayoutGuide.snp.bottom).offset(20)
             make.height.equalTo(200)
         }
         
@@ -171,16 +168,6 @@ class DetailOrderVC: UIViewController {
         progress.completedUnitCount = Int64(progressValue)
         progressBar.setProgress(Float(progress.fractionCompleted), animated: true)
         
-        progressLabel.text = "\(progressValue) % 완료되었습니다!"
+        progressLabel.text = "\(progressValue) % 완료되었습니다."
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

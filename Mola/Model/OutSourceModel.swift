@@ -33,9 +33,9 @@ struct OutSource: Decodable{
 struct CompletedImage: Decodable {
     let id: Int
     let url: String
-    let height: Float
-    let width: Float
-    let xcoordinate: Float
-    let ycoordinate: Float
+    let height: Double
+    let width: Double
+    let xcoordinate: Double
+    let ycoordinate: Double
 }
 

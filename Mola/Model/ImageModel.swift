@@ -10,9 +10,9 @@ import Foundation
 
 struct LabelingImageInfo: Encodable {
     let userId: Int
-    let xCoordinate: Float
-    let yCoordinate: Float
-    let height: Float
+    let xCoordinate: Double
+    let yCoordinate: Double
+    let height: Double
     let width: Float
 }
 
