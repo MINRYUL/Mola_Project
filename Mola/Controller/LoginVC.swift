@@ -142,7 +142,7 @@ extension LoginVC : UITextFieldDelegate {
 
         if checkInput {
             let loginData : LoginData = {
-                LoginData(email: self.email!, password: self.password!.capitalized)
+                LoginData(email: self.email!, password: self.password!)
             }()
             MolaApi.shared.requestUserLogin(requestURL: loginRequestURL, loginData: loginData) { res in
                 switch res.result{
@@ -161,26 +161,26 @@ extension LoginVC : UITextFieldDelegate {
                                 } else {
                                     checkInput = false
                                 }
-                                
+
                                 if let email : String = jsonDict["email"] as? String {
                                     UserDefaults.standard.set(email, forKey: "UserEmail")
                                 } else {
                                     checkInput = false
                                 }
-                                
+
                                 if let point : Int = jsonDict["point"] as? Int {
                                     UserDefaults.standard.set(point, forKey: "UserPoint")
                                 } else {
                                     checkInput = false
                                 }
 
-                        
+
                                 if let name : String = jsonDict["name"] as? String {
                                     UserDefaults.standard.set(name, forKey: "UserName")
                                 } else {
                                     checkInput = false
                                 }
-                                
+
                                 if checkInput == false{
                                     errorString = "알 수 없는 오류"
                                 }
@@ -210,7 +210,7 @@ extension LoginVC : UITextFieldDelegate {
             alert.addAction(action)
             present(alert, animated: true, completion: nil)
         }
-        
+  
 //        NotificationCenter.default.post(name: LoginVC.NotificationDone, object: nil)
     }
     

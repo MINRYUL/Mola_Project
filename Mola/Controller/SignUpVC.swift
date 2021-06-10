@@ -132,11 +132,11 @@ extension SignUpVC: UITableViewDataSource, UITableViewDelegate {
         if signUpCategory[indexPath.section].textField[indexPath.row].label == "이메일" {
             cell.boardTextField.keyboardType = .emailAddress
         } else if signUpCategory[indexPath.section].textField[indexPath.row].label == "비밀번호" {
-            cell.boardTextField.keyboardType = .default
+            cell.boardTextField.keyboardType = .emailAddress
             cell.boardTextField.isSecureTextEntry = true
             cell.boardTextField.textContentType = .password
         } else if signUpCategory[indexPath.section].textField[indexPath.row].label == "비밀번호 확인" {
-            cell.boardTextField.keyboardType = .default
+            cell.boardTextField.keyboardType = .emailAddress
             cell.boardTextField.isSecureTextEntry = true
             cell.boardTextField.textContentType = .password
         } else if signUpCategory[indexPath.section].textField[indexPath.row].label == "이름" {

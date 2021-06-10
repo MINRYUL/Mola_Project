@@ -18,8 +18,10 @@ class OutsourcingVC: UIViewController, UINavigationControllerDelegate {
     var imageId: Int?
     var xCoordinate: Double = 0
     var yCoordinate: Double = 0
-    var height: Double = 0
+    var originWidth: Double = 0
+    var originHight: Double = 0
     var width: Double = 0
+    var height: Double = 0
     
     lazy var leftRefrashItem = UIBarButtonItem(title: "새로고침", style: .plain, target: self, action: #selector(leftButtonPressed))
     
@@ -203,14 +205,13 @@ class OutsourcingVC: UIViewController, UINavigationControllerDelegate {
     private func setLabelingView() {
         view.addSubview(labelingView)
         let imageSize = detailImage.contentClippingRect
-        
-        let viewPos: CGPoint = CGPoint(x: ((Double)(imageSize.origin.x) + self.xCoordinate), y: ((Double)(imageSize.origin.y) + self.yCoordinate))
+        print(imageSize)
+        let viewPos: CGPoint = CGPoint(x: ((Double)(imageSize.origin.x) + (self.xCoordinate * Double(imageSize.size.width))), y: ((Double)(imageSize.origin.y) + (self.yCoordinate * Double(imageSize.size.height))))
         let viewSize: CGSize = CGSize(width: ((Double)(imageSize.size.width) * self.width), height: ((Double)(imageSize.size.height) * self.height))
         
         let rect: CGRect = .init(origin: viewPos, size: viewSize)
         
         labelingView.frame = rect
-        
         print(rect)
     }
     
@@ -282,13 +283,13 @@ class OutsourcingVC: UIViewController, UINavigationControllerDelegate {
 }
 
 extension OutsourcingVC: CropViewControllerDelegate {
-    
     func cropViewControllerDidCrop(_ cropViewController: CropViewController, cropped: UIImage, transformation: Transformation) {
-        print(transformation)
-        xCoordinate = Double(transformation.scrollBounds.minX/transformation.scale)
-        yCoordinate = Double(transformation.scrollBounds.minY/transformation.scale)
-        height = (Double)((cropped.getHeight)/(detailImage.image!.getHeight))
-        width = (Double)((cropped.getWidth)/(detailImage.image!.getWidth))
+        
+        height = ((Double)(cropped.getHeight)/(Double)(detailImage.image!.getHeight))
+        width = ((Double)(cropped.getWidth)/(Double)(detailImage.image!.getWidth))
+        
+        xCoordinate = Double(transformation.scrollBounds.origin.x / transformation.scale)/originWidth
+        yCoordinate = Double(transformation.scrollBounds.origin.y / transformation.scale)/originHight
         
         if initLabelingView == false {
             initLabelingView = true
@@ -301,12 +302,21 @@ extension OutsourcingVC: CropViewControllerDelegate {
         self.navigationItem.rightBarButtonItem?.isEnabled = true
     }
     
+    func cropViewControllerDidEndResize(_ cropViewController: CropViewController, original: UIImage, cropInfo: CropInfo){
+
+        originWidth = Double(cropInfo.imageViewSize.width)
+        originHight = Double(cropInfo.imageViewSize.height)
+    }
+    
     func cropViewControllerDidCancel(_ cropViewController: CropViewController, original: UIImage) {
         dismiss(animated: true, completion: nil)
     }
     
     @objc private func touchUpSelectImageButton(_ sender: UITapGestureRecognizer) {
-        let cropViewController = Mantis.cropViewController(image: self.detailImage.image!)
+        var config = Mantis.Config()
+        config.ratioOptions = [.square]
+        config.showRotationDial = false
+        let cropViewController = Mantis.cropViewController(image: self.detailImage.image!, config: config)
         cropViewController.delegate = self
         cropViewController.modalPresentationStyle = .fullScreen
         self.present(cropViewController, animated: true)

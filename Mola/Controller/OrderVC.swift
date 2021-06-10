@@ -151,28 +151,15 @@ class OrderVC: UIViewController, UINavigationControllerDelegate, UIScrollViewDel
                                         MolaApi.shared.uploadDocument(requestURL: self.fileUploadURL, fileData: fileData) { res in
                                             switch res.result{
                                             case .success(let data):
-                                                if let jsonString = String(data: data, encoding: .utf8){
-                                                    if let jsonDict: [String: Any] = UtilityManager.shared.jsonStringToDictionary(jsonString: jsonString){
-                                                        print(jsonDict)
-                                                        print(jsonDict["status"] ?? "오류")
-                                                        if let status : Int = jsonDict["status"] as? Int {
-                                                            if status == 200{
-                                                                DispatchQueue.main.async {
-                                                                    let alert: UIAlertController = UIAlertController(title: "완료", message: "외주 신청이 완료되었습니다.", preferredStyle: .alert)
-                                                                    let action: UIAlertAction = UIAlertAction(title: "확인", style: .default, handler: self.popView)
-                                                                    alert.addAction(action)
-                                                                    self.present(alert, animated: true, completion: nil)
-                                                                }
-                                                            }
-                                                        }
-                                                        DispatchQueue.main.async {
-                                                            let alert: UIAlertController = UIAlertController(title: "오류", message: "파일 업로드에 실패하였습니다. 다시 시도하여주십시오.", preferredStyle: .alert)
-                                                            let action: UIAlertAction = UIAlertAction(title: "확인", style: .default)
-                                                            alert.addAction(action)
-                                                            self.present(alert, animated: true)
-                                                        }
-                                                    }
+                                                print(data)
+                                                DispatchQueue.main.async {
+                                                    let alert: UIAlertController = UIAlertController(title: "완료", message: "외주 신청이 완료되었습니다.", preferredStyle: .alert)
+                                                    let action: UIAlertAction = UIAlertAction(title: "확인", style: .default, handler: self.popView)
+                                                    alert.addAction(action)
+                                                    self.present(alert, animated: true, completion: nil)
                                                 }
+                                                
+                                                
                                             case .failure(let err):
                                                 print("err발생")
                                                 print(err)

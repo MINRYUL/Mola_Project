@@ -36,7 +36,6 @@ class DetailOrderVC: UIViewController {
         $0.backgroundColor = .systemGray6
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 40
-//        $0.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
     }
     
     private let progressLabel = UILabel().then() {
@@ -53,7 +52,6 @@ class DetailOrderVC: UIViewController {
     @objc func buttonPressed(sender: UIBarButtonItem!) {
         print("touch navigationButton button")
         
-        print(outSourceModel?.completedImageList.count)
         if (outSourceModel?.completedImageList.count ?? 0) - 1 <= self.imageCount ?? 0 {
             let alert: UIAlertController = UIAlertController(title: "알림", message: "현재까지 완료된 마지막 사진입니다.", preferredStyle: .alert)
             let action: UIAlertAction = UIAlertAction(title: "확인", style: .default)
@@ -80,7 +78,9 @@ class DetailOrderVC: UIViewController {
         self.navigationController?.navigationBar.barTintColor = .black
         self.tabBarController?.tabBar.isHidden = true
         setProgress()
-        didChangeImageView()
+        if outSourceModel?.imgCompleted ?? 0 > 0 {
+            didChangeImageView()
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -109,7 +109,7 @@ class DetailOrderVC: UIViewController {
         view.addSubview(labelingView)
         let imageSize = detailImage.contentClippingRect
         
-        let viewPos: CGPoint = CGPoint(x: ((Double)(imageSize.origin.x) + (self.outSourceModel?.completedImageList[imageCount!].xcoordinate ?? 0)), y: ((Double)(imageSize.origin.y) + (self.outSourceModel?.completedImageList[imageCount!].ycoordinate ?? 0)))
+        let viewPos: CGPoint = CGPoint(x: ((Double)(imageSize.origin.x) + (self.outSourceModel?.completedImageList[imageCount!].xcoordinate ?? 0) * Double(imageSize.size.width)), y: ((Double)(imageSize.origin.y) + (self.outSourceModel?.completedImageList[imageCount!].ycoordinate ?? 0) * Double(imageSize.size.height)))
         
         let viewSize: CGSize = CGSize(width: ((Double)(imageSize.size.width) * (self.outSourceModel?.completedImageList[imageCount!].width ?? 0)), height: ((Double)(imageSize.size.height) * (self.outSourceModel?.completedImageList[imageCount!].height ?? 0)))
         

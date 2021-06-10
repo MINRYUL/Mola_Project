@@ -44,6 +44,11 @@ class OrderMenuVC: UIViewController {
         didReceiveOutSoruces()
     }
     
+    @objc
+    private func popView(_ sender: UIAlertAction) {
+       self.navigationController?.popViewController(animated: true)
+    }
+    
     private func didReceiveOutSoruces() {
         let id: MyId = {
             MyId(id: UserDefaults.standard.value(forKey: "UserId") as! Int )
