@@ -70,7 +70,7 @@
 
 ![readmeImage/Untitled%203.png](readmeImage/Untitled%203.png)
 
-![readmeImage/Untitled%204.png](readmeImage2/Untitled%204.png)
+![readmeImage/Untitled%204.png](readmeImage/Untitled%204.png)
 
 **외주 등록 및 확인**
 
